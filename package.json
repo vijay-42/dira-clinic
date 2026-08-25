@@ -1,0 +1,31 @@
+{
+  "name": "dira-clinic",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DIRA — Deshpande Immunology & Rheumatology Association",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "check": "node scripts/check-todos.mjs",
+    "typecheck": "tsc --noEmit",
+    "check:layout": "bash scripts/check-layout.sh",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "build:logo": "python3 scripts/build-logo.py"
+  },
+  "dependencies": {
+    "next": "^16.3.2",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2"
+  }
+}

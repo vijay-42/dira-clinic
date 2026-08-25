@@ -1,0 +1,353 @@
+@import "tailwindcss";
+
+/* ===========================================================================
+   PALETTE — a four-colour clinical system.
+   Deep teal carries the brand; coral, green and plum colour-code the four
+   condition families so category is readable at a glance, not decorative.
+   Every pair below is verified by `npm run check:contrast`. Change a value
+   there first, then here.
+   ========================================================================= */
+:root {
+  --c-paper:       #F4F7FA;
+  --c-surface:     #FFFFFF;
+  --c-raised:      #E7EFF7;
+  --c-ink:         #101B2E;
+  --c-muted:       #465A72;
+  --c-faint:       #57697F;
+  --c-rule:        #D2DEEB;
+  --c-rule-soft:   #E3EBF3;
+
+  --c-brand:       #123A83;
+  --c-brand-ink:   #0D2C66;
+  --c-brand-tint:  #DCE6F5;
+  --c-on-brand:    #FFFFFF;
+  /* Band fill is a separate role from the text accent: in dark mode the accent
+     must go light to stay readable, but a full-width band must stay deep. */
+  --c-brand-surface:    #123A83;
+  --c-on-brand-surface: #FFFFFF;
+  /* Label on the amber action fill, and on the fixed-white button. */
+  --c-on-warm:     #FFFFFF;
+  --c-on-white:    #0D2C66;
+
+  --c-warm:        #AC4A08;
+  --c-warm-tint:   #FAEADC;
+  --c-fresh:       #166E1E;
+  --c-fresh-tint:  #DEEFE0;
+  --c-teal:        #0A626D;
+  --c-teal-tint:   #D9ECEF;
+  --c-plum:        #65457F;
+  --c-plum-tint:   #ECE5F2;
+
+  --c-shadow:      215 40% 18%;
+  --radius:        14px;
+  --radius-sm:     10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --c-paper:       #0A121E;
+    --c-surface:     #101B2B;
+    --c-raised:      #142235;
+    --c-ink:         #E4EAF2;
+    --c-muted:       #9AABC0;
+    --c-faint:       #8395AB;
+    --c-rule:        #23324A;
+    --c-rule-soft:   #1A2739;
+
+    --c-brand:       #77A9EA;
+    --c-brand-ink:   #95BEF2;
+    --c-brand-tint:  #14243F;
+    --c-on-brand:    #08111E;
+    --c-brand-surface:    #0C1B36;
+    --c-on-brand-surface: #E4EAF2;
+  --c-on-warm:     #2B1808;
+  --c-on-white:    #0D2C66;
+    --c-on-warm:     #2B1808;
+    --c-on-white:    #0D2C66;
+
+    --c-warm:        #F0A05A;
+    --c-warm-tint:   #33220F;
+    --c-fresh:       #68C173;
+    --c-fresh-tint:  #142D18;
+    --c-teal:        #63B7C2;
+    --c-teal-tint:   #0F2C31;
+    --c-plum:        #B99AD2;
+    --c-plum-tint:   #241D33;
+
+    --c-shadow:      215 60% 2%;
+  }
+}
+
+:root[data-theme="dark"] {
+  --c-paper:       #0A121E;
+  --c-surface:     #101B2B;
+  --c-raised:      #142235;
+  --c-ink:         #E4EAF2;
+  --c-muted:       #9AABC0;
+  --c-faint:       #8395AB;
+  --c-rule:        #23324A;
+  --c-rule-soft:   #1A2739;
+
+  --c-brand:       #77A9EA;
+  --c-brand-ink:   #95BEF2;
+  --c-brand-tint:  #14243F;
+  --c-on-brand:    #08111E;
+  --c-brand-surface:    #0C1B36;
+  --c-on-brand-surface: #E4EAF2;
+
+  --c-warm:        #F0A05A;
+  --c-warm-tint:   #33220F;
+  --c-fresh:       #68C173;
+  --c-fresh-tint:  #142D18;
+  --c-teal:        #63B7C2;
+  --c-teal-tint:   #0F2C31;
+  --c-plum:        #B99AD2;
+  --c-plum-tint:   #241D33;
+
+  --c-shadow:      215 60% 2%;
+}
+
+@theme inline {
+  --color-paper:      var(--c-paper);
+  --color-surface:    var(--c-surface);
+  --color-raised:     var(--c-raised);
+  --color-ink:        var(--c-ink);
+  --color-muted:      var(--c-muted);
+  --color-faint:      var(--c-faint);
+  --color-rule:       var(--c-rule);
+  --color-rule-soft:  var(--c-rule-soft);
+  --color-brand:      var(--c-brand);
+  --color-brand-ink:  var(--c-brand-ink);
+  --color-brand-tint: var(--c-brand-tint);
+  --color-on-brand:   var(--c-on-brand);
+  --color-brand-surface:    var(--c-brand-surface);
+  --color-on-brand-surface: var(--c-on-brand-surface);
+  --color-warm:       var(--c-warm);
+  --color-warm-tint:  var(--c-warm-tint);
+  --color-fresh:      var(--c-fresh);
+  --color-fresh-tint: var(--c-fresh-tint);
+  --color-teal:       var(--c-teal);
+  --color-teal-tint:  var(--c-teal-tint);
+  --color-plum:       var(--c-plum);
+  --color-plum-tint:  var(--c-plum-tint);
+
+  --font-display: var(--font-spectral), Georgia, "Times New Roman", serif;
+  --font-sans:    var(--font-plex-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono:    var(--font-plex-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  --radius-card: var(--radius);
+}
+
+/* ===========================================================================
+   BASE
+   ========================================================================= */
+@layer base {
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background: var(--c-paper);
+    color: var(--c-ink);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--c-brand); color: var(--c-on-brand); }
+
+  :focus-visible {
+    outline: 3px solid var(--c-brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+
+  /* IBM Plex Sans ships no italic here, so a bare <em> would be synthesised as
+     a fake oblique. Use the real Spectral italic already loaded. */
+  em, i { font-family: var(--font-display); font-style: italic; }
+
+  /* Patients with inflammatory arthritis may struggle with fine pointer
+     control, so tap targets stay generous throughout. */
+  a, button { touch-action: manipulation; }
+}
+
+/* ===========================================================================
+   TYPE SCALE
+   ========================================================================= */
+@utility display-xl {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.35rem, 5.4vw, 3.7rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+@utility display-l {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.95rem, 4vw, 2.75rem);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+}
+@utility display-m {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 2.7vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+@utility display-s {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1.32;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+@utility lede {
+  font-size: clamp(1.06rem, 1.5vw, 1.2rem);
+  line-height: 1.58;
+  color: var(--c-muted);
+}
+
+@utility measure   { max-width: 65ch; }
+@utility measure-s { max-width: 52ch; }
+@utility tnum      { font-variant-numeric: tabular-nums; }
+
+@utility versed {
+  & p { margin: 0; }
+  & p + p { margin-top: 0.15em; }
+}
+
+/* ===========================================================================
+   COMPONENTS
+   ========================================================================= */
+
+@utility card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-rule-soft);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 2px hsl(var(--c-shadow) / 0.05),
+              0 8px 24px -12px hsl(var(--c-shadow) / 0.12);
+}
+
+/* Category colouring. The stripe encodes which family a condition belongs to,
+   so colour carries information rather than ornament. */
+@utility cat-brand { --cat: var(--c-brand); --cat-tint: var(--c-brand-tint); }
+@utility cat-warm  { --cat: var(--c-warm);  --cat-tint: var(--c-warm-tint); }
+@utility cat-fresh { --cat: var(--c-fresh); --cat-tint: var(--c-fresh-tint); }
+@utility cat-teal  { --cat: var(--c-teal);  --cat-tint: var(--c-teal-tint); }
+@utility cat-plum  { --cat: var(--c-plum);  --cat-tint: var(--c-plum-tint); }
+
+@utility cat-text  { color: var(--cat); }
+@utility cat-bg    { background: var(--cat-tint); }
+@utility cat-top   { border-top: 4px solid var(--cat); }
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3.1rem;
+  padding: 0.8rem 1.55rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.97rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  border: 2px solid transparent;
+  transition: background-color 150ms ease, color 150ms ease,
+              border-color 150ms ease, transform 150ms ease;
+}
+@utility btn-solid {
+  background: var(--c-brand);
+  color: var(--c-on-brand);
+  border-color: var(--c-brand);
+  &:hover { background: var(--c-brand-ink); border-color: var(--c-brand-ink); }
+}
+@utility btn-warm {
+  background: var(--c-warm);
+  color: var(--c-on-warm);
+  border-color: var(--c-warm);
+  &:hover { filter: brightness(0.92); }
+}
+@utility btn-ghost {
+  background: transparent;
+  color: var(--c-brand);
+  border-color: var(--c-brand);
+  &:hover { background: var(--c-brand-tint); }
+}
+@utility btn-on-dark {
+  background: #FFFFFF;
+  color: var(--c-on-white);
+  border-color: #FFFFFF;
+  &:hover { background: rgb(255 255 255 / 0.88); }
+}
+
+@utility link {
+  color: var(--c-brand);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklab, var(--c-brand) 40%, transparent);
+  transition: text-decoration-color 150ms ease;
+  &:hover { text-decoration-color: var(--c-brand); }
+}
+
+/* A pill used for section eyebrows — gives the colour system somewhere to
+   live without resorting to decorative icons. */
+@utility pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: var(--c-brand-tint);
+  color: var(--c-brand);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* A detail that has not been supplied yet. Loud on purpose. */
+@utility todo-marker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  letter-spacing: 0.04em;
+  color: var(--c-warm);
+  background: var(--c-warm-tint);
+  padding: 0.15em 0.5em;
+  border-radius: 6px;
+  border: 1px dashed color-mix(in oklab, var(--c-warm) 45%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100; }
+.skip-link:focus {
+  left: 0.75rem; top: 0.75rem;
+  background: var(--c-brand); color: var(--c-on-brand);
+  padding: 0.75rem 1.1rem; border-radius: var(--radius-sm);
+}
+
+.prose p { margin: 0 0 1.05em; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { font-weight: 600; }

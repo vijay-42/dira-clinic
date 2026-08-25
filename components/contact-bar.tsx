@@ -1,0 +1,66 @@
+import { telHref, whatsappHref, clinic, isTodo } from '@/content/clinic'
+import { IconWhatsApp, IconPhone } from './icons'
+
+/** Fixed bottom bar on mobile: phone and WhatsApp always one tap away. */
+export function MobileContactBar() {
+  const tel = telHref()
+  const wa = whatsappHref()
+
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 border-t border-rule bg-surface shadow-[0_-4px_20px_-8px_rgba(0,0,0,0.18)] xl:hidden">
+      <a
+        href={wa ?? '/contact/'}
+        {...(wa ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        className="flex min-h-[3.6rem] items-center justify-center gap-2 border-r border-rule text-[0.92rem] font-semibold text-brand"
+      >
+        <IconWhatsApp className="h-[1.15rem] w-[1.15rem]" />
+        WhatsApp
+      </a>
+      <a
+        href={tel ?? '/contact/'}
+        className="flex min-h-[3.6rem] items-center justify-center gap-2 bg-brand text-[0.92rem] font-semibold text-[color:var(--c-on-brand)]"
+      >
+        <IconPhone className="h-[1.05rem] w-[1.05rem]" />
+        Call the clinic
+      </a>
+    </div>
+  )
+}
+
+/** The two primary calls to action. */
+export function AppointmentActions({
+  className = '',
+  message,
+  onDark = false,
+}: {
+  className?: string
+  message?: string
+  onDark?: boolean
+}) {
+  const wa = whatsappHref(message)
+  const tel = telHref()
+
+  return (
+    <div className={`flex flex-col gap-3 sm:flex-row sm:items-center ${className}`}>
+      <a
+        href={wa ?? '/contact/'}
+        {...(wa ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        className={`btn ${onDark ? 'btn-on-dark' : 'btn-warm'}`}
+      >
+        <IconWhatsApp className="h-[1.15rem] w-[1.15rem]" />
+        Book on WhatsApp
+      </a>
+      <a
+        href={tel ?? '/contact/'}
+        className={`btn ${
+          onDark
+            ? 'border-white/60 bg-transparent text-[color:var(--c-on-brand-surface)] hover:bg-white/10'
+            : 'btn-ghost'
+        }`}
+      >
+        <IconPhone className="h-[1.05rem] w-[1.05rem]" />
+        {isTodo(clinic.phone) ? 'Call the clinic' : clinic.phone}
+      </a>
+    </div>
+  )
+}

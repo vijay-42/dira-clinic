@@ -1,0 +1,585 @@
+<title>DIRA Website Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --paper:#F1F4F0;
+  --surface:#FBFCFA;
+  --ink:#131C1A;
+  --muted:#55625E;
+  --faint:#7C8884;
+  --rule:#D5DBD4;
+  --rule-soft:#E4E8E2;
+  --accent:#2F5E4F;
+  --accent-soft:#E2EBE4;
+  --flag:#8C3A34;
+  --flag-soft:#F1E4E1;
+  --rail:9.5rem;
+  --measure:66ch;
+  --gap:3.25rem;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F1514;
+    --surface:#151D1B;
+    --ink:#E7ECE8;
+    --muted:#98A5A0;
+    --faint:#74807C;
+    --rule:#26312E;
+    --rule-soft:#1D2624;
+    --accent:#7FBBA2;
+    --accent-soft:#1B2B26;
+    --flag:#D48D82;
+    --flag-soft:#2B1F1D;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F1514;
+  --surface:#151D1B;
+  --ink:#E7ECE8;
+  --muted:#98A5A0;
+  --faint:#74807C;
+  --rule:#26312E;
+  --rule-soft:#1D2624;
+  --accent:#7FBBA2;
+  --accent-soft:#1B2B26;
+  --flag:#D48D82;
+  --flag-soft:#2B1F1D;
+}
+
+*{box-sizing:border-box;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16.5px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  padding:0 1.5rem 7rem;
+}
+.wrap{max-width:calc(var(--rail) + var(--gap) + var(--measure));margin:0 auto;}
+
+/* ---- masthead ---- */
+.masthead{
+  display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:baseline;
+  padding:2.75rem 0 1.1rem;border-bottom:1px solid var(--ink);
+}
+.mark{
+  font-family:"Spectral",Georgia,serif;font-weight:600;font-size:1.35rem;
+  letter-spacing:0.14em;margin:0;
+}
+.mark span{color:var(--accent);}
+.masthead .meta{
+  margin-left:auto;font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:0.7rem;letter-spacing:0.06em;color:var(--faint);text-transform:uppercase;
+  display:flex;gap:1.5rem;flex-wrap:wrap;
+}
+
+/* ---- title block ---- */
+.titleblock{padding:3.5rem 0 3rem;border-bottom:1px solid var(--rule);}
+h1{
+  font-family:"Spectral",Georgia,serif;font-weight:300;
+  font-size:clamp(2.4rem,6.2vw,3.9rem);line-height:1.06;letter-spacing:-0.018em;
+  margin:0 0 1.5rem;text-wrap:balance;max-width:20ch;
+}
+h1 em{font-style:italic;color:var(--accent);}
+.stand{
+  font-size:1.13rem;color:var(--muted);max-width:58ch;margin:0;line-height:1.6;
+}
+.stand strong{color:var(--ink);font-weight:500;}
+
+/* ---- section grid ---- */
+.s{
+  display:grid;grid-template-columns:var(--rail) minmax(0,var(--measure));
+  column-gap:var(--gap);
+  padding:3.4rem 0;border-bottom:1px solid var(--rule-soft);
+}
+.s:last-of-type{border-bottom:none;}
+.rail{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--faint);margin:0.55rem 0 0;line-height:1.5;
+}
+.rail b{display:block;color:var(--accent);font-weight:500;}
+.col > :first-child{margin-top:0;}
+.col > :last-child{margin-bottom:0;}
+
+h2{
+  font-family:"Spectral",Georgia,serif;font-weight:600;
+  font-size:1.72rem;line-height:1.2;letter-spacing:-0.01em;
+  margin:0 0 1.1rem;text-wrap:balance;
+}
+h3{
+  font-size:0.94rem;font-weight:600;letter-spacing:0.01em;
+  margin:2.1rem 0 0.5rem;
+}
+h3.acc{color:var(--accent);}
+p{margin:0 0 1.05rem;}
+a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px;}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+strong{font-weight:600;}
+em{font-style:italic;}
+
+ul,ol{margin:0 0 1.05rem;padding-left:1.15rem;}
+li{margin-bottom:0.42rem;}
+li::marker{color:var(--faint);}
+ol{padding-left:1.3rem;}
+ol li::marker{font-family:"IBM Plex Mono",monospace;font-size:0.85em;}
+
+.lede{font-size:1.05rem;color:var(--muted);margin-bottom:1.6rem;}
+
+/* ---- rules & notes ---- */
+.note{
+  border-left:2px solid var(--accent);background:var(--accent-soft);
+  padding:1rem 1.15rem;margin:1.6rem 0;font-size:0.95rem;
+}
+.note.warn{border-left-color:var(--flag);background:var(--flag-soft);}
+.note p:last-child{margin-bottom:0;}
+.note .lbl{
+  font-family:"IBM Plex Mono",monospace;font-size:0.66rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--accent);display:block;margin-bottom:0.35rem;
+}
+.note.warn .lbl{color:var(--flag);}
+
+/* ---- tables ---- */
+.tw{overflow-x:auto;margin:1.5rem 0;}
+table{border-collapse:collapse;width:100%;font-size:0.9rem;min-width:30rem;}
+th{
+  text-align:left;font-family:"IBM Plex Mono",monospace;font-weight:500;
+  font-size:0.66rem;letter-spacing:0.09em;text-transform:uppercase;color:var(--faint);
+  padding:0 0.9rem 0.6rem 0;border-bottom:1px solid var(--ink);vertical-align:bottom;
+}
+td{
+  padding:0.72rem 0.9rem 0.72rem 0;border-bottom:1px solid var(--rule-soft);
+  vertical-align:top;line-height:1.5;
+}
+tr td:last-child,tr th:last-child{padding-right:0;}
+td.no{color:var(--flag);}
+td.yes{color:var(--accent);}
+.pg td:first-child{font-weight:600;white-space:nowrap;}
+.num{font-variant-numeric:tabular-nums;font-family:"IBM Plex Mono",monospace;font-size:0.85em;color:var(--muted);white-space:nowrap;}
+
+/* ---- swatches ---- */
+.swatches{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(6.6rem,1fr));
+  gap:0.55rem;margin:1.5rem 0;
+}
+.sw{border:1px solid var(--rule);background:var(--surface);}
+.sw .chip{height:3.1rem;display:block;}
+.sw .cap{
+  padding:0.42rem 0.5rem 0.5rem;font-family:"IBM Plex Mono",monospace;
+  font-size:0.63rem;line-height:1.45;color:var(--muted);
+}
+.sw .cap b{display:block;color:var(--ink);font-weight:500;letter-spacing:0.04em;text-transform:uppercase;font-size:0.6rem;}
+
+/* ---- type specimen ---- */
+.spec{border:1px solid var(--rule);background:var(--surface);padding:1.35rem 1.4rem;margin:1.4rem 0;}
+.spec + .spec{margin-top:0.7rem;}
+.spec .role{
+  font-family:"IBM Plex Mono",monospace;font-size:0.63rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--faint);margin:0 0 0.6rem;
+}
+.spec .samp{margin:0;line-height:1.25;}
+.samp.serif{font-family:"Spectral",Georgia,serif;font-weight:400;font-size:1.85rem;letter-spacing:-0.01em;}
+.samp.sans{font-family:"IBM Plex Sans",sans-serif;font-size:1.05rem;line-height:1.55;color:var(--muted);}
+.samp.mono{font-family:"IBM Plex Mono",monospace;font-size:0.85rem;letter-spacing:0.03em;color:var(--muted);}
+
+/* ---- phases ---- */
+.phase{
+  display:grid;grid-template-columns:2.4rem 1fr;column-gap:1.1rem;
+  padding:1.15rem 0;border-top:1px solid var(--rule-soft);
+}
+.phase:first-of-type{border-top:1px solid var(--ink);}
+.phase .n{
+  font-family:"IBM Plex Mono",monospace;font-size:0.78rem;color:var(--accent);
+  padding-top:0.15rem;font-variant-numeric:tabular-nums;
+}
+.phase h4{margin:0 0 0.3rem;font-size:0.97rem;font-weight:600;}
+.phase p{margin:0;font-size:0.92rem;color:var(--muted);}
+.phase .dur{
+  font-family:"IBM Plex Mono",monospace;font-size:0.68rem;color:var(--faint);
+  letter-spacing:0.05em;display:block;margin-top:0.4rem;text-transform:uppercase;
+}
+
+/* ---- checklist ---- */
+.check{list-style:none;padding:0;margin:1.4rem 0;}
+.check li{
+  display:grid;grid-template-columns:1.4rem 1fr;column-gap:0.7rem;
+  padding:0.62rem 0;border-bottom:1px solid var(--rule-soft);margin:0;
+}
+.check li::before{
+  content:"";width:0.82rem;height:0.82rem;border:1px solid var(--faint);
+  margin-top:0.42rem;
+}
+.check b{font-weight:600;}
+.check span{display:block;color:var(--muted);font-size:0.88rem;}
+
+footer{
+  padding:3rem 0 0;border-top:1px solid var(--ink);margin-top:3.4rem;
+  font-family:"IBM Plex Mono",monospace;font-size:0.7rem;
+  letter-spacing:0.05em;color:var(--faint);text-transform:uppercase;
+  display:flex;flex-wrap:wrap;gap:0.6rem 2rem;
+}
+
+@media (max-width:780px){
+  :root{--gap:0rem;}
+  .s{grid-template-columns:1fr;padding:2.6rem 0;}
+  .rail{margin:0 0 0.9rem;}
+  .rail b{display:inline;margin-left:0.5rem;}
+  .masthead .meta{margin-left:0;gap:1rem;}
+  h1{font-size:clamp(2rem,8.5vw,2.6rem);}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;}
+}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="mark">DI<span>R</span>A</p>
+  <div class="meta">
+    <span>Website Build Plan</span>
+    <span>Draft 02</span>
+    <span>24 Aug 2026</span>
+  </div>
+</header>
+
+<div class="titleblock">
+  <h1>A clinic website that reads like it was <em>written by a doctor</em>, not generated.</h1>
+  <p class="stand">The source copy for DIRA is already strong — specific, restrained, and honest about uncertainty. <strong>The risk isn't the writing. It's the packaging.</strong> This plan sets out what makes a site look machine-made, how we avoid each tell, and the order we build in.</p>
+</div>
+
+<!-- 1 -->
+<section class="s">
+  <p class="rail">Section 01<b>The brief</b></p>
+  <div class="col">
+    <h2>What we're building</h2>
+    <p>A nine-page marketing and patient-information site for DIRA — Deshpande Immunology &amp; Rheumatology Association — a single-consultant rheumatology and clinical immunology practice led by Dr Gaurang Deshpande.</p>
+    <p>The site has three jobs, in this order:</p>
+    <ol>
+      <li><strong>Convert the uncertain patient.</strong> Most visitors won't have a diagnosis. They'll have joint pain, a positive ANA, or a report they don't understand. The site must tell them they're in the right place before it tells them anything else.</li>
+      <li><strong>Establish credentials fast.</strong> MD Internal Medicine, DM Clinical Immunology &amp; Rheumatology from NIMS Hyderabad. That sequence means something to referring doctors and to informed patients. It should be legible in seconds.</li>
+      <li><strong>Take the referral.</strong> A dedicated route for physicians who suspect an immune-mediated disorder and want a specialist opinion.</li>
+    </ol>
+    <p>Everything else — services, conditions, philosophy — supports those three.</p>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="s">
+  <p class="rail">Section 02<b>The real problem</b></p>
+  <div class="col">
+    <h2>Why sites look AI-generated</h2>
+    <p class="lede">"Looks AI-made" isn't a vague feeling. It's a specific, short list of defaults that every generator reaches for. Name them and you can avoid them.</p>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th style="width:44%">The tell</th><th>What we do instead</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="no">Purple-to-blue gradient hero, glassmorphic cards, glowing blobs</td><td class="yes">Flat ground, hairline rules, no gradients anywhere on the site</td></tr>
+          <tr><td class="no">Three identical cards with an icon on top, repeated unchanged in every section</td><td class="yes">Cards are used, but colour-coded by condition family so the colour carries information; section layouts vary with what the content actually is</td></tr>
+          <tr><td class="no">Emoji, or a thousand-icon library dropped in wholesale</td><td class="yes">Fifteen marks drawn for this site at one weight — including an antibody that matches the logo</td></tr>
+          <tr><td class="no">Everything centre-aligned</td><td class="yes">Left-aligned text with a real measure. Centring reserved for one or two deliberate moments</td></tr>
+          <tr><td class="no">Inter / Poppins / Space Grotesk at every size</td><td class="yes">Three faces with three distinct jobs (see Section 04)</td></tr>
+          <tr><td class="no">Invented statistics — "10,000+ happy patients", "98% satisfaction"</td><td class="yes">One real number: approximately five years in consultant practice. Nothing else quantified</td></tr>
+          <tr><td class="no">Stock photos of foreign models in lab coats holding clipboards</td><td class="yes">Real photography of Dr Deshpande and the actual clinic. This is the single biggest lever — see Section 05</td></tr>
+          <tr><td class="no">Filler copy: "empowering your health journey", "holistic wellness solutions"</td><td class="yes">The existing copy, kept almost verbatim. It's better than anything a rewrite would produce</td></tr>
+          <tr><td class="no">Fade-in-on-scroll on every element</td><td class="yes">Essentially no motion. Hover and focus states only</td></tr>
+          <tr><td class="no">Perfectly even vertical rhythm — every section the same height and weight</td><td class="yes">Deliberately uneven pacing. Some sections are three lines; some are a full page</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="lbl">The underlying principle</span>
+      <p>Generated design is <em>evenly</em> designed — every element gets the same amount of attention, so nothing has emphasis and the whole page flattens. Human design is uneven on purpose. We'll spend the visual budget on the homepage opening and Dr Deshpande's profile, and keep everything else deliberately plain.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="s">
+  <p class="rail">Section 03<b>Direction</b></p>
+  <div class="col">
+    <h2>The visual thesis: a specialist clinic, in colour</h2>
+    <div class="note warn">
+      <span class="lbl">Revised — draft 02</span>
+      <p>Draft 01 proposed an austere, typographic "clinical document" look. On review you asked for something warmer and more colourful, in the register of an Indian specialist clinic site. This section and the next now describe what was actually built. The rest of the plan is unchanged.</p>
+    </div>
+    <p>The site is built on a <strong>four-colour clinical system</strong>: a royal blue drawn from the logo carries the brand, and teal, green and plum colour-code the four condition families. The colour is doing a job — a patient scanning for "allergy and immune concerns" follows green through the site, from the homepage card to the conditions page to the service listing.</p>
+    <p>Reference points are the specialist clinic and the well-made hospital site: a coloured hero band, contact details in a bar above the fold, credential cards, icon-led service tiles, generous rounded cards on tinted section backgrounds, and a prominent WhatsApp action. It should read as <em>welcoming and organised</em> rather than austere.</p>
+    <p>What it deliberately does <em>not</em> borrow from that genre: invented statistics, patient testimonials, stock photographs of models in lab coats, justified body text, or superlative claims. Those are the parts that make clinic sites look interchangeable — and in India, testimonials and superlatives also sit outside what a registered practitioner may advertise (Section 08).</p>
+    <p>It also stays <em>calm</em>. Patients arriving here are often anxious, frequently in pain, and have usually seen three doctors already. Nothing moves, pulses, pops up, or auto-plays. Hover and focus states are the only motion on the site.</p>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="s">
+  <p class="rail">Section 04<b>Identity</b></p>
+  <div class="col">
+    <h2>Logo, palette and type</h2>
+
+    <h3 class="acc">The mark</h3>
+    <p>The logo is the artwork you supplied: a circular emblem in a blue-to-green gradient holding four motifs — an <strong>antibody</strong>, a <strong>knee joint</strong>, a <strong>DNA helix</strong> and <strong>leaves</strong> — above the DIRA wordmark and the line <em>Immunity Aligned. Movement Redefined.</em></p>
+    <p>It is a strong asset for this practice specifically: the antibody says clinical immunology, the joint says rheumatology, and together they say what a generic cross or caduceus never could. The whole site palette is now drawn from it rather than sitting beside it.</p>
+    <div class="note warn">
+      <span class="lbl">One request for the designer</span>
+      <p>The artwork arrived as a <strong>JPEG on a white background</strong>, with bevels and a drop shadow baked into the pixels. Two consequences: the emblem sits on a white chip wherever the surface behind it isn't already white (otherwise the shadow fringes), and it will never be perfectly crisp at very small sizes. <strong>An SVG master, or a transparent PNG at 1024px or larger, would fix both.</strong> Worth asking whoever produced it — it is a five-minute export for them. Until then the site derives its assets automatically (<span class="num">npm run build:logo</span>), so replacing the source file and re-running is all that is needed.</p>
+    </div>
+
+    <h3 class="acc">Colour</h3>
+    <p>The blue and the green are sampled from the logo itself. The royal blue is the brand and fills the hero, the footer and the page bands; blue, teal, green and plum colour-code the four condition families and are used consistently sitewide, so colour encodes category rather than decorating the page. Amber is reserved strictly for actions — it is the only warm note anywhere, which makes a button unmistakable.</p>
+    <div class="swatches">
+      <div class="sw"><span class="chip" style="background:#123A83"></span><span class="cap"><b>Brand blue</b>#123A83</span></div>
+      <div class="sw"><span class="chip" style="background:#0A626D"></span><span class="cap"><b>Teal</b>#0A626D</span></div>
+      <div class="sw"><span class="chip" style="background:#166E1E"></span><span class="cap"><b>Green</b>#166E1E</span></div>
+      <div class="sw"><span class="chip" style="background:#65457F"></span><span class="cap"><b>Plum</b>#65457F</span></div>
+      <div class="sw"><span class="chip" style="background:#AC4A08"></span><span class="cap"><b>Amber</b>#AC4A08</span></div>
+      <div class="sw"><span class="chip" style="background:#101B2E"></span><span class="cap"><b>Ink</b>#101B2E</span></div>
+    </div>
+    <p>Both a light and a dark theme are defined in full. Every foreground/background pair the design uses is checked against WCAG AA by a script in the repo (<span class="num">npm run check:contrast</span>) — the palette was designed against that check rather than eyeballed, and the build fails the check if a colour is later changed carelessly.</p>
+
+    <h3 class="acc">Typography</h3>
+    <p>Unchanged from draft 01, and it holds up well against the colour: a warm serif for headings gives the pages authority that a second sans would not, and keeps the site from looking like a template.</p>
+
+    <div class="spec">
+      <p class="role">Display — Spectral</p>
+      <p class="samp serif">Clarity when the diagnosis is uncertain.</p>
+    </div>
+    <div class="spec">
+      <p class="role">Body — IBM Plex Sans</p>
+      <p class="samp sans">Not every symptom is an autoimmune disease. But every unexplained concern deserves a thoughtful evaluation.</p>
+    </div>
+    <div class="spec">
+      <p class="role">Utility — IBM Plex Mono</p>
+      <p class="samp mono">CONSULTANT RHEUMATOLOGIST &amp; CLINICAL IMMUNOLOGIST</p>
+    </div>
+
+    <h3 class="acc">Icons</h3>
+    <p>Fifteen marks drawn for this site at a single stroke weight — consultation, second opinion, antibody, joint, pain, rehabilitation, laboratory, pharmacy, multidisciplinary care, and the contact marks. Not a thousand-icon library dropped in wholesale, which is where the interchangeable look usually comes from. The antibody icon is the logo, so the mark recurs as a motif rather than sitting in the corner unrelated to everything else.</p>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="s">
+  <p class="rail">Section 05<b>Photography</b></p>
+  <div class="col">
+    <h2>The one thing that matters most</h2>
+    <p class="lede">If you do only one thing from this document, do this one.</p>
+    <p>No amount of typography will stop a site looking generated if the images are stock. Conversely, three or four honest photographs of the actual room and the actual doctor will carry the entire site — because no generator can fake them.</p>
+    <p><strong>What we need:</strong> a half-day with a local photographer, natural light, no flash, no lab coats posed against white backdrops.</p>
+    <ul>
+      <li>One portrait of Dr Deshpande — seated, in the consulting room, looking at the camera. Not smiling broadly. Composed and attentive is the correct register for this speciality.</li>
+      <li>One wider shot of the consulting room, empty.</li>
+      <li>The waiting area and the entrance, so patients recognise the building when they arrive.</li>
+      <li>Physiotherapy / rehabilitation space, if it exists on site.</li>
+      <li>Two or three quiet detail shots — hands, a goniometer, the desk, the door plate.</li>
+    </ul>
+    <div class="note warn">
+      <span class="lbl">If a shoot isn't possible before launch</span>
+      <p>The site is built with the photography slots already in place, each showing a visible <span class="num">[ADD PORTRAIT OF DR DESHPANDE]</span> marker until a real image is dropped in. It launches perfectly well without them — colour and type carry it. What it must never launch with is stock photography of models in lab coats: patients notice, and it undoes the credibility everything else is working to build.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="s">
+  <p class="rail">Section 06<b>Structure</b></p>
+  <div class="col">
+    <h2>Sitemap</h2>
+    <p>Nine pages. Every one maps to content that already exists in your document — no page is invented to pad the navigation out.</p>
+    <div class="tw">
+      <table class="pg">
+        <thead><tr><th style="width:30%">Page</th><th>Contains</th></tr></thead>
+        <tbody>
+          <tr><td>Home</td><td>Hero thesis, the "who should consult" triage, Dr Deshpande in brief, services summary, referral entry point, contact</td></tr>
+          <tr><td>About DIRA</td><td>What DIRA is, the philosophy, the DIRA difference, the six-step approach</td></tr>
+          <tr><td>Dr Gaurang Deshpande</td><td>Qualifications, training, areas of special interest, the personal note. The most designed page on the site after Home</td></tr>
+          <tr><td>Conditions</td><td>Rheumatology, immunology, allergy, pain — grouped exactly as your document groups them. Built so individual condition pages can be added later for search</td></tr>
+          <tr><td>Services</td><td>Consultation, second opinions, allergy &amp; immunology evaluation, chronic pain, physiotherapy, lab, pharmacy, multidisciplinary care</td></tr>
+          <tr><td>For Doctors</td><td>The referral page. Plain, fast, no marketing register. When to refer, and how</td></tr>
+          <tr><td>Patient Education</td><td>The "understanding your disease is part of treatment" content. This is also the long-term SEO engine — see Section 09</td></tr>
+          <tr><td>FAQ</td><td>The seven questions you've already drafted, verbatim</td></tr>
+          <tr><td>Contact &amp; Appointment</td><td>Phone, WhatsApp, email, address, map, timings, appointment request</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Booking</h3>
+    <p>My recommendation for v1: <strong>WhatsApp deep link as the primary action, phone as the equal second, and a short request form as the third.</strong> Indian clinic patients overwhelmingly prefer WhatsApp, it needs no backend, and it doesn't over-promise a confirmed slot the way a calendar widget does. A real booking system can come later once you know the actual volume.</p>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="s">
+  <p class="rail">Section 07<b>Copy</b></p>
+  <div class="col">
+    <h2>Leave the writing alone</h2>
+    <p>The document you've written is unusually good. It does three things most clinic copy fails at: it admits diagnostic uncertainty, it declines to promise cures, and it uses short declarative lines with real rhythm. That voice is the strongest anti-generic asset the project has.</p>
+    <p>So the editing brief is <strong>trim, don't rewrite</strong>:</p>
+    <ul>
+      <li>Cut roughly 30–40% for the web. The condition lists repeat across four sections; each appears once, in the place it belongs.</li>
+      <li>Keep every short line break as a line break. "Sometimes the cause is clear. / Sometimes it isn't." is doing typographic work — it should be set as displayed lines, not folded into a paragraph.</li>
+      <li>Keep the pull quote. <em>"Not every symptom is an autoimmune disease. But every unexplained concern deserves a thoughtful evaluation."</em> That's the site's whole thesis and it belongs on the homepage.</li>
+      <li>Fix the numbering in "Our Approach" — the source has six steps all numbered 1.</li>
+      <li>No superlatives get added anywhere. No "best", "leading", "top", "world-class". Partly because it's better writing, and partly because of Section 08.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="s">
+  <p class="rail">Section 08<b>Compliance</b></p>
+  <div class="col">
+    <h2>Advertising rules for Indian practitioners</h2>
+    <p class="lede">Flagging this early because it constrains the copy, and it's easier to build within than retrofit.</p>
+    <p>Advertising and soliciting by registered medical practitioners in India is restricted. The operative code has been the Medical Council of India's Professional Conduct, Etiquette and Ethics Regulations, 2002 (Chapter 6.1); the NMC's 2023 replacement regulations were notified and then withdrawn, so the position is somewhat unsettled. A <strong>factual, informational</strong> practice website is accepted practice. Promotional claims are not.</p>
+    <p>Practical rules we'll build to:</p>
+    <ul>
+      <li><strong>No patient testimonials or reviews on the site.</strong> This is the most common violation and the easiest to avoid.</li>
+      <li><strong>No superlatives or comparative claims</strong> — "best rheumatologist in the city", "number one", "leading centre".</li>
+      <li><strong>No before/after imagery, no success rates, no cure claims.</strong></li>
+      <li><strong>Display the NMC / State Medical Council registration number</strong> alongside qualifications. It's expected, and it also signals legitimacy to patients who know to look.</li>
+      <li>State fees factually or not at all — never as an offer, discount, or package.</li>
+      <li>If teleconsultation is offered, it falls under the Telemedicine Practice Guidelines, 2020, and needs its own terms page.</li>
+    </ul>
+    <div class="note warn">
+      <span class="lbl">Not legal advice</span>
+      <p>Worth a five-minute confirmation with Dr Deshpande's state medical council or the practice's lawyer before launch. Your existing copy already complies — no testimonials, no superlatives, no cure promises — so this is mostly about not drifting later.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="s">
+  <p class="rail">Section 09<b>Findability</b></p>
+  <div class="col">
+    <h2>How patients will actually arrive</h2>
+    <p>Realistically, in this order: Google Maps, a word-of-mouth name search, a symptom search, and a referring doctor. The website is only part of that.</p>
+    <ol>
+      <li><strong>Google Business Profile is priority one</strong> — ahead of the website, honestly. Complete profile, correct category ("Rheumatologist"), real photos, accurate hours, and the site linked. Most local patients never leave Maps.</li>
+      <li><strong>Name searches.</strong> "Dr Gaurang Deshpande rheumatologist" must return the site first. That needs the name in the title tag, a <span class="num">Physician</span> and <span class="num">MedicalClinic</span> schema block, and consistent name/address/phone everywhere.</li>
+      <li><strong>Symptom and condition searches</strong> are the long game. "Rheumatologist in [city]" is winnable; "positive ANA what does it mean" is where the Patient Education pages earn their keep over 6–12 months. Build the section now, fill it gradually — a few genuinely useful articles beat twenty thin ones.</li>
+      <li><strong>Performance.</strong> Most traffic will be Android on mobile data. No heavy JavaScript, self-hosted fonts, compressed images. The site should be usable on a slow connection — which the design direction gives us for free.</li>
+    </ol>
+    <div class="note warn">
+      <span class="lbl">Name collision worth knowing about</span>
+      <p>"DIRA" is already an established term in exactly this speciality — <strong>Deficiency of the Interleukin-1 Receptor Antagonist</strong>, a rare autoinflammatory disease. Dr Deshpande almost certainly knows this. The practical consequence: the clinic will never rank for "DIRA" alone, and searches will surface the disease. Nothing needs to change about the name, but every title tag, listing and citation should read <em>"DIRA Clinic, [City]"</em> or <em>"Deshpande Immunology &amp; Rheumatology"</em> rather than the bare acronym.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="s">
+  <p class="rail">Section 10<b>Build</b></p>
+  <div class="col">
+    <h2>Stack</h2>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:32%">Layer</th><th>Choice and reasoning</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Framework</strong></td><td>Next.js 16, App Router, static export. Nine mostly-static pages with good SEO needs — static HTML at the edge, no server to maintain</td></tr>
+          <tr><td><strong>Styling</strong></td><td>Tailwind v4 with a locked custom token set, and a contrast script that verifies every colour pair. No component library — those are precisely where the interchangeable look comes from</td></tr>
+          <tr><td><strong>Content</strong></td><td>Typed content files in the repo for v1. Articles as MDX so Patient Education can grow. A light CMS only if Dr Deshpande wants to edit without a developer</td></tr>
+          <tr><td><strong>Fonts</strong></td><td>Self-hosted, subset, preloaded. No external font request</td></tr>
+          <tr><td><strong>Forms</strong></td><td>Serverless handler to email, plus honeypot spam protection. Nothing patient-identifying is stored</td></tr>
+          <tr><td><strong>Hosting</strong></td><td>Vercel or Netlify, free tier, custom domain, automatic HTTPS</td></tr>
+          <tr><td><strong>Analytics</strong></td><td>Plausible or similar — cookieless, so no consent banner. A health site should not be running ad-network trackers</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Non-negotiables</h3>
+    <ul>
+      <li>Keyboard navigable throughout, visible focus states, WCAG AA contrast in both light and dark. Patients with inflammatory arthritis may have real difficulty with fine pointer control — generous tap targets are a clinical courtesy, not a nicety.</li>
+      <li>Phone number and WhatsApp reachable from every page without scrolling on mobile.</li>
+      <li>No cookie banner, no chat widget, no newsletter pop-up, no exit-intent modal.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="s">
+  <p class="rail">Section 11<b>Blocked on you</b></p>
+  <div class="col">
+    <h2>What I need before building</h2>
+    <p class="lede">The first four block the build. The rest block launch.</p>
+    <ul class="check">
+      <li><div><b>City and full clinic address</b><span>Blocks the build — the entire local-search strategy, the map, and every title tag depend on it. Your source document has this as a placeholder.</span></div></li>
+      <li><div><b>Phone, WhatsApp number, email</b><span>Blocks the build — these are the primary calls to action on every page.</span></div></li>
+      <li><div><b>Clinic days and timings</b><span>Blocks the build. Include whether appointments are by prior booking only.</span></div></li>
+      <li><div><b>Exact name of the MBBS institution</b><span>Blocks the build. Your document flags this as "Padmashree Dr. D. Y. Patil?" — I need the official name as it should be displayed.</span></div></li>
+      <li><div><b>NMC / State Medical Council registration number</b><span>Should be displayed alongside qualifications.</span></div></li>
+      <li><div><b>Domain name</b><span>Registered already, or should I check availability? Something containing "deshpande" plus the speciality will outperform "dira" alone, for the reason in Section 09.</span></div></li>
+      <li><div><b>Photography — does any exist?</b><span>If not, whether a shoot is possible before launch. This changes the design substantially either way.</span></div></li>
+      <li><div><b>Logo or existing branding</b><span>If there's a letterhead, signboard, or prescription pad design, the site should match it rather than invent a competing identity.</span></div></li>
+      <li><div><b>Languages</b><span>English only, or Marathi and Hindi as well? Affects font choices — Spectral has no Devanagari, so a second face would be needed.</span></div></li>
+      <li><div><b>Teleconsultation — offered or not?</b><span>If yes, it needs its own page and terms under the 2020 guidelines.</span></div></li>
+      <li><div><b>Consultation fee — display it?</b><span>Your call. Displaying it reduces time-wasting enquiries; hiding it is also common.</span></div></li>
+      <li><div><b>Physiotherapy, lab and pharmacy — on site or partnered?</b><span>The copy currently implies on-site. Worth being precise, since patients will plan their visit around it.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="s">
+  <p class="rail">Section 12<b>Sequence</b></p>
+  <div class="col">
+    <h2>How we get there</h2>
+    <p>Five phases. Phase 1 can start the moment the first four items in Section 11 land.</p>
+
+    <div class="phase">
+      <p class="n">01</p>
+      <div>
+        <h4>Content edit and page architecture</h4>
+        <p>Trim the source document to web length, resolve the repetition across sections, fix the numbering, and lock the nine-page structure with final headings. Nothing is designed yet.</p>
+        <span class="dur">2–3 days</span>
+      </div>
+    </div>
+    <div class="phase">
+      <p class="n">02</p>
+      <div>
+        <h4>Homepage design, built in code</h4>
+        <p>No Figma stage — the homepage gets built directly as a real page so you can judge it on a phone. If the direction is wrong, this is the cheap moment to find out.</p>
+        <span class="dur">3–4 days, one round of revisions</span>
+      </div>
+    </div>
+    <div class="phase">
+      <p class="n">03</p>
+      <div>
+        <h4>Remaining eight pages</h4>
+        <p>Built against the approved system. Dr Deshpande's profile and the For Doctors page get individual attention; the rest follow the established patterns.</p>
+        <span class="dur">4–5 days</span>
+      </div>
+    </div>
+    <div class="phase">
+      <p class="n">04</p>
+      <div>
+        <h4>Photography integrated, technical pass</h4>
+        <p>Images placed and optimised. Schema markup, meta tags, sitemap, accessibility audit, performance testing on a throttled mobile connection, form testing.</p>
+        <span class="dur">2–3 days</span>
+      </div>
+    </div>
+    <div class="phase">
+      <p class="n">05</p>
+      <div>
+        <h4>Launch and local search</h4>
+        <p>Domain, hosting, HTTPS, analytics. Google Business Profile created or claimed and fully completed, Search Console verified, sitemap submitted. Then a proofread of every page by Dr Deshpande before it goes public.</p>
+        <span class="dur">1–2 days</span>
+      </div>
+    </div>
+
+    <p style="margin-top:1.8rem"><strong>Roughly three weeks of working time</strong>, assuming answers come back promptly and photography doesn't hold things up. Phases 1–3 can proceed with placeholder contact details if needed, but nothing launches without them.</p>
+  </div>
+</section>
+
+<footer>
+  <span>DIRA — Deshpande Immunology &amp; Rheumatology Association</span>
+  <span>Website build plan, draft 02</span>
+  <span>24 Aug 2026</span>
+</footer>
+
+</div>
