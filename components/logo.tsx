@@ -34,7 +34,7 @@ export function LogoMark({
 }) {
   return (
     <span
-      className={`inline-flex shrink-0 items-center justify-center overflow-hidden ${
+      className={`flex shrink-0 items-center justify-center overflow-hidden ${
         chip ? 'bg-white' : ''
       } ${className}`}
       style={chip ? { borderRadius: '22%' } : undefined}
@@ -54,15 +54,15 @@ export function LogoMark({
 export function Logo({ className = '' }: { className?: string }) {
   return (
     <span
-      className={`inline-flex items-center bg-white px-2 py-1.5 ${className}`}
+      className={`flex items-center bg-white px-2 py-1 ${className}`}
       style={{ borderRadius: '10px' }}
     >
       <img
         src="/logo-wordmark.png"
         alt={`${clinic.name} — ${clinic.legalName}`}
         width={560}
-        height={146}
-        className="h-9 w-auto sm:h-10"
+        height={173}
+        className="block h-10 w-auto sm:h-11"
       />
     </span>
   )
@@ -74,13 +74,13 @@ export function Logo({ className = '' }: { className?: string }) {
  */
 export function LogoLockup({ className = '' }: { className?: string }) {
   return (
-    <span className={`inline-flex items-center justify-center bg-white ${className}`}>
+    <span className={`flex items-center justify-center bg-white ${className}`}>
       <img
         src="/logo-full.png"
         alt={`${clinic.name} — ${clinic.legalName}. ${clinic.strapline}`}
         width={640}
         height={199}
-        className="h-auto w-full object-contain"
+        className="block h-auto w-full object-contain"
       />
     </span>
   )

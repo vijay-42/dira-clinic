@@ -30,11 +30,22 @@ DESIGN = ROOT / 'design'
 PUBLIC = ROOT / 'public'
 
 # --- Crop boxes, measured from the 2172x724 logo master ----------------------
-# Emblem occupies x 69..688; the wordmark runs 756..2064; the tagline sits
-# below y 560. Re-measure these if the logo composition changes.
-EMBLEM_BOX = (58, 38, 700, 668)
-WORDMARK_BOX = (58, 38, 2074, 562)   # emblem + DIRA, no tagline
-FULL_BOX = (58, 38, 2074, 666)       # everything
+# Ink bounds in the source:
+#     emblem    x  68..684   y  48..658
+#     wordmark  x 760..2048  y 134..540
+#     tagline   x 764..2064  y 566..638
+#
+# Note the emblem extends to y=658, well BELOW the wordmark's baseline at 540.
+# So the header variant cannot be a single rectangular crop: cropping above the
+# tagline to drop it would slice the bottom off the emblem. The header lockup is
+# composed from two crops instead — see build_logo().
+EMBLEM_BOX = (58, 38, 700, 668)          # full emblem, nothing clipped
+WORDMARK_TEXT_BOX = (740, 124, 2062, 552)  # the word DIRA only, no tagline
+FULL_BOX = (58, 38, 2074, 666)           # everything, tagline included
+
+# Gap between emblem and wordmark in the composed header lockup, as a fraction
+# of the emblem's width. The source spacing is (760-684)/616 = 0.123.
+COMPOSE_GAP = 0.123
 
 # --- Output widths (2x the largest place each is displayed) -----------------
 MARK_W = 192
@@ -104,6 +115,22 @@ def save_png(im: Image.Image, path: Path, width: int) -> None:
     print(f'  {path.relative_to(ROOT)}  {width}x{height}  {path.stat().st_size // 1024} KB')
 
 
+def compose_wordmark(emblem: Image.Image, word: Image.Image) -> Image.Image:
+    """Places the full emblem beside the word DIRA on a fresh canvas.
+
+    Needed because the emblem hangs lower than the wordmark, so no single
+    rectangle contains both without either clipping the emblem or including
+    the tagline. Centres are aligned vertically, which is how they sit in the
+    source artwork.
+    """
+    gap = round(emblem.size[0] * COMPOSE_GAP)
+    height = max(emblem.size[1], word.size[1])
+    canvas = Image.new('RGBA', (emblem.size[0] + gap + word.size[0], height), (0, 0, 0, 0))
+    canvas.alpha_composite(emblem, (0, (height - emblem.size[1]) // 2))
+    canvas.alpha_composite(word, (emblem.size[0] + gap, (height - word.size[1]) // 2))
+    return canvas
+
+
 def build_logo() -> None:
     src_path = DESIGN / 'logo-source.png'
     if not src_path.exists():
@@ -112,8 +139,10 @@ def build_logo() -> None:
     src = Image.open(src_path).convert('RGB')
 
     emblem = strip_background(src.crop(EMBLEM_BOX))
+    word = strip_background(src.crop(WORDMARK_TEXT_BOX))
+
     save_png(emblem, PUBLIC / 'logo-mark.png', MARK_W)
-    save_png(strip_background(src.crop(WORDMARK_BOX)), PUBLIC / 'logo-wordmark.png', WORDMARK_W)
+    save_png(compose_wordmark(emblem, word), PUBLIC / 'logo-wordmark.png', WORDMARK_W)
     save_png(strip_background(src.crop(FULL_BOX)), PUBLIC / 'logo-full.png', FULL_W)
 
     # Favicon on white: the artwork's bevels and drop shadow were drawn for a

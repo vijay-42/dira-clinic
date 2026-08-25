@@ -58,7 +58,7 @@ export function SiteHeader() {
       <header className="sticky top-0 z-30 border-b border-rule-soft bg-surface/95 backdrop-blur">
         <Container>
           <div className="flex items-center justify-between gap-6 py-3.5">
-            <Link href="/" aria-label="DIRA — home" className="shrink-0 text-ink">
+            <Link href="/" aria-label="DIRA — home" className="flex shrink-0 items-center text-ink">
               <Logo />
             </Link>
 
