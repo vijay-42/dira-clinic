@@ -68,8 +68,10 @@ export default function HomePage() {
         <Container className="relative">
           <div className="grid items-center gap-12 py-14 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:py-24">
             <div className="min-w-0">
+              {/* Not the strapline — that is already inside the logo directly
+                  above. This says something the logo doesn't. */}
               <p className="pill bg-white/15 text-[color:var(--c-on-brand-surface)]">
-                {clinic.strapline}
+                {clinic.tagline}
               </p>
 
               <h1 className="display-xl mt-6 max-w-[18ch]">

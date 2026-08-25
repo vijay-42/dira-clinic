@@ -2,10 +2,9 @@
 """Derives the site's images from the source artwork in design/.
 
 Inputs                              Outputs
-  design/logo-source.png              public/logo-mark.png      emblem alone
-                                      public/logo-wordmark.png  emblem + DIRA
-                                      public/logo-full.png      + tagline
-                                      app/icon.png              favicon
+  design/logo-source.png              public/logo-mark.png   emblem alone
+                                      public/logo-full.png   the complete lockup
+                                      app/icon.png           favicon
   design/dr-deshpande-source.png      public/dr-deshpande.jpg   portrait
 
 The logo arrives on a white background. It is cut out by flood-filling inward
@@ -39,17 +38,11 @@ PUBLIC = ROOT / 'public'
 # So the header variant cannot be a single rectangular crop: cropping above the
 # tagline to drop it would slice the bottom off the emblem. The header lockup is
 # composed from two crops instead — see build_logo().
-EMBLEM_BOX = (58, 38, 700, 668)          # full emblem, nothing clipped
-WORDMARK_TEXT_BOX = (740, 124, 2062, 552)  # the word DIRA only, no tagline
-FULL_BOX = (58, 38, 2074, 666)           # everything, tagline included
-
-# Gap between emblem and wordmark in the composed header lockup, as a fraction
-# of the emblem's width. The source spacing is (760-684)/616 = 0.123.
-COMPOSE_GAP = 0.123
+EMBLEM_BOX = (58, 38, 700, 668)  # full emblem, nothing clipped
+FULL_BOX = (58, 38, 2074, 666)   # everything, tagline included
 
 # --- Output widths (2x the largest place each is displayed) -----------------
 MARK_W = 192
-WORDMARK_W = 560
 FULL_W = 640
 ICON_W = 256
 PALETTE_COLORS = 200
@@ -115,22 +108,6 @@ def save_png(im: Image.Image, path: Path, width: int) -> None:
     print(f'  {path.relative_to(ROOT)}  {width}x{height}  {path.stat().st_size // 1024} KB')
 
 
-def compose_wordmark(emblem: Image.Image, word: Image.Image) -> Image.Image:
-    """Places the full emblem beside the word DIRA on a fresh canvas.
-
-    Needed because the emblem hangs lower than the wordmark, so no single
-    rectangle contains both without either clipping the emblem or including
-    the tagline. Centres are aligned vertically, which is how they sit in the
-    source artwork.
-    """
-    gap = round(emblem.size[0] * COMPOSE_GAP)
-    height = max(emblem.size[1], word.size[1])
-    canvas = Image.new('RGBA', (emblem.size[0] + gap + word.size[0], height), (0, 0, 0, 0))
-    canvas.alpha_composite(emblem, (0, (height - emblem.size[1]) // 2))
-    canvas.alpha_composite(word, (emblem.size[0] + gap, (height - word.size[1]) // 2))
-    return canvas
-
-
 def build_logo() -> None:
     src_path = DESIGN / 'logo-source.png'
     if not src_path.exists():
@@ -139,10 +116,7 @@ def build_logo() -> None:
     src = Image.open(src_path).convert('RGB')
 
     emblem = strip_background(src.crop(EMBLEM_BOX))
-    word = strip_background(src.crop(WORDMARK_TEXT_BOX))
-
     save_png(emblem, PUBLIC / 'logo-mark.png', MARK_W)
-    save_png(compose_wordmark(emblem, word), PUBLIC / 'logo-wordmark.png', WORDMARK_W)
     save_png(strip_background(src.crop(FULL_BOX)), PUBLIC / 'logo-full.png', FULL_W)
 
     # Favicon on white: the artwork's bevels and drop shadow were drawn for a

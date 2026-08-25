@@ -7,9 +7,8 @@ import { clinic } from '@/content/clinic'
  * bevels and a drop shadow baked into the pixels. Three variants are derived
  * from it by `npm run build:assets` — see scripts/build-assets.py:
  *
- *   public/logo-mark.png      the circular emblem alone
- *   public/logo-wordmark.png  emblem + DIRA, no tagline — used in the header
- *   public/logo-full.png      the complete lockup including the tagline
+ *   public/logo-mark.png  the circular emblem alone
+ *   public/logo-full.png  the complete lockup, tagline included
  *
  * Two rules follow from the artwork itself:
  *
@@ -17,8 +16,8 @@ import { clinic } from '@/content/clinic'
  *      wherever the surface behind it is not already white. On the light
  *      header the chip is invisible; on the deep blue footer it reads as a
  *      deliberate white badge.
- *   2. The tagline is dark navy and disappears on a dark band, so the full
- *      lockup is only ever used on a light surface.
+ *   2. The tagline is dark navy and disappears on a dark band, so the lockup
+ *      is only ever used on a light surface — which the white chip guarantees.
  *
  * If a vector master arrives, drop it in and delete the generator — it will
  * render more crisply at small sizes.
@@ -58,11 +57,11 @@ export function Logo({ className = '' }: { className?: string }) {
       style={{ borderRadius: '10px' }}
     >
       <img
-        src="/logo-wordmark.png"
-        alt={`${clinic.name} — ${clinic.legalName}`}
-        width={560}
-        height={173}
-        className="block h-10 w-auto sm:h-11"
+        src="/logo-full.png"
+        alt={`${clinic.name} — ${clinic.legalName}. ${clinic.strapline}`}
+        width={640}
+        height={199}
+        className="block h-14 w-auto sm:h-16"
       />
     </span>
   )
