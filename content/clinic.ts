@@ -24,15 +24,15 @@ export const clinic = {
   descriptor: 'Immunology & Rheumatology',
 
   // ---- BLOCKS BUILD ------------------------------------------------------
-  /** TODO City only, e.g. 'Pune'. Used in page titles and local search. */
-  city: TODO,
-  /** TODO State, e.g. 'Maharashtra'. */
-  state: TODO,
+  /** City. Used in page titles and local search. */
+  city: 'Bangalore',
+  /** State. */
+  state: 'Karnataka',
   address: {
     /** TODO e.g. 'Suite 4, Sunrise Medical Centre, 12 FC Road' */
     line1: TODO,
-    /** TODO e.g. 'Shivajinagar' — locality/area. Optional, may be ''. */
-    line2: '',
+    /** Locality / area. */
+    line2: 'Indiranagar',
     /** TODO e.g. '411005' */
     postalCode: TODO,
   },
@@ -154,6 +154,13 @@ export function addressLine(): string {
   ]
     .filter(Boolean)
     .join(', ')
+}
+
+/** "Indiranagar, Bangalore" — locality and city, skipping whichever is absent. */
+export function locality(): string {
+  return [clinic.address.line2, isTodo(clinic.city) ? '' : clinic.city]
+    .filter(Boolean)
+    .join(', ') || orMarker(clinic.city, 'ADD CITY')
 }
 
 /** City name for titles and headings, falling back to a visible marker. */

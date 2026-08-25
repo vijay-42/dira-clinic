@@ -1,21 +1,14 @@
-import { Fragment } from 'react'
 import Link from 'next/link'
-import { Container, Section, SectionHead, Verses, TickList } from '@/components/ui'
+import { Container, Section, SectionHead, TickList } from '@/components/ui'
 import { AppointmentActions } from '@/components/contact-bar'
 import { DoctorPortrait } from '@/components/portrait'
 import {
   IconConsult, IconOpinion, IconImmune, IconJoint, IconPain,
   IconRehab, IconLab, IconPharmacy, IconTeam, IconArrow,
 } from '@/components/icons'
-import { clinic, isTodo, cityName } from '@/content/clinic'
+import { clinic, isTodo, cityName, locality } from '@/content/clinic'
 import { doctor } from '@/content/doctor'
 import { triage, approach, conditionGroups } from '@/content/site'
-
-const symptoms = [
-  'Pain', 'Stiffness', 'Swelling', 'Fatigue', 'Rashes', 'Recurrent symptoms',
-  'Abnormal blood tests', 'Unexplained inflammation', 'Allergy-like reactions',
-  'Symptoms involving more than one part of the body',
-]
 
 /* Why a patient can trust this clinic — stated as facts, not slogans.
    No invented statistics: the only number here is real. */
@@ -66,7 +59,7 @@ export default function HomePage() {
           style={{ background: 'radial-gradient(circle, #FFFFFF 0%, transparent 62%)' }}
         />
         <Container className="relative">
-          <div className="grid items-center gap-12 py-14 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:py-24">
+          <div className="grid items-center gap-10 py-10 sm:py-14 lg:grid-cols-[1.35fr_0.65fr] lg:gap-14 lg:py-16">
             <div className="min-w-0">
               {/* Not the strapline — that is already inside the logo directly
                   above. This says something the logo doesn't. */}
@@ -74,60 +67,35 @@ export default function HomePage() {
                 {clinic.tagline}
               </p>
 
-              <h1 className="display-xl mt-6 max-w-[18ch]">
-                When something doesn’t feel right, the first step is understanding why.
+              <h1 className="display-l mt-5 max-w-[22ch] text-[clamp(2.1rem,3.6vw,3.05rem)]">
+                Expert Care in Rheumatology &amp; Immunology Treatment in {cityName()}
               </h1>
 
-              <p className="mt-7 max-w-[56ch] text-[1.02rem] leading-relaxed opacity-85">
-                {symptoms.map((s, i) => (
-                  <Fragment key={s}>
-                    {s}
-                    {i < symptoms.length - 1 ? (
-                      <span aria-hidden="true" className="opacity-60">{' · '}</span>
-                    ) : (
-                      '.'
-                    )}
-                  </Fragment>
-                ))}
+              <p className="mt-5 max-w-[58ch] text-[1.05rem] leading-relaxed opacity-90">
+                Led by {doctor.name}, {doctor.title}, DIRA Clinic provides comprehensive,
+                compassionate care for arthritis, autoimmune diseases, joint pain, and other
+                rheumatic conditions in {locality()}.
               </p>
 
-              <Verses
-                className="mt-8 font-[family-name:var(--font-display)] text-[1.3rem] leading-[1.45] sm:text-[1.45rem]"
-                lines={['Sometimes the cause is clear.', 'Sometimes it isn’t.']}
-              />
-              <p className="mt-2 max-w-[44ch] font-[family-name:var(--font-display)] text-[1.3rem] italic leading-[1.45] opacity-90 sm:text-[1.45rem]">
-                And sometimes the biggest question is whether the immune system is involved at
-                all.
+              <p className="mt-6 max-w-[46ch] font-[family-name:var(--font-display)] text-[1.2rem] italic leading-[1.45] opacity-90 sm:text-[1.3rem]">
+                Sometimes the cause is clear. Sometimes it isn’t. And sometimes the biggest
+                question is whether the immune system is involved at all.
               </p>
 
-              <AppointmentActions className="mt-9" onDark />
+              <AppointmentActions className="mt-7" onDark />
             </div>
 
+            {/* Portrait only — the consultant's name, qualifications and profile
+                link live in the section below and on the profile page, so
+                repeating them here just made the banner taller. */}
             <div className="min-w-0">
-              <div className="card overflow-hidden p-0 text-ink">
+              {/* Height is controlled by capping the card's WIDTH, not by putting
+                  max-height on the aspect box. aspect-ratio is a two-way
+                  constraint: capping the height shrinks the width too, which
+                  leaves the card showing white beside the photo. */}
+              <div className="card mx-auto w-full max-w-[24rem] overflow-hidden p-0">
                 <div className="aspect-[4/5] bg-raised">
                   <DoctorPortrait priority />
-                </div>
-                <div className="p-6">
-                  <p className="eyebrow text-brand">Consultant</p>
-                  <p className="display-s mt-2">{doctor.name}</p>
-                  <p className="mt-1.5 text-[0.92rem] leading-snug text-muted">{doctor.title}</p>
-                  <ul className="mt-4 space-y-1 border-t border-rule-soft pt-4">
-                    {doctor.degrees.map((d) => (
-                      <li key={d} className="text-[0.85rem] leading-snug text-muted">
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-4 text-[0.88rem] text-faint">
-                    Approximately {doctor.yearsAsConsultant} years in consultant practice.
-                  </p>
-                  <Link
-                    href="/dr-gaurang-deshpande/"
-                    className="link mt-4 inline-flex items-center gap-1.5 text-[0.92rem]"
-                  >
-                    Full profile <IconArrow className="h-4 w-4" />
-                  </Link>
                 </div>
               </div>
             </div>

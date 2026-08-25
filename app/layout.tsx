@@ -4,7 +4,7 @@ import './globals.css'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { MobileContactBar } from '@/components/contact-bar'
-import { clinic, siteUrl, isTodo } from '@/content/clinic'
+import { clinic, siteUrl, isTodo, locality } from '@/content/clinic'
 import { clinicSchema, JsonLd } from '@/lib/schema'
 
 /* Fonts are downloaded at build time and served from our own origin — no
@@ -41,8 +41,7 @@ export const metadata: Metadata = {
     default: `DIRA${city} — Rheumatology & Clinical Immunology`,
     template: `%s — DIRA${city}`,
   },
-  description:
-    'Specialist evaluation for rheumatological disease, suspected autoimmune disorders, allergy, chronic pain and difficult-to-diagnose inflammatory conditions. Led by Dr Gaurang Deshpande, Consultant Rheumatologist & Clinical Immunologist.',
+  description: `Expert rheumatology and clinical immunology care in ${locality()}. Led by Dr Gaurang Deshpande, Consultant Rheumatologist & Clinical Immunologist — arthritis, autoimmune disease, joint pain, allergy, chronic pain and difficult-to-diagnose inflammatory conditions.`,
   applicationName: clinic.legalName,
   authors: [{ name: clinic.legalName }],
   openGraph: {
@@ -50,8 +49,7 @@ export const metadata: Metadata = {
     siteName: `DIRA — ${clinic.legalName}`,
     locale: 'en_IN',
     title: `DIRA${city} — Rheumatology & Clinical Immunology`,
-    description:
-      'Clarity when the diagnosis is uncertain. Expertise when it is clear. Rheumatology, clinical immunology, allergy and chronic pain.',
+    description: `Rheumatology, clinical immunology, allergy and chronic pain in ${locality()}. Clarity when the diagnosis is uncertain. Expertise when it is clear.`,
   },
   robots: { index: true, follow: true },
   alternates: { canonical: '/' },
