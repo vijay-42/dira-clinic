@@ -36,14 +36,18 @@ export const clinic = {
     /** TODO e.g. '411005' */
     postalCode: TODO,
   },
-  /** TODO Display form, e.g. '+91 20 1234 5678'. */
-  phone: TODO,
-  /** TODO Digits only with country code, no +/spaces, e.g. '912012345678'. */
-  phoneDial: TODO,
-  /** TODO Digits only with country code, e.g. '919876543210'. */
-  whatsapp: TODO,
-  /** TODO e.g. 'appointments@diraclinic.in' */
-  email: TODO,
+  /** Display form. */
+  phone: '+91 90363 69016',
+  /** Digits only with country code, no +/spaces. */
+  phoneDial: '919036369016',
+  /**
+   * Digits only with country code.
+   * ASSUMPTION: same as the clinic mobile above. WhatsApp is the primary call
+   * to action on every page, so if this number is not actually on WhatsApp,
+   * change it here — otherwise the main button on the site goes nowhere useful.
+   */
+  whatsapp: '919036369016',
+  email: 'diraclinicllp2026@gmail.com',
 
   /**
    * TODO Clinic hours. `closed: true` renders as "Closed".
