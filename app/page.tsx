@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import Link from 'next/link'
 import { Container, Section, SectionHead, Verses, TickList } from '@/components/ui'
 import { AppointmentActions } from '@/components/contact-bar'
-import { LogoMark } from '@/components/logo'
+import { DoctorPortrait } from '@/components/portrait'
 import {
   IconConsult, IconOpinion, IconImmune, IconJoint, IconPain,
   IconRehab, IconLab, IconPharmacy, IconTeam, IconArrow,
@@ -101,17 +101,10 @@ export default function HomePage() {
               <AppointmentActions className="mt-9" onDark />
             </div>
 
-            {/* Consultant card. Replace the mark with Dr Deshpande's portrait
-                once photography exists — see docs/dira-plan.html, Section 05. */}
             <div className="min-w-0">
               <div className="card overflow-hidden p-0 text-ink">
-                <div className="flex aspect-[4/3] items-center justify-center bg-raised">
-                  <div className="text-center">
-                    <LogoMark chip={false} className="mx-auto h-24 w-24 opacity-60" />
-                    <p className="mt-4 px-6 text-[0.78rem] leading-relaxed text-faint">
-                      <span className="todo-marker">[ADD PORTRAIT OF DR DESHPANDE]</span>
-                    </p>
-                  </div>
+                <div className="aspect-[4/5] bg-raised">
+                  <DoctorPortrait priority />
                 </div>
                 <div className="p-6">
                   <p className="eyebrow text-brand">Consultant</p>

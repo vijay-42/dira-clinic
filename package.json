@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit",
     "check:layout": "bash scripts/check-layout.sh",
     "check:contrast": "node scripts/check-contrast.mjs",
-    "build:logo": "python3 scripts/build-logo.py"
+    "build:assets": "python3 scripts/build-assets.py"
   },
   "dependencies": {
     "next": "^16.3.2",

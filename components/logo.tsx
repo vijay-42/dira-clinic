@@ -3,28 +3,33 @@ import { clinic } from '@/content/clinic'
 /**
  * DIRA logo.
  *
- * The supplied artwork (public/logo.jpeg) is a raster with baked-in bevels and
- * a drop shadow drawn for a white ground. Two derived assets are generated from
- * it — see scripts/build-logo.py:
+ * The supplied artwork is a horizontal lockup on a white background, with
+ * bevels and a drop shadow baked into the pixels. Three variants are derived
+ * from it by `npm run build:assets` — see scripts/build-assets.py:
  *
- *   public/logo-mark.png  the circular emblem alone, background removed
- *   public/logo-full.png  the full lockup including wordmark and tagline
+ *   public/logo-mark.png      the circular emblem alone
+ *   public/logo-wordmark.png  emblem + DIRA, no tagline — used in the header
+ *   public/logo-full.png      the complete lockup including the tagline
  *
- * Because the shadow was drawn for white, the mark always sits on a white chip
- * when the surface behind it is not already white. On a light header the chip
- * is invisible; on the deep blue footer it reads as a deliberate white badge.
+ * Two rules follow from the artwork itself:
  *
- * If an SVG or transparent-PNG master ever arrives from the designer, drop it
- * in and delete the generator — it will render more crisply at small sizes.
+ *   1. The shadow was drawn for white, so the logo sits on a white chip
+ *      wherever the surface behind it is not already white. On the light
+ *      header the chip is invisible; on the deep blue footer it reads as a
+ *      deliberate white badge.
+ *   2. The tagline is dark navy and disappears on a dark band, so the full
+ *      lockup is only ever used on a light surface.
+ *
+ * If a vector master arrives, drop it in and delete the generator — it will
+ * render more crisply at small sizes.
  */
 
-/** The circular emblem: antibody, joint, DNA helix and leaves. */
+/** The circular emblem alone. */
 export function LogoMark({
   className = '',
   chip = true,
 }: {
   className?: string
-  /** White backing, so the artwork's shadow reads correctly on any surface. */
   chip?: boolean
 }) {
   return (
@@ -38,54 +43,43 @@ export function LogoMark({
         src="/logo-mark.png"
         alt=""
         width={192}
-        height={190}
+        height={188}
         className="h-[86%] w-[86%] object-contain"
       />
     </span>
   )
 }
 
-/** Emblem plus wordmark, as used in the header. */
-export function Logo({
-  className = '',
-  tone = 'brand',
-}: {
-  className?: string
-  /** 'mono' inherits currentColor for the wordmark, for use on dark bands. */
-  tone?: 'brand' | 'mono'
-}) {
+/** Emblem plus wordmark — the header lockup. */
+export function Logo({ className = '' }: { className?: string }) {
   return (
-    <span className={`flex items-center gap-3 ${className}`}>
-      <LogoMark className="h-11 w-11" />
-      <span className="flex flex-col leading-none">
-        <span
-          className={`font-[family-name:var(--font-display)] text-[1.4rem] font-bold tracking-[0.13em] ${
-            tone === 'brand' ? 'text-brand' : ''
-          }`}
-        >
-          DIRA
-        </span>
-        <span className="mt-1.5 text-[0.58rem] font-medium uppercase tracking-[0.13em] opacity-70">
-          {clinic.descriptor}
-        </span>
-      </span>
+    <span
+      className={`inline-flex items-center bg-white px-2 py-1.5 ${className}`}
+      style={{ borderRadius: '10px' }}
+    >
+      <img
+        src="/logo-wordmark.png"
+        alt={`${clinic.name} — ${clinic.legalName}`}
+        width={560}
+        height={146}
+        className="h-9 w-auto sm:h-10"
+      />
     </span>
   )
 }
 
 /**
- * The complete supplied lockup — emblem, wordmark and tagline as drawn.
- * Light surfaces only: the tagline is dark navy and disappears on a dark band,
- * so this renders on a white card wherever it is used.
+ * The complete supplied lockup, tagline included.
+ * Light surfaces only — the tagline is dark navy and vanishes on a dark band.
  */
 export function LogoLockup({ className = '' }: { className?: string }) {
   return (
     <span className={`inline-flex items-center justify-center bg-white ${className}`}>
       <img
         src="/logo-full.png"
-        alt="DIRA — Deshpande Immunology & Rheumatology Association. Immunity Aligned. Movement Redefined."
-        width={480}
-        height={603}
+        alt={`${clinic.name} — ${clinic.legalName}. ${clinic.strapline}`}
+        width={640}
+        height={199}
         className="h-auto w-full object-contain"
       />
     </span>

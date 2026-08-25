@@ -34,7 +34,7 @@ npm run build          # static export to out/
 npm run check          # what clinic details are still missing
 npm run check:contrast # verifies every colour pair against WCAG AA
 npm run check:layout   # renders every page at 360/390/768px, reports overflow
-npm run build:logo     # regenerates logo assets from public/logo.jpeg
+npm run build:assets   # regenerates logo and photo assets from design/
 npm run typecheck      # tsc --noEmit
 ```
 
@@ -56,7 +56,8 @@ app/                     one folder per page, App Router
   layout.tsx             fonts, metadata, header/footer, structured data
   globals.css            the whole design system — palette, type scale, components
   icon.png               favicon, generated from the logo
-components/              header, footer, logo, icons, contact actions, form
+design/                  source artwork — build inputs, never deployed
+components/              header, footer, logo, portrait, icons, contact, form
 content/
   clinic.ts              ← ALL placeholder details live here
   doctor.ts              qualifications, special interests, the personal note
@@ -71,13 +72,18 @@ scripts/                 the two verification scripts described above
 Defined once in `app/globals.css` and used everywhere — do not introduce ad-hoc
 colours or font sizes in components.
 
-- **Logo** — the supplied artwork lives at `public/logo.jpeg`. Everything else
-  is derived from it by `npm run build:logo` (needs Python + Pillow):
-  `public/logo-mark.png` (emblem alone, background removed), `public/logo-full.png`
-  (full lockup with wordmark and tagline), `app/icon.png` (favicon).
-  **To change the logo:** replace `public/logo.jpeg`, re-measure the two crop
-  boxes at the top of `scripts/build-logo.py`, and re-run. Do not hand-edit the
-  derived files — they are overwritten.
+- **Images** — source artwork lives in `design/` and is **not** deployed;
+  `public/` is copied verbatim into the build, so masters are kept out of it.
+  `npm run build:assets` (needs Python + Pillow) derives everything:
+
+  | from `design/`            | to                                                   |
+  | ------------------------- | ---------------------------------------------------- |
+  | `logo-source.png`         | `logo-mark.png`, `logo-wordmark.png`, `logo-full.png`, `app/icon.png` |
+  | `dr-deshpande-source.png` | `dr-deshpande.jpg`                                   |
+
+  **To change either:** replace the file in `design/` and re-run. If the logo
+  composition changes, re-measure the crop boxes at the top of
+  `scripts/build-assets.py` first. Never hand-edit the derived files.
 - **Palette** — sampled from the logo. Royal blue (`#123A83`) is the brand and
   fills the hero, footer and page bands. Blue, teal, green and plum colour-code
   the four condition families via the `cat-brand` / `cat-teal` / `cat-fresh` /
@@ -106,14 +112,21 @@ Edit `scripts/check-contrast.mjs` first, run `npm run check:contrast`, and only
 copy the values into `app/globals.css` once every pair passes. The palette was
 designed against that check rather than eyeballed.
 
-### Ask the designer for a vector logo
+### Two things worth asking the designer for
 
-`public/logo.jpeg` is a raster on a white background with bevels and a drop
-shadow baked into the pixels. Because of that the emblem sits on a white chip
-wherever the surface behind it isn't already white, and it will never be
-perfectly crisp at small sizes. **An SVG master, or a transparent PNG at 1024px
-or larger, fixes both** and is a quick export for whoever produced it. Drop the
-replacement in, re-run `npm run build:logo`, and the site picks it up.
+1. **A vector logo.** `design/logo-source.png` is a raster on a white background
+   with bevels and a drop shadow baked into the pixels. Because of that the logo
+   sits on a white chip wherever the surface behind it isn't already white, and
+   it won't be perfectly crisp at small sizes. An SVG master fixes both.
+2. **A larger portrait.** `design/dr-deshpande-source.png` is 510×630. That is
+   fine at the sizes used today but soft on a high-density screen in the large
+   card on the doctor page. 1200px wide or more would fix it. The build script
+   never upscales, so dropping in a bigger original is all that's needed.
+
+Two further rules the artwork itself imposes, both encoded in
+`components/logo.tsx`: the **tagline is dark navy**, so the full lockup is only
+ever placed on a light surface; and the header uses the **wordmark variant
+without the tagline**, because at header height the tagline is unreadable.
 
 ## Deliberate choices worth knowing about
 
@@ -125,10 +138,10 @@ replacement in, re-run `npm run build:logo`, and the site picks it up.
   medical council registration number is displayed. Advertising by registered
   medical practitioners in India is restricted — see `docs/dira-plan.html`,
   Section 08. Keep new copy within these limits.
-- **No stock photography.** Portrait slots are built and show a visible
-  `[ADD PORTRAIT OF DR DESHPANDE]` marker until real images exist. When they are
-  added they must be of the actual clinic and the actual doctor — see Section 05
-  of the plan for why this matters more than anything else here.
+- **No stock photography.** Dr Deshpande's portrait is real and in place. The
+  clinic interiors are still missing — consulting room, waiting area, entrance,
+  physiotherapy space. See Section 05 of the plan for why these matter more than
+  anything else on the site, and why stock is never the fallback.
 - **"DIRA" is also a rare autoinflammatory disease** (Deficiency of the
   Interleukin-1 Receptor Antagonist). The clinic will never rank for the bare
   acronym, so every page title pairs the name with the speciality and the city.

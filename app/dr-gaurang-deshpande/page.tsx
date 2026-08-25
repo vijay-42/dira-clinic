@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Container, Section, SectionHead } from '@/components/ui'
 import { AppointmentActions } from '@/components/contact-bar'
-import { LogoMark } from '@/components/logo'
+import { DoctorPortrait } from '@/components/portrait'
 import { doctor } from '@/content/doctor'
 import { clinic, isTodo } from '@/content/clinic'
 
@@ -26,13 +26,8 @@ export default function DoctorPage() {
         <Container>
           <div className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:py-20">
             <div className="card overflow-hidden p-0 text-ink">
-              <div className="flex aspect-[4/5] items-center justify-center bg-raised">
-                <div className="px-6 text-center">
-                  <LogoMark chip={false} className="mx-auto h-24 w-24 opacity-60" />
-                  <p className="mt-4 text-[0.78rem]">
-                    <span className="todo-marker">[ADD PORTRAIT OF DR DESHPANDE]</span>
-                  </p>
-                </div>
+              <div className="aspect-[4/5] bg-raised">
+                <DoctorPortrait priority />
               </div>
             </div>
 
