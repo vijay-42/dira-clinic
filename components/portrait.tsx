@@ -7,9 +7,17 @@ import { doctor } from '@/content/doctor'
 export function DoctorPortrait({
   className = '',
   priority = false,
+  fill = false,
 }: {
   className?: string
   priority?: boolean
+  /**
+   * Take the image out of layout flow, filling its nearest positioned
+   * ancestor. Without this an <img> contributes its INTRINSIC height to the
+   * row even with `h-full`, so in a stretch grid the photo silently dictates
+   * how tall the banner is. Use inside a `relative` container.
+   */
+  fill?: boolean
 }) {
   return (
     <img
@@ -19,7 +27,9 @@ export function DoctorPortrait({
       height={630}
       loading={priority ? 'eager' : 'lazy'}
       fetchPriority={priority ? 'high' : undefined}
-      className={`h-full w-full object-cover object-top ${className}`}
+      className={`${
+        fill ? 'absolute inset-0' : ''
+      } h-full w-full object-cover object-top ${className}`}
     />
   )
 }

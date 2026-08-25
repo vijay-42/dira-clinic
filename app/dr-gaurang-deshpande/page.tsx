@@ -24,22 +24,22 @@ export default function DoctorPage() {
       {/* Coloured hero with the portrait slot beside the credentials */}
       <section className="bg-brand-surface text-[color:var(--c-on-brand-surface)]">
         <Container>
-          <div className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:py-20">
-            <div className="card overflow-hidden p-0 text-ink">
-              <div className="aspect-[4/5] bg-raised">
-                <DoctorPortrait priority />
-              </div>
+          <div className="grid items-stretch gap-8 py-8 sm:py-10 lg:grid-cols-[0.62fr_1.38fr] lg:gap-12 lg:py-12">
+            {/* Stretches to the text column rather than dictating the banner
+                height with a fixed aspect ratio. */}
+            <div className="card relative mx-auto h-full min-h-[16rem] w-full max-w-[19rem] overflow-hidden bg-raised p-0 lg:max-w-none">
+              <DoctorPortrait priority fill />
             </div>
 
             <div className="min-w-0">
               <p className="pill bg-white/15 text-[color:var(--c-on-brand-surface)]">The consultant</p>
-              <h1 className="display-l mt-5">{doctor.name}</h1>
-              <p className="mt-3 text-[1.1rem] opacity-90">{doctor.title}</p>
-              <p className="lede mt-5 max-w-[54ch] text-[color:var(--c-on-brand-surface)] opacity-85">
+              <h1 className="display-l mt-3 text-[clamp(1.85rem,2.9vw,2.5rem)]">{doctor.name}</h1>
+              <p className="mt-2 text-[1.05rem] opacity-90">{doctor.title}</p>
+              <p className="lede mt-3 max-w-[54ch] text-[color:var(--c-on-brand-surface)] opacity-85">
                 {doctor.intro}
               </p>
 
-              <ul className="mt-7 flex flex-wrap gap-2">
+              <ul className="mt-5 flex flex-wrap gap-2">
                 {doctor.degrees.map((d) => (
                   <li
                     key={d}

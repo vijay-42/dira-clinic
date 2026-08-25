@@ -59,7 +59,7 @@ export default function HomePage() {
           style={{ background: 'radial-gradient(circle, #FFFFFF 0%, transparent 62%)' }}
         />
         <Container className="relative">
-          <div className="grid items-center gap-10 py-10 sm:py-14 lg:grid-cols-[1.35fr_0.65fr] lg:gap-14 lg:py-16">
+          <div className="grid items-center items-stretch gap-8 py-7 sm:py-8 lg:grid-cols-[1.4fr_0.6fr] lg:gap-12 lg:py-9">
             <div className="min-w-0">
               {/* Not the strapline — that is already inside the logo directly
                   above. This says something the logo doesn't. */}
@@ -67,36 +67,29 @@ export default function HomePage() {
                 {clinic.tagline}
               </p>
 
-              <h1 className="display-l mt-5 max-w-[22ch] text-[clamp(2.1rem,3.6vw,3.05rem)]">
+              <h1 className="display-l mt-3 max-w-[30ch] text-[clamp(1.7rem,2.6vw,2.25rem)]">
                 Expert Care in Rheumatology &amp; Immunology Treatment in {cityName()}
               </h1>
 
-              <p className="mt-5 max-w-[58ch] text-[1.05rem] leading-relaxed opacity-90">
+              <p className="mt-3 max-w-[60ch] text-[0.98rem] leading-relaxed opacity-90">
                 Led by {doctor.name}, {doctor.title}, DIRA Clinic provides comprehensive,
                 compassionate care for arthritis, autoimmune diseases, joint pain, and other
                 rheumatic conditions in {locality()}.
               </p>
 
-              <p className="mt-6 max-w-[46ch] font-[family-name:var(--font-display)] text-[1.2rem] italic leading-[1.45] opacity-90 sm:text-[1.3rem]">
-                Sometimes the cause is clear. Sometimes it isn’t. And sometimes the biggest
-                question is whether the immune system is involved at all.
-              </p>
 
-              <AppointmentActions className="mt-7" onDark />
+              <AppointmentActions className="mt-5" onDark />
             </div>
 
             {/* Portrait only — the consultant's name, qualifications and profile
                 link live in the section below and on the profile page, so
                 repeating them here just made the banner taller. */}
             <div className="min-w-0">
-              {/* Height is controlled by capping the card's WIDTH, not by putting
-                  max-height on the aspect box. aspect-ratio is a two-way
-                  constraint: capping the height shrinks the width too, which
-                  leaves the card showing white beside the photo. */}
-              <div className="card mx-auto w-full max-w-[24rem] overflow-hidden p-0">
-                <div className="aspect-[4/5] bg-raised">
-                  <DoctorPortrait priority />
-                </div>
+              {/* No fixed aspect ratio here on purpose. An aspect box would make
+                  the portrait dictate the banner height; instead it stretches to
+                  whatever the text column needs and crops with object-cover. */}
+              <div className="card relative mx-auto h-full min-h-[15rem] w-full max-w-[20rem] overflow-hidden bg-raised p-0 lg:max-w-none">
+                <DoctorPortrait priority fill />
               </div>
             </div>
           </div>
