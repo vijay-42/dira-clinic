@@ -7,7 +7,7 @@ export function MobileContactBar() {
   const wa = whatsappHref()
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 border-t border-rule bg-surface shadow-[0_-4px_20px_-8px_rgba(0,0,0,0.18)] xl:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 border-t border-rule bg-surface shadow-[0_-4px_20px_-8px_rgba(0,0,0,0.18)] lg:hidden">
       <a
         href={wa ?? '/contact/'}
         {...(wa ? { target: '_blank', rel: 'noopener noreferrer' } : {})}

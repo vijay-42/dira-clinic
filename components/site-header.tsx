@@ -7,16 +7,24 @@ import { Logo } from './logo'
 import { IconPhone, IconWhatsApp, IconMail, IconPin } from './icons'
 import { clinic, telHref, whatsappHref, mailHref, isTodo, cityName } from '@/content/clinic'
 
+/**
+ * Header navigation, deliberately kept to four items.
+ *
+ * "Doctors" points at the consultant's profile, not the /for-doctors/ referral
+ * page — that is the usual reading of the word in a clinic menu sitting beside
+ * About and Services.
+ *
+ * Conditions, Patient Education, FAQ and For Doctors are no longer in the
+ * header. They are not orphaned: the footer lists all nine pages on every
+ * page, they stay in sitemap.xml, and each is linked from the body copy of the
+ * pages it belongs with.
+ */
 const primaryNav = [
-  { href: '/about/', label: 'About DIRA' },
-  { href: '/dr-gaurang-deshpande/', label: 'Dr Deshpande' },
-  { href: '/conditions/', label: 'Conditions' },
+  { href: '/about/', label: 'About' },
+  { href: '/dr-gaurang-deshpande/', label: 'Doctors' },
   { href: '/services/', label: 'Services' },
-  { href: '/patient-education/', label: 'Patient Education' },
-  { href: '/for-doctors/', label: 'For Doctors' },
+  { href: '/contact/', label: 'Contact us' },
 ]
-
-const mobileExtra = [{ href: '/faq/', label: 'FAQ' }]
 
 export function SiteHeader() {
   const pathname = usePathname()
@@ -62,7 +70,7 @@ export function SiteHeader() {
               <Logo />
             </Link>
 
-            <nav aria-label="Primary" className="hidden items-center gap-6 xl:flex">
+            <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex">
               {primaryNav.map((item) => (
                 <Link
                   key={item.href}
@@ -89,7 +97,7 @@ export function SiteHeader() {
             </nav>
 
             {/* Mobile menu — a <details> disclosure, so it needs no JavaScript */}
-            <details className="group relative xl:hidden">
+            <details className="group relative lg:hidden">
               <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-[10px] border border-rule px-3 py-2 text-[0.85rem] font-medium text-ink [&::-webkit-details-marker]:hidden">
                 Menu
                 <span aria-hidden="true" className="flex flex-col gap-[3.5px]">
@@ -102,22 +110,20 @@ export function SiteHeader() {
                 aria-label="Primary"
                 className="card absolute right-0 top-full z-40 mt-3 w-[17rem] overflow-hidden p-0"
               >
-                {[...primaryNav, ...mobileExtra, { href: '/contact/', label: 'Contact' }].map(
-                  (item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      aria-current={isActive(item.href) ? 'page' : undefined}
-                      className={`block border-b border-rule-soft px-4 py-3 text-[0.95rem] last:border-b-0 ${
-                        isActive(item.href)
-                          ? 'bg-brand-tint font-medium text-brand'
-                          : 'text-ink'
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  ),
-                )}
+                {primaryNav.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                    className={`block border-b border-rule-soft px-4 py-3 text-[0.95rem] last:border-b-0 ${
+                      isActive(item.href)
+                        ? 'bg-brand-tint font-medium text-brand'
+                        : 'text-ink'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               </nav>
             </details>
           </div>

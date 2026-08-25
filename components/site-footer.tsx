@@ -20,7 +20,7 @@ export function SiteFooter() {
   const wa = whatsappHref()
 
   return (
-    <footer className="bg-brand-surface pb-24 pt-14 text-[color:var(--c-on-brand-surface)] xl:pb-14">
+    <footer className="bg-brand-surface pb-24 pt-14 text-[color:var(--c-on-brand-surface)] lg:pb-14">
       <Container>
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-14">
           <div>
