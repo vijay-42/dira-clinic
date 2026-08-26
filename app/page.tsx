@@ -9,7 +9,7 @@ import {
 } from '@/components/icons'
 import { clinic, isTodo, cityName, locality } from '@/content/clinic'
 import { doctor } from '@/content/doctor'
-import { triage, approach, conditionGroups } from '@/content/site'
+import { triage, conditionGroups } from '@/content/site'
 
 /* Why a patient can trust this clinic — stated as facts, not slogans.
    No invented statistics: the only number here is real. */
@@ -52,16 +52,17 @@ export default function HomePage() {
   return (
     <>
       {/* ============================================================ HERO
-          Light panel rather than a solid colour block: the portrait sits in a
-          soft halo, which is what gives the section its shape. */}
-      <section className="ring-field relative overflow-hidden bg-paper">
+          Light panel rather than a solid colour block: the brand navy arrives
+          as a wash (hero-field) and the portrait sits in a soft halo, which is
+          what gives the section its shape. */}
+      <section className="hero-field relative overflow-hidden">
         <Container className="relative">
           <div className="grid items-center gap-9 pb-12 pt-8 sm:pt-11 lg:grid-cols-[1.32fr_0.68fr] lg:gap-12 lg:pb-16 lg:pt-12">
             <div className="min-w-0">
               <p className="eyebrow text-brand">{clinic.tagline}</p>
 
-              <h1 className="display-xl mt-4 max-w-[26ch] text-[clamp(1.95rem,3.4vw,2.85rem)]">
-                Expert care in rheumatology &amp; immunology in {cityName()}
+              <h1 className="display-xl mt-4 max-w-[26ch] text-[clamp(1.7rem,3.4vw,2.85rem)]">
+                Expert care in Rheumatology &amp; Immunology in {cityName()}
               </h1>
 
               <p className="lede measure mt-4">
@@ -239,28 +240,8 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* ======================================================= APPROACH */}
-      <Section tone="raised">
-        <SectionHead
-          eyebrow="Our approach"
-          title="How an evaluation proceeds"
-          lede="Six steps, in order — because the sequence is the point. The diagnosis is established before treatment is chosen."
-        />
-        <ol className="reveal-each mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {approach.map((step, i) => (
-            <li key={step.title} className="card p-6">
-              <span className="eyebrow tnum text-brand">
-                Step {String(i + 1).padStart(2, '0')}
-              </span>
-              <h3 className="display-s mt-2">{step.title}</h3>
-              <p className="mt-2 text-[0.93rem] leading-relaxed text-muted">{step.body}</p>
-            </li>
-          ))}
-        </ol>
-      </Section>
-
       {/* ============================================== DOCTOR PULL QUOTE */}
-      <Section tone="paper">
+      <Section tone="raised">
         <figure className="card cat-warm relative overflow-hidden p-8 sm:p-12">
           <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 bg-[color:var(--cat)]" />
           <blockquote>
@@ -281,76 +262,6 @@ export default function HomePage() {
         </figure>
       </Section>
 
-      {/* ===================================================== REFERRALS */}
-      <Section tone="raised">
-        <div className="grid items-start gap-8 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
-          <div>
-            <SectionHead
-              eyebrow="For doctors"
-              title="Referrals from physicians and specialists"
-              lede="You don’t need to be certain that it is autoimmune before referring. A specialist opinion can also establish when it is not an autoimmune disease, and guide the patient to the appropriate next step."
-            />
-            <Link href="/for-doctors/" className="btn btn-ghost mt-8">
-              When to refer <IconArrow className="nudge h-4 w-4" />
-            </Link>
-          </div>
-          <div className="card cat-plum p-7">
-            <h3 className="display-s cat-text">Common referral reasons</h3>
-            <TickList
-              items={[
-                'Positive autoimmune serology',
-                'Possible connective tissue disease',
-                'Suspected vasculitis',
-                'Unexplained muscle disease',
-                'Complex multisystem illness',
-              ]}
-              columns={1}
-              className="mt-4"
-            />
-          </div>
-        </div>
-      </Section>
-
-      {/* ======================================================= CTA BAND
-          Two panels rather than one: the questions "is this even autoimmune?"
-          and "I want to book" are different visitors, and each gets its own. */}
-      <section className="grid lg:grid-cols-2">
-        <div className="ring-field bg-band-mid px-6 py-14 text-[color:var(--c-on-band)] sm:px-10 sm:py-16 lg:px-14">
-          <div className="ml-auto max-w-[34rem] lg:mr-8">
-            <p className="eyebrow opacity-85">Not sure if it is autoimmune?</p>
-            <h2 className="display-m mt-4 max-w-[20ch]">
-              Being told it is not an autoimmune disease is a useful answer too
-            </h2>
-            <p className="mt-4 max-w-[46ch] text-[1rem] leading-relaxed opacity-90">
-              Many patients arrive with a positive ANA, a raised inflammatory marker, or symptoms
-              across several organs and no diagnosis at all. Establishing what is not happening
-              is part of the work.
-            </p>
-            <Link
-              href="/conditions/"
-              className="btn btn-on-dark mt-7"
-            >
-              Conditions we see <IconArrow className="nudge h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-
-        {/* A hairline keeps the two depths of navy reading as two panels: below
-            lg they stack, so the seam moves from the left edge to the top. */}
-        <div className="ring-field border-t border-[color:var(--c-band-seam)] bg-band-deep px-6 py-14 text-[color:var(--c-on-band)] sm:px-10 sm:py-16 lg:border-l lg:border-t-0 lg:px-14">
-          <div className="max-w-[34rem] lg:ml-8">
-            <p className="eyebrow opacity-85">Appointments</p>
-            <h2 className="display-m mt-4 max-w-[20ch]">
-              Take the first step towards understanding what is happening
-            </h2>
-            <p className="mt-4 max-w-[46ch] text-[1rem] leading-relaxed opacity-90">
-              Consultations at {locality()} are by prior appointment. WhatsApp is usually the
-              quickest way to reach the clinic.
-            </p>
-            <AppointmentActions onDark className="mt-7" />
-          </div>
-        </div>
-      </section>
     </>
   )
 }
