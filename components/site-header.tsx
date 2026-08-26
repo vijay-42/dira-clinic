@@ -5,8 +5,9 @@ import { usePathname } from 'next/navigation'
 import { Container } from './ui'
 import { Logo } from './logo'
 import { IconPhone, IconWhatsApp, IconMail, IconPin, IconChevron } from './icons'
-import { clinic, telHref, whatsappHref, mailHref, isTodo, cityName } from '@/content/clinic'
+import { clinic, telHref, mailHref, isTodo, cityName } from '@/content/clinic'
 import { serviceMenu } from '@/content/service-pages'
+import { openBooking } from './booking-dialog'
 
 /**
  * Header navigation, deliberately kept to four items.
@@ -33,7 +34,6 @@ export function SiteHeader() {
   const isWithin = (item: { children?: readonly { href: string }[] }) =>
     !!item.children?.some((c) => pathname === c.href)
   const tel = telHref()
-  const wa = whatsappHref()
   const mail = mailHref('Appointment enquiry')
 
   return (
@@ -123,14 +123,14 @@ export function SiteHeader() {
                   </div>
                 )
               })}
-              <a
-                href={wa ?? '/contact/'}
-                {...(wa ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              <button
+                type="button"
+                onClick={() => openBooking()}
                 className="btn btn-warm min-h-0 px-4 py-2.5 text-[0.88rem]"
               >
                 <IconWhatsApp className="h-4 w-4" />
                 Book appointment
-              </a>
+              </button>
             </nav>
 
             {/* Mobile menu — a <details> disclosure, so it needs no JavaScript */}
@@ -179,6 +179,21 @@ export function SiteHeader() {
                     ) : null}
                   </div>
                 ))}
+                <div className="border-t border-rule-soft p-3">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      // Collapse the menu behind the dialog, so closing the
+                      // dialog does not reveal a menu still hanging open.
+                      e.currentTarget.closest('details')?.removeAttribute('open')
+                      openBooking()
+                    }}
+                    className="btn btn-warm min-h-0 w-full py-2.5 text-[0.9rem]"
+                  >
+                    <IconWhatsApp className="h-4 w-4" />
+                    Book appointment
+                  </button>
+                </div>
               </nav>
             </details>
           </div>

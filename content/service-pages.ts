@@ -37,6 +37,8 @@ export type ServicePage = {
     heading: string
     body?: string[]
     list?: string[]
+    /** Trailing note rendered after the list — caveats, availability, context. */
+    note?: string
   }[]
   /** Short answers shown as an FAQ block, also emitted as FAQPage schema. */
   faqs: { q: string; a: string }[]
@@ -45,54 +47,65 @@ export type ServicePage = {
 export const servicePages: ServicePage[] = [
   {
     slug: 'arthritis-treatment-in-bangalore',
-    navLabel: 'Arthritis & Allergy',
-    title: 'Arthritis & Allergy Treatment',
+    navLabel: 'Arthritis',
+    title: 'Arthritis Treatment',
     metaTitle: 'Arthritis Treatment in Bangalore',
     metaDescription:
-      'Assessment and treatment of arthritis and allergic conditions in Indiranagar, Bangalore. Rheumatoid arthritis, osteoarthritis, gout, psoriatic arthritis, and suspected allergy — evaluated by a consultant rheumatologist and clinical immunologist.',
-    eyebrow: 'Arthritis & allergy',
+      'Arthritis treatment in Indiranagar, Bangalore — assessment and personalised care for osteoarthritis, rheumatoid arthritis, inflammatory arthritis, joint pain and stiffness, from a consultant rheumatologist and clinical immunologist.',
+    eyebrow: 'Arthritis',
     cat: 'cat-brand',
     icon: 'joint',
-    lede: 'Joint pain has many causes, and they are treated very differently. The first job of a consultation is to establish which kind of arthritis is present — or whether the problem is arthritis at all.',
+    lede: 'Living with arthritis can make simple everyday activities such as walking, climbing stairs, working, or even getting out of bed uncomfortable. At DIRA, we focus on helping patients understand their joint problems and receive personalised care based on their symptoms, condition, and overall health.',
     sections: [
       {
-        heading: 'Arthritis is not one disease',
+        heading: 'Comprehensive arthritis care at DIRA',
         body: [
-          'Inflammatory arthritis, degenerative joint disease and crystal arthritis can all present as a painful, swollen joint, but they need different treatment and carry different long-term risks. Getting the distinction right early matters, because inflammatory arthritis can cause joint damage that is far easier to prevent than to reverse.',
-          'Assessment combines the pattern of joint involvement, the timing of symptoms, examination findings and — where the clinical question requires it — blood tests and imaging.',
+          'Arthritis is not just one condition. It can affect people differently and may involve pain, stiffness, swelling, tenderness, or difficulty moving the affected joints. Early evaluation can help identify the underlying cause and guide an appropriate treatment plan.',
+          'Our approach begins with understanding your symptoms, medical history, lifestyle, and joint-related concerns. Depending on your condition, your doctor may recommend appropriate clinical evaluation and investigations to understand the problem better.',
         ],
       },
       {
-        heading: 'Forms of arthritis assessed and managed here',
+        heading: 'Conditions we help manage',
+        body: [
+          'Our arthritis care is designed for patients experiencing a range of joint and musculoskeletal concerns, including:',
+        ],
         list: [
+          'Osteoarthritis and age-related joint problems',
           'Rheumatoid arthritis',
-          'Osteoarthritis',
-          'Gout and other crystal arthritis',
-          'Psoriatic arthritis',
-          'Spondyloarthritis and inflammatory back pain',
-          'Arthritis associated with connective tissue disease',
-          'Undifferentiated arthritis, where a firm diagnosis has not yet emerged',
+          'Joint pain and stiffness',
+          'Knee, shoulder, hip, and other joint problems',
+          'Inflammatory arthritis',
+          'Recurring joint swelling and discomfort',
+          'Mobility difficulties associated with arthritis',
         ],
       },
       {
-        heading: 'Allergy and immune-related symptoms',
+        heading: 'Personalised arthritis treatment',
         body: [
-          'Allergy is assessed alongside rheumatology because both are questions about how the immune system is behaving. Many patients arrive having been told they have an allergy without that ever having been confirmed, or with reactions that turn out to have a different explanation.',
-          'The aim is to establish whether an allergic or immune mechanism is genuinely present, and to avoid both missing a real disorder and over-investigating symptoms that have another cause.',
+          'The right treatment depends on the type and severity of arthritis, the joints involved, and individual patient needs. No single treatment works for everyone with arthritis, so the aim is a care plan suited to your specific condition and daily needs.',
+          'Treatment may include appropriate medicines, lifestyle guidance, physical activity or rehabilitation recommendations, and other clinically suitable approaches. Your doctor will explain the available options and help you understand the benefits, precautions, and expected outcomes of your treatment.',
+          'The goal is not only to address joint discomfort but also to help you maintain mobility and manage your condition over the long term.',
+        ],
+      },
+      {
+        heading: 'Why choose DIRA',
+        body: [
+          'Good arthritis care starts with listening to the patient. The clinic provides a comfortable environment where you can openly discuss your pain, stiffness, movement difficulties, and other concerns.',
+          'Our approach focuses on:',
         ],
         list: [
-          'Recurrent or unexplained allergic symptoms',
-          'Drug reactions and drug allergy labels that have never been tested',
-          'Food-related reactions and concerns',
-          'Skin and respiratory allergic symptoms',
-          'Abnormal allergy or immune blood tests',
+          'Individualised assessment and treatment planning',
+          'Clear communication and patient education',
+          'Practical guidance for managing joint health',
+          'Ongoing monitoring when required',
+          'A patient-centred approach to long-term arthritis management',
         ],
       },
       {
-        heading: 'What treatment may involve',
+        heading: 'Take the first step towards better joint health',
         body: [
-          'Treatment is chosen to fit the diagnosis and the person. For inflammatory arthritis that usually means disease-modifying treatment with structured monitoring, alongside pain management and rehabilitation. For osteoarthritis the emphasis falls on pain control, movement, muscle strength and joint protection.',
-          'Where medication is started, what it is for, how it will be monitored and what to watch for are explained before it begins.',
+          'Persistent joint pain or stiffness should not be ignored or dismissed as a normal part of ageing. Getting the right evaluation can help you understand what is causing your symptoms and what treatment options may be appropriate.',
+          'If you are looking for arthritis treatment in Bangalore, DIRA is here to support you with personalised care focused on your comfort, mobility, and overall well-being.',
         ],
       },
     ],
@@ -106,8 +119,8 @@ export const servicePages: ServicePage[] = [
         a: 'Not always. A rheumatology opinion is useful where the diagnosis is uncertain, where inflammation may also be present, or where pain and function are not responding to initial management.',
       },
       {
-        q: 'Can allergy testing tell me what I am allergic to?',
-        a: 'Testing can support or argue against a suspected allergy, but results are only meaningful alongside the history of what actually happened. A positive test without matching symptoms does not by itself establish an allergy.',
+        q: 'Is joint pain simply a normal part of getting older?',
+        a: 'Some joint wear is common with age, but persistent pain, stiffness or swelling should not be dismissed as inevitable. An evaluation can establish what is actually causing the symptoms and whether treatment would help.',
       },
     ],
   },
@@ -118,45 +131,64 @@ export const servicePages: ServicePage[] = [
     title: 'Immunology & Rheumatology Treatment',
     metaTitle: 'Immunology & Rheumatology Treatment, Bangalore',
     metaDescription:
-      'Specialist care for autoimmune and immune-mediated disease in Indiranagar, Bangalore — lupus, vasculitis, myositis, connective tissue disease, immune dysregulation and unexplained inflammation.',
+      'Personalised immunology and rheumatology care in Indiranagar, Bangalore — rheumatoid arthritis, lupus and connective tissue disorders, psoriatic arthritis, ankylosing spondylitis, Sjögren’s disease, scleroderma, vasculitis and gout, assessed by a consultant rheumatologist and clinical immunologist.',
     eyebrow: 'Immunology & rheumatology',
     cat: 'cat-teal',
     icon: 'immune',
-    lede: 'Immune-mediated disease rarely stays in one place. When symptoms cross several organ systems, or blood tests are abnormal without an obvious cause, the question is whether the immune system is driving it.',
+    lede: 'Autoimmune and rheumatic conditions can affect more than just your joints. Persistent joint pain, stiffness, swelling, fatigue, muscle discomfort, skin changes or unexplained inflammation may sometimes be linked to an underlying immune-system disorder.',
     sections: [
       {
-        heading: 'When an immunology opinion helps',
+        heading: 'Comprehensive immunology & rheumatology care',
         body: [
-          'Autoimmune and immune-mediated conditions can affect joints, skin, muscles, blood, nerves, lungs and kidneys, sometimes several at once. That pattern is often what first suggests an immune cause — and it is also why these cases are difficult to place with a single-organ specialist.',
-          'Dr Deshpande holds a DM in Clinical Immunology & Rheumatology, a super-speciality qualification covering both, so allergy, immune dysregulation and multisystem illness are assessed here rather than referred onward.',
+          'Rheumatology focuses on conditions affecting the joints, muscles, bones and connective tissues, while immunology helps understand disorders involving the body’s immune system. In autoimmune diseases, the immune system can mistakenly attack healthy tissues. Conditions such as rheumatoid arthritis, lupus, Sjögren’s disease, scleroderma and other inflammatory disorders may involve multiple parts of the body.',
+          'At DIRA, we take a patient-focused approach to evaluating symptoms and identifying possible causes. Your consultation may include a detailed medical history, physical examination, and appropriate laboratory or imaging investigations when required.',
+          'There is often no single test that can diagnose an autoimmune or rheumatic condition, so a complete clinical assessment is important.',
         ],
       },
       {
-        heading: 'Conditions commonly seen',
+        heading: 'Conditions we help manage',
+        body: [
+          'Symptoms can vary significantly between individuals. Early medical evaluation can be particularly important when inflammatory or autoimmune disease is suspected, as timely treatment may help control inflammation and reduce the risk of long-term complications.',
+        ],
         list: [
-          'Systemic lupus erythematosus',
+          'Rheumatoid arthritis',
+          'Lupus and connective tissue disorders',
+          'Psoriatic arthritis',
+          'Ankylosing spondylitis and other inflammatory arthritis',
           'Sjögren’s disease',
-          'Systemic sclerosis',
-          'Inflammatory myositis',
-          'Vasculitis',
-          'Mixed and undifferentiated connective tissue disease',
-          'Autoimmune blood disorders',
-          'Autoimmune neurological conditions',
-          'Immune dysregulation and unexplained inflammation',
+          'Scleroderma',
+          'Vasculitis and other immune-mediated conditions',
+          'Gout and selected metabolic joint disorders',
+          'Unexplained joint pain, swelling or prolonged stiffness',
         ],
       },
       {
-        heading: 'A positive test is a starting point, not a diagnosis',
+        heading: 'Personalised treatment plans',
         body: [
-          'Many patients are referred because of a positive ANA or another abnormal immune result. A positive test in the absence of matching symptoms and examination findings frequently turns out not to indicate disease at all.',
-          'Investigations are interpreted in clinical context, and further tests are requested only when the answer would change what happens next. Establishing that no immune-mediated disease is present is a legitimate and useful outcome.',
+          'There is no single treatment approach for every rheumatology or immunology condition. At DIRA, treatment recommendations are based on your diagnosis, symptoms, disease activity, medical history and individual needs.',
+          'Depending on the condition, treatment may involve medicines to control inflammation or modify disease activity, along with lifestyle guidance, physical therapy or other supportive care when appropriate. Long-term conditions may also require regular monitoring and adjustments to treatment over time.',
+          'Our aim is to help you better understand your condition, manage symptoms, protect joint and organ health where possible, and maintain your everyday quality of life.',
         ],
       },
       {
-        heading: 'Long-term management',
+        heading: 'Why choose DIRA?',
         body: [
-          'Immune-mediated disease is usually managed over years rather than weeks. That means tracking disease activity, adjusting treatment as it changes, monitoring for medication side effects, and watching for the complications that particular conditions carry.',
-          'Where more than one speciality is needed — pulmonology, nephrology, dermatology, neurology, haematology — care is coordinated rather than fragmented across separate appointments.',
+          'At DIRA, we believe effective care begins with listening carefully to each patient. We focus on clear communication and personalised treatment rather than taking a one-size-fits-all approach.',
+        ],
+        list: [
+          'Detailed evaluation of symptoms and medical history',
+          'Appropriate diagnostic assessment',
+          'Individualised treatment planning',
+          'Guidance for long-term disease management',
+          'Regular monitoring when required',
+          'Patient-friendly explanations about your condition and treatment',
+        ],
+      },
+      {
+        heading: 'Get the right care for your symptoms',
+        body: [
+          'If you have persistent joint pain, morning stiffness, recurring swelling, unexplained fatigue, or symptoms that may be related to an autoimmune condition, consulting a rheumatology specialist can help you understand what may be causing them.',
+          'If you are looking for immunology and rheumatology treatment in Bangalore, DIRA provides personalised care designed around your health needs.',
         ],
       },
     ],
@@ -182,47 +214,80 @@ export const servicePages: ServicePage[] = [
     title: 'Physiotherapy & Rehabilitation',
     metaTitle: 'Physiotherapy Clinic in Bangalore',
     metaDescription:
-      'Physiotherapy and rehabilitation integrated with rheumatology care in Indiranagar, Bangalore. Mobility, strengthening, joint protection and functional recovery for arthritis and inflammatory disease.',
+      'Physiotherapy clinic in Indiranagar, Bangalore. Personalised assessment and rehabilitation for back and neck pain, knee and shoulder pain, arthritis, sports and ligament injuries, fractures and post-surgical recovery — planned alongside medical care.',
     eyebrow: 'Physiotherapy',
     cat: 'cat-fresh',
     icon: 'rehab',
-    lede: 'Medication controls disease activity. Movement is what restores function. For most patients with arthritis or inflammatory disease, the two work together or neither works well.',
+    lede: 'Pain, stiffness, muscle weakness or difficulty moving can affect your work, your exercise, your sleep and your everyday activities. Whether you are recovering from an injury, managing joint pain or living with a long-term musculoskeletal condition, the right physiotherapy can improve movement and function.',
     sections: [
       {
-        heading: 'Rehabilitation planned around the diagnosis',
+        heading: 'Personalised physiotherapy care at DIRA',
         body: [
-          'Physiotherapy for an inflamed joint is not the same as physiotherapy for a mechanical problem, and pushing the wrong programme can set a patient back. Because rehabilitation here is planned alongside the medical assessment, the programme reflects what is actually happening in the joint and where the disease currently sits.',
-          'That also means it can be adjusted as disease activity changes rather than running to a fixed script.',
+          'Physiotherapy is an important part of rehabilitation for many musculoskeletal conditions, including back pain, osteoarthritis, rheumatoid arthritis, fractures and other conditions that affect movement and mobility.',
+          'Your physiotherapy begins with an assessment of your symptoms, movement, strength, flexibility and functional limitations. From that assessment, the team develops an individualised treatment and rehabilitation plan suited to your needs.',
+          'The focus is not simply on managing discomfort. The aim is to improve mobility, build strength, restore confidence in movement, and help you return to your normal activities as safely as possible.',
         ],
       },
       {
-        heading: 'What a programme may focus on',
+        heading: 'Conditions physiotherapy can help with',
+        body: [
+          'Physiotherapy may be recommended for a wide range of conditions and recovery needs. It can also support people recovering from illness, injury or surgery, and those managing an age-related decline in physical function.',
+        ],
         list: [
-          'Restoring and maintaining joint range of movement',
-          'Strengthening the muscles that support affected joints',
-          'Joint protection and techniques for daily tasks',
-          'Posture and movement patterns',
-          'Functional recovery after a flare or a period of immobility',
-          'Maintaining independence in everyday activities',
-          'Safe, graded return to work and physical activity',
+          'Back and neck pain',
+          'Knee and shoulder pain',
+          'Joint stiffness and mobility problems',
+          'Arthritis-related movement difficulties',
+          'Sports injuries',
+          'Muscle and ligament injuries',
+          'Post-surgical rehabilitation',
+          'Recovery after fractures or other injuries',
+          'Muscle weakness and reduced mobility',
+          'Posture and movement-related problems',
         ],
       },
       {
-        heading: 'Who it helps',
+        heading: 'Our approach to physiotherapy',
         body: [
-          'Rehabilitation is useful across inflammatory arthritis, osteoarthritis, inflammatory back pain, myositis and chronic musculoskeletal pain — and for patients recovering function after a disease flare.',
-          'It is equally relevant where no inflammatory disease is found: mechanical and soft-tissue problems often respond better to structured rehabilitation than to medication.',
+          'Every patient is different, so treatment should not follow a one-size-fits-all approach. A plan is tailored to your condition, your physical ability, your recovery goals and the progress you make.',
+          'Depending on what you need, your programme may include therapeutic exercise, mobility and flexibility work, strengthening, movement retraining, posture guidance and other appropriate rehabilitation techniques.',
+          'Your physiotherapist can also give you guidance on exercises and daily activities that help you manage your condition and support your recovery outside the clinic.',
+        ],
+      },
+      {
+        heading: 'Rehabilitation planned alongside your medical care',
+        body: [
+          'Physiotherapy for an inflamed joint is not the same as physiotherapy for a mechanical problem, and pushing the wrong programme can set a patient back. Because rehabilitation here is planned alongside the medical assessment, the programme reflects what is actually happening in the joint.',
+          'It can also be adjusted as your condition changes, rather than running to a fixed script.',
+        ],
+      },
+      {
+        heading: 'Why choose DIRA',
+        body: [
+          'Effective physiotherapy starts with understanding the person, not only the symptoms. The aim is to keep your treatment comfortable, clearly explained and focused on practical results — improving or maintaining how you function, so you can be as independent as possible in everyday life.',
+        ],
+        list: [
+          'A detailed assessment before treatment begins',
+          'Personalised rehabilitation plans',
+          'Exercise-based physiotherapy',
+          'Guidance for safe movement and daily activities',
+          'Progress monitoring where it is needed',
+          'Plain explanations of what is being done and why',
         ],
       },
     ],
     faqs: [
       {
         q: 'Should I exercise if my joints are painful?',
-        a: 'Usually yes, but what kind and how much depends on whether the joint is actively inflamed. That is exactly the judgement a programme planned alongside your rheumatology assessment is meant to get right.',
+        a: 'Usually yes, but what kind and how much depends on whether the joint is actively inflamed. That is exactly the judgement a programme planned alongside your medical assessment is meant to get right.',
       },
       {
         q: 'How long does rehabilitation take?',
         a: 'It varies with the condition, how long symptoms have been present and what function you are working back towards. Realistic expectations are set at the start rather than left open-ended.',
+      },
+      {
+        q: 'Do I need a referral to see a physiotherapist here?',
+        a: 'No. You can book directly. If an assessment suggests an underlying inflammatory or immune-related condition, that can be evaluated in the same clinic.',
       },
     ],
   },
@@ -230,49 +295,82 @@ export const servicePages: ServicePage[] = [
   {
     slug: 'pharmacy-service-in-bangalore',
     navLabel: 'Pharmacy',
-    title: 'Pharmacy Support',
+    title: 'Pharmacy Service',
     metaTitle: 'Pharmacy Service in Bangalore',
     metaDescription:
-      'Pharmacy support for rheumatology and immunology patients in Indiranagar, Bangalore — access to prescribed medicines, with counselling on how they are taken, stored and monitored.',
+      'Pharmacy service at DIRA Clinic, Indiranagar, Bangalore — convenient access to prescribed medicines, with careful prescription-based dispensing and clear medication guidance.',
     eyebrow: 'Pharmacy',
     cat: 'cat-plum',
     icon: 'pharmacy',
-    lede: 'Rheumatology treatment often involves medicines that are not stocked everywhere, taken on unusual schedules, and monitored with regular blood tests. Continuity matters more here than in most specialities.',
+    lede: 'Getting the right medicines at the right time is an important part of your healthcare journey. Our pharmacy service is designed to make accessing prescribed medicines more convenient, while keeping patient safety and medication awareness at the centre of care.',
     sections: [
       {
-        heading: 'Why it is part of the clinic',
+        heading: 'Convenient pharmacy service at DIRA Clinic',
         body: [
-          'Treatment for inflammatory and autoimmune disease frequently depends on taking a medicine consistently over months or years. Gaps caused by a medicine being unavailable, or by confusion over how it should be taken, undo work that treatment has already done.',
-          'Having pharmacy support alongside the consultation reduces the number of places a patient has to chase, and means questions about a prescription can be answered by people who can see why it was written.',
+          'Whether you are visiting the clinic for a consultation, managing a long-term condition, or following a treatment plan, having convenient access to your prescribed medicines can make healthcare simpler and more organised.',
+          'Our pharmacy service supports patients by providing access to medicines prescribed by qualified healthcare professionals. We aim to make the process simple, reliable and comfortable for patients and their families.',
+          'Every prescription should be reviewed carefully to ensure that the medicine, dose, dosage form, route and intended use are appropriate. Proper dispensing and clear medicine labelling are also important aspects of medication safety.',
+          'We encourage patients to understand their medicines and to follow the instructions provided by their doctor or healthcare professional.',
         ],
       },
       {
-        heading: 'What this covers',
+        heading: 'Medicines for your healthcare needs',
+        body: [
+          'Our pharmacy service can support patients receiving treatment for a variety of healthcare needs, subject to prescription and availability. This may include medicines prescribed for:',
+        ],
         list: [
-          'Access to prescribed medicines where they are available',
-          'Explanation of how and when each medicine should be taken',
-          'Guidance on storage, including medicines that need refrigeration',
-          'Clarity on which blood tests are due and when',
-          'What to do about a missed dose',
-          'Which side effects warrant contacting the clinic',
+          'Arthritis and rheumatology conditions',
+          'Autoimmune and inflammatory conditions',
+          'Pain and musculoskeletal problems',
+          'Other conditions managed through DIRA Clinic',
+          'Ongoing or long-term treatment plans',
+        ],
+        note: 'The availability of medicines may vary, and prescription medicines are provided in accordance with applicable requirements.',
+      },
+      {
+        heading: 'Focus on medication safety',
+        body: [
+          'Taking medicines correctly is an important part of effective treatment. Medication errors can sometimes occur because of similar medicine names, incorrect doses, unclear instructions, or confusion about how a medicine should be taken. Healthcare guidance recommends appropriate checks during dispensing, and clear patient education about medicines.',
+          'Our pharmacy service aims to support patients with clear information about their prescribed medicines, including the instructions provided by the treating doctor. If you have questions about a medicine, its dosage, timing, or any concern you have about it, discuss them with your doctor or pharmacist rather than changing your medication on your own.',
         ],
       },
       {
-        heading: 'Monitoring is part of the prescription',
+        heading: 'Why choose DIRA Clinic pharmacy?',
         body: [
-          'Several of the medicines used in rheumatology require periodic blood monitoring for safety. Those requirements are explained when treatment starts and tracked alongside it, so monitoring does not quietly lapse.',
-          'No medicine is dispensed without a valid prescription, and treatment decisions always rest with the treating doctor.',
+          'We understand that patients value convenience as well as dependable healthcare support. Having pharmacy services within a clinical setting can make it easier to continue your treatment plan after your consultation.',
+          'Our approach focuses on:',
+        ],
+        list: [
+          'Convenient access to prescribed medicines',
+          'Careful prescription-based dispensing',
+          'Patient-friendly medication guidance',
+          'Attention to medicine storage and handling',
+          'Support for patients managing ongoing treatment',
+          'A coordinated healthcare experience',
+        ],
+        note: 'Medicines are an important part of patient care, and maintaining appropriate standards for their quality, safety and distribution is a key part of India’s healthcare regulatory framework.',
+      },
+      {
+        heading: 'Pharmacy support in Bangalore',
+        body: [
+          'Managing healthcare can involve consultations, investigations, prescriptions and regular medicines. Our pharmacy service is intended to make this experience more convenient by bringing medication access closer to your healthcare journey.',
+          'If you are looking for a pharmacy service in Bangalore, DIRA Clinic provides a patient-focused and convenient option for accessing prescribed medicines as part of your overall care.',
+          'Visit DIRA Clinic or speak with our team to learn more about our pharmacy services and medicine availability.',
         ],
       },
     ],
     faqs: [
       {
-        q: 'Can I get my regular medicines here?',
-        a: 'Prescribed medicines are available where stocked. If something is not held, the clinic will say so directly rather than leaving you to find out later.',
+        q: 'Do I need a prescription?',
+        a: 'Yes. Prescription medicines are dispensed only against a valid prescription, in accordance with applicable requirements.',
       },
       {
-        q: 'Do I need a prescription?',
-        a: 'Yes. Medicines are dispensed only against a valid prescription.',
+        q: 'Will you have my medicine in stock?',
+        a: 'Availability varies. If something is not held, the clinic will tell you directly rather than leaving you to find out later.',
+      },
+      {
+        q: 'Who do I ask if I am unsure about a medicine?',
+        a: 'Speak to your doctor or the pharmacist about the medicine, its dosage or timing, or any concern you have about it. Do not change or stop a prescribed medicine on your own.',
       },
     ],
   },

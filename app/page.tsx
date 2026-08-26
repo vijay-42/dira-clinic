@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Container, Section, SectionHead, TickList } from '@/components/ui'
 import { AppointmentActions } from '@/components/contact-bar'
-import { QuickBookBar, ContactStrip } from '@/components/quick-book'
+import { ContactStrip } from '@/components/contact-strip'
 import { DoctorPortrait } from '@/components/portrait'
 import {
   IconConsult, IconOpinion, IconImmune, IconJoint, IconPain,
@@ -56,7 +56,7 @@ export default function HomePage() {
           soft halo, which is what gives the section its shape. */}
       <section className="ring-field relative overflow-hidden bg-paper">
         <Container className="relative">
-          <div className="grid items-center gap-9 pb-20 pt-8 sm:pt-11 lg:grid-cols-[1.32fr_0.68fr] lg:gap-12 lg:pb-24 lg:pt-12">
+          <div className="grid items-center gap-9 pb-12 pt-8 sm:pt-11 lg:grid-cols-[1.32fr_0.68fr] lg:gap-12 lg:pb-16 lg:pt-12">
             <div className="min-w-0">
               <p className="eyebrow text-brand">{clinic.tagline}</p>
 
@@ -118,11 +118,6 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
-
-      {/* Appointment bar, straddling the hero and the section below it */}
-      <Container className="relative z-10 -mt-16">
-        <QuickBookBar />
-      </Container>
 
       {/* Practical facts strip */}
       <Section tone="paper" className="!py-12 sm:!py-14">

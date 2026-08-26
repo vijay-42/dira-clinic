@@ -11,7 +11,7 @@ const pending = []
 /** Pulls the nearest preceding /** ... *\/ comment as context. */
 function hintAbove(lines, index) {
   const parts = []
-  for (let j = index - 1; j >= 0 && j > index - 10; j--) {
+  for (let j = index - 1; j >= 0 && j > index - 18; j--) {
     const t = lines[j].trim()
     // A whole comment on one line: /** TODO City only, e.g. 'Pune'. */
     if (/^\/\*\*.*\*\/$/.test(t)) {

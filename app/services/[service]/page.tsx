@@ -112,6 +112,11 @@ export default async function ServiceDetailPage({ params }: Props) {
                     <TickList items={section.list} columns={section.list.length > 5 ? 2 : 1} />
                   </div>
                 ) : null}
+                {section.note ? (
+                  <p className="measure mt-5 text-[0.95rem] leading-relaxed text-muted">
+                    {section.note}
+                  </p>
+                ) : null}
               </div>
             </div>
           </div>

@@ -446,3 +446,42 @@
 .prose p { margin: 0 0 1.05em; }
 .prose p:last-child { margin-bottom: 0; }
 .prose strong { font-weight: 600; }
+
+/* The appointment dialog. A native <dialog>, so the backdrop, the focus trap
+   and Escape come from the platform; this is only its shape and its entrance.
+   `allow-discrete` plus @starting-style is what lets an element animate in
+   from display:none — where that is unsupported, it simply appears. */
+.booking-dialog {
+  width: min(30rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--c-ink);
+  box-shadow: 0 24px 70px -28px hsl(var(--c-shadow) / 0.55);
+}
+.booking-dialog::backdrop {
+  background: hsl(var(--c-shadow) / 0.45);
+  backdrop-filter: blur(2px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .booking-dialog,
+  .booking-dialog::backdrop {
+    transition: opacity 180ms ease, transform 180ms ease, overlay 180ms allow-discrete,
+                display 180ms allow-discrete;
+  }
+  .booking-dialog { opacity: 1; transform: translateY(0); }
+  .booking-dialog::backdrop { opacity: 1; }
+
+  .booking-dialog:not([open]) { opacity: 0; transform: translateY(8px); }
+  .booking-dialog:not([open])::backdrop { opacity: 0; }
+
+  @starting-style {
+    .booking-dialog[open] { opacity: 0; transform: translateY(8px); }
+    .booking-dialog[open]::backdrop { opacity: 0; }
+  }
+}

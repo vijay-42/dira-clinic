@@ -1,5 +1,6 @@
 import { telHref, whatsappHref, clinic, isTodo } from '@/content/clinic'
 import { IconWhatsApp, IconPhone } from './icons'
+import { BookAppointmentButton } from './booking-dialog'
 
 /** Fixed bottom bar on mobile: phone and WhatsApp always one tap away. */
 export function MobileContactBar() {
@@ -27,7 +28,15 @@ export function MobileContactBar() {
   )
 }
 
-/** The two primary calls to action. */
+/**
+ * The two primary calls to action.
+ *
+ * The first opens the appointment dialog rather than jumping straight into
+ * WhatsApp: the clinic gets a name, a number and a reason instead of an empty
+ * "hello", and the patient still ends up in WhatsApp on submit. `message` is
+ * carried into the dialog as the opening line, so the enquiry keeps the
+ * context of the page it was made from.
+ */
 export function AppointmentActions({
   className = '',
   message,
@@ -37,19 +46,17 @@ export function AppointmentActions({
   message?: string
   onDark?: boolean
 }) {
-  const wa = whatsappHref(message)
   const tel = telHref()
 
   return (
     <div className={`flex flex-col gap-3 sm:flex-row sm:items-center ${className}`}>
-      <a
-        href={wa ?? '/contact/'}
-        {...(wa ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      <BookAppointmentButton
+        topic={message}
         className={`btn ${onDark ? 'btn-on-dark' : 'btn-warm'}`}
       >
         <IconWhatsApp className="h-[1.15rem] w-[1.15rem]" />
-        Book on WhatsApp
-      </a>
+        Book appointment
+      </BookAppointmentButton>
       <a
         href={tel ?? '/contact/'}
         className={`btn ${

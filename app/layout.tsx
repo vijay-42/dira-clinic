@@ -4,6 +4,7 @@ import './globals.css'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { MobileContactBar } from '@/components/contact-bar'
+import { BookingDialog } from '@/components/booking-dialog'
 import { clinic, siteUrl, isTodo, locality } from '@/content/clinic'
 import { clinicSchema, JsonLd } from '@/lib/schema'
 
@@ -99,6 +100,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <SiteFooter />
         <MobileContactBar />
+        <BookingDialog />
         <JsonLd data={clinicSchema()} />
       </body>
     </html>
