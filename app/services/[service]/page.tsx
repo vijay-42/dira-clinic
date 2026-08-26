@@ -83,7 +83,9 @@ export default async function ServiceDetailPage({ params }: Props) {
             <p className="pill">{page.eyebrow}</p>
           </div>
 
-          <h1 className="display-l mt-4 max-w-[24ch] text-[clamp(1.75rem,2.7vw,2.35rem)]">
+          {/* No width cap: every service title fits on one line at desktop
+              widths, and short screens still wrap naturally. */}
+          <h1 className="display-l mt-4 text-[clamp(1.6rem,2.7vw,2.35rem)]">
             {page.title} in {cityName()}
           </h1>
           <p className="lede measure mt-3">{page.lede}</p>

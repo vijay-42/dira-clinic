@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Container } from './ui'
 import { Logo } from './logo'
 import { IconPhone, IconWhatsApp, IconMail, IconPin, IconChevron } from './icons'
 import { clinic, telHref, mailHref, isTodo, cityName } from '@/content/clinic'
@@ -28,6 +27,15 @@ const primaryNav = [
   { href: '/contact/', label: 'Contact us' },
 ]
 
+/**
+ * The header spans nearly the full viewport rather than the 78rem body
+ * Container — the nav reads as edge-to-edge with a margin, not as a column.
+ * Capped so the row does not stretch absurdly on very wide monitors.
+ */
+function HeaderRow({ children }: { children: React.ReactNode }) {
+  return <div className="mx-auto w-full max-w-[110rem] px-5 sm:px-8 lg:px-12">{children}</div>
+}
+
 export function SiteHeader() {
   const pathname = usePathname()
   const isActive = (href: string) => pathname === href
@@ -40,8 +48,8 @@ export function SiteHeader() {
     <>
       {/* Utility bar — contact details above the fold on every page */}
       <div className="bg-brand-surface text-[color:var(--c-on-brand-surface)]">
-        <Container>
-          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 py-2 text-[0.82rem]">
+        <HeaderRow>
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 py-2 text-[0.84rem]">
             <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
               <a
                 href={tel ?? '/contact/'}
@@ -63,23 +71,23 @@ export function SiteHeader() {
               {cityName()}
             </p>
           </div>
-        </Container>
+        </HeaderRow>
       </div>
 
       <header className="header-sticky sticky top-0 z-30 border-b border-rule-soft bg-surface/95 backdrop-blur">
-        <Container>
-          <div className="flex items-center justify-between gap-6 py-3.5">
+        <HeaderRow>
+          <div className="flex items-center justify-between gap-8 py-4">
             <Link href="/" aria-label="DIRA — home" className="flex shrink-0 items-center text-ink">
               <Logo />
             </Link>
 
-            <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex">
+            <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex xl:gap-9">
               {primaryNav.map((item) => {
                 const link = (
                   <Link
                     href={item.href}
                     aria-current={isActive(item.href) ? 'page' : undefined}
-                    className={`relative inline-flex items-center gap-1 py-1 text-[0.88rem] font-medium transition-colors hover:text-brand ${
+                    className={`relative inline-flex items-center gap-1 py-1 text-[1rem] font-medium transition-colors hover:text-brand ${
                       isActive(item.href) || (item.children && isWithin(item)) ? 'text-brand' : 'text-muted'
                     }`}
                   >
@@ -126,7 +134,7 @@ export function SiteHeader() {
               <button
                 type="button"
                 onClick={() => openBooking()}
-                className="btn btn-warm min-h-0 px-4 py-2.5 text-[0.88rem]"
+                className="btn btn-warm min-h-0 px-6 py-3 text-[0.95rem]"
               >
                 <IconWhatsApp className="h-4 w-4" />
                 Book appointment
@@ -197,7 +205,7 @@ export function SiteHeader() {
               </nav>
             </details>
           </div>
-        </Container>
+        </HeaderRow>
       </header>
     </>
   )

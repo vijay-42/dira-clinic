@@ -381,55 +381,92 @@ export const servicePages: ServicePage[] = [
     title: 'Day Care Infusion & Diagnostics',
     metaTitle: 'Day Care Infusion & Diagnostics, Indiranagar',
     metaDescription:
-      'Day care infusion therapy and diagnostic support for rheumatology and immunology patients in Indiranagar, Bangalore — supervised infusions and the laboratory tests that guide treatment.',
+      'Day care infusion and diagnostic services at DIRA Clinic, Indiranagar, Bangalore — planned, medically supervised infusion therapy and the investigations that support ongoing treatment, without an overnight hospital stay.',
     eyebrow: 'Day care & diagnostics',
     cat: 'cat-teal',
     icon: 'lab',
-    lede: 'Some treatments are given by infusion under supervision rather than taken at home. Having that happen where your rheumatologist works means the person overseeing it already knows your case.',
+    lede: 'Managing a chronic condition or undergoing regular treatment can mean several hours in a hospital, or repeated visits for investigations and therapy. Our day care service is designed to make planned treatment and essential investigations more convenient and comfortable, without the need for an overnight stay.',
     sections: [
       {
-        heading: 'Day care infusion',
+        heading: 'What is day care infusion therapy?',
         body: [
-          'A number of treatments used in inflammatory and autoimmune disease are given intravenously at set intervals, with the patient observed during and after the infusion. These are day care procedures — you come in, the infusion is given under supervision, and you go home the same day.',
-          'Before a first infusion, what the medicine is for, how long it takes, what is monitored during it and what to expect afterwards are all explained.',
+          'Day care infusion therapy involves administering prescribed medicines or fluids through an intravenous route under appropriate medical supervision. Depending on the patient’s condition and treatment plan, certain therapies can be provided in a monitored day care setting rather than as an inpatient.',
+          'Infusion therapy may be recommended for selected patients with rheumatological, autoimmune, inflammatory or other chronic conditions. Whether it is suitable depends on the diagnosis, the prescribed medication, the medical history and individual patient requirements.',
+          'At DIRA Clinic, the treatment plan is determined by the treating doctor, and patients are monitored during the infusion as appropriate.',
         ],
       },
       {
-        heading: 'What day care involves',
-        list: [
-          'Pre-infusion checks, including any blood tests required beforehand',
-          'The infusion given under clinical supervision',
-          'Observation during and after, for infusion-related reactions',
-          'A record of what was given and when the next dose is due',
-          'Clear instructions on what to watch for once you are home',
+        heading: 'Diagnostic services at DIRA Clinic',
+        body: [
+          'Accurate diagnosis and regular monitoring are important parts of managing many chronic and inflammatory conditions. Diagnostic investigations may help doctors understand a patient’s condition, assess disease activity, monitor the response to treatment, or evaluate overall health.',
+          'Depending on your medical requirements, investigations may include appropriate blood tests and other diagnostic assessments recommended by your healthcare professional.',
+          'We aim to make the process straightforward by coordinating investigations with your ongoing clinical care wherever appropriate.',
         ],
       },
       {
-        heading: 'Diagnostic support',
+        heading: 'Comfortable and convenient day care',
         body: [
-          'Rheumatology and immunology depend heavily on laboratory work, both to reach a diagnosis and to monitor treatment safely over time. Access to that testing alongside the consultation shortens the loop between a clinical question and an answer.',
-          'The principle stays the same as everywhere else on this site: test when the clinical question requires it, not simply because a test is available. Every investigation should have a reason you can be told.',
+          'We understand that patients receiving recurring treatment value comfort, safety and convenience. Our day care service is designed to provide a calm setting in which patients can receive planned care while remaining under appropriate medical supervision.',
+          'A typical visit may include:',
         ],
         list: [
-          'Inflammatory markers and disease activity monitoring',
-          'Autoimmune serology, interpreted in clinical context',
-          'Safety monitoring for disease-modifying and immunosuppressive treatment',
-          'Baseline testing before starting a new treatment',
+          'Review of your treatment plan and medical history',
+          'Appropriate pre-treatment assessment',
+          'Administration of prescribed infusion therapy when indicated',
+          'Monitoring during treatment',
+          'Diagnostic investigations when required',
+          'Post-treatment guidance and follow-up recommendations',
+        ],
+        note: 'The exact process and its duration can vary depending on the treatment and individual patient needs.',
+      },
+      {
+        heading: 'Who may benefit from day care services?',
+        body: [
+          'Day care infusion and diagnostic services may be suitable for patients who require planned, medically supervised treatment but do not need hospital admission. This can be particularly convenient for patients undergoing recurring treatment or monitoring for a chronic condition.',
+          'Your doctor will determine whether day care treatment is appropriate, based on your diagnosis, medication, medical history and current health status.',
+        ],
+      },
+      {
+        heading: 'Why choose DIRA Clinic?',
+        body: [
+          'We believe healthcare should be organised around the needs of the patient. Our day care services are designed to combine medical supervision with a comfortable and convenient care experience.',
+          'Our approach focuses on:',
+        ],
+        list: [
+          'Personalised treatment planning',
+          'Appropriate medical assessment before treatment',
+          'Supervised infusion care',
+          'Convenient diagnostic support',
+          'Patient-friendly communication',
+          'Follow-up and ongoing care when required',
+        ],
+        note: 'By bringing treatment and diagnostic support together, we aim to reduce unnecessary inconvenience for patients who require regular medical care.',
+      },
+      {
+        heading: 'Day care infusion and diagnostics in Indiranagar',
+        body: [
+          'If you have been advised infusion therapy, regular investigations or ongoing monitoring as part of your treatment, DIRA Clinic can help you understand the process and the care options available to you.',
+          'If you are looking for day care infusion and diagnostics in Indiranagar, Bangalore, DIRA Clinic provides a patient-focused setting for planned treatment and diagnostic support.',
+          'Contact the clinic to discuss your treatment requirements and arrange an appointment.',
         ],
       },
     ],
     faqs: [
       {
         q: 'How long does an infusion take?',
-        a: 'It depends on the medicine — some take under an hour, others several hours including the observation period afterwards. You will be told what to expect before the first one so you can plan the day.',
+        a: 'It depends on the medicine — some take under an hour, others several hours including the observation period afterwards. You will be told what to expect beforehand so that you can plan the day.',
       },
       {
         q: 'Can I go home the same day?',
-        a: 'Yes. These are day care procedures, with observation after the infusion before you leave.',
+        a: 'Yes. These are day care procedures, with observation after the infusion before you leave. No overnight stay is involved.',
+      },
+      {
+        q: 'How do I know whether day care infusion is right for me?',
+        a: 'That is decided by the treating doctor, based on your diagnosis, the medication prescribed, your medical history and your current health. If infusion therapy has been advised elsewhere, bring the prescription and previous records to the consultation.',
       },
       {
         q: 'Why do I need blood tests so often?',
-        a: 'Several rheumatology treatments require periodic monitoring to catch side effects early, while they are still easily managed. The schedule is explained when treatment starts.',
+        a: 'Investigations are used to assess disease activity, monitor the response to treatment and check overall health while treatment continues. Which tests are needed, and how often, is decided by the treating doctor.',
       },
     ],
   },
