@@ -60,7 +60,7 @@ export function SectionHead({
 }) {
   const centred = align === 'center'
   return (
-    <div className={`${centred ? 'mx-auto text-center' : ''} ${className}`}>
+    <div className={`reveal ${centred ? 'mx-auto text-center' : ''} ${className}`}>
       {eyebrow ? (
         <p
           className={`pill ${

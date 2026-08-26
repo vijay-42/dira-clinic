@@ -59,8 +59,8 @@ export function Logo({ className = '' }: { className?: string }) {
       <img
         src="/logo-full.png"
         alt={`${clinic.name} — ${clinic.legalName}. ${clinic.strapline}`}
-        width={640}
-        height={199}
+        width={448}
+        height={140}
         className="block h-14 w-auto sm:h-16"
       />
     </span>
@@ -77,8 +77,8 @@ export function LogoLockup({ className = '' }: { className?: string }) {
       <img
         src="/logo-full.png"
         alt={`${clinic.name} — ${clinic.legalName}. ${clinic.strapline}`}
-        width={640}
-        height={199}
+        width={448}
+        height={140}
         className="block h-auto w-full object-contain"
       />
     </span>

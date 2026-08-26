@@ -26,7 +26,7 @@ export default function FaqPage() {
           {faqs.map((faq) => (
             /* <details> rather than a JavaScript accordion: it works with the
                page's own JS disabled, and is keyboard-navigable for free. */
-            <details key={faq.q} className="card group overflow-hidden">
+            <details key={faq.q} className="disclose card group overflow-hidden">
               <summary className="flex cursor-pointer list-none items-start justify-between gap-5 p-6 [&::-webkit-details-marker]:hidden">
                 <h2 className="display-s max-w-[46ch] transition-colors group-hover:text-brand">
                   {faq.q}
@@ -54,7 +54,7 @@ export default function FaqPage() {
             lede="If you are not certain whether your problem is one DIRA can help with, get in touch and describe it. Being told that a rheumatology opinion is not what you need is a perfectly good outcome."
           />
           <Link href="/contact/" className="btn btn-warm mt-8">
-            Contact the clinic <IconArrow className="h-4 w-4" />
+            Contact the clinic <IconArrow className="nudge h-4 w-4" />
           </Link>
         </div>
       </Section>

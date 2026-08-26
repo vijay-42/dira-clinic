@@ -11,21 +11,30 @@ import { clinicSchema, JsonLd } from '@/lib/schema'
    request ever leaves for a third-party font server. */
 /* Headings: a geometric sans with a friendly bold, in the register of a modern
    clinic site. Not Poppins, which is the default everyone reaches for. */
+/* Only the two weights the type scale actually calls for: display-m/s use 700,
+   display-xl/l use 800. Every extra weight here is another font file on the
+   critical path, so this list is trimmed to what the CSS uses. */
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['500', '600', '700', '800'],
+  weight: ['700', '800'],
   display: 'swap',
   variable: '--font-jakarta',
 })
 
 /* Spectral is kept for pull quotes only — an editorial serif still adds warmth
-   where a person is being quoted. */
+   where a person is being quoted. Italic only: every use of it is italic, and
+   the upright face was being downloaded for nothing. */
 const spectral = Spectral({
   subsets: ['latin'],
   weight: ['400'],
-  style: ['normal', 'italic'],
+  style: ['italic'],
   display: 'swap',
   variable: '--font-spectral',
+  /* Not preloaded: it sets one pull quote, on two of the nineteen pages.
+     Preloading it put 15 KB on the critical path of every other page for
+     nothing. It downloads when a quote is actually on screen, and `swap`
+     means the text is readable in the fallback serif meanwhile. */
+  preload: false,
 })
 
 const plexSans = IBM_Plex_Sans({
@@ -35,9 +44,11 @@ const plexSans = IBM_Plex_Sans({
   variable: '--font-plex-sans',
 })
 
+/* One weight: the eyebrow, the pill and the placeholder marker are the only
+   things set in mono, and all three are 500. */
 const plexMono = IBM_Plex_Mono({
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: ['500'],
   display: 'swap',
   variable: '--font-plex-mono',
 })

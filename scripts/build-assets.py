@@ -5,7 +5,7 @@ Inputs                              Outputs
   design/logo-source.png              public/logo-mark.png   emblem alone
                                       public/logo-full.png   the complete lockup
                                       app/icon.png           favicon
-  design/dr-deshpande-source.png      public/dr-deshpande.jpg   portrait
+  design/dr-deshpande-source.png      public/dr-deshpande.webp  portrait
 
 The logo arrives on a white background. It is cut out by flood-filling inward
 from the image border, so white *inside* the artwork — the knee joint, the
@@ -43,12 +43,19 @@ FULL_BOX = (58, 38, 2074, 666)   # everything, tagline included
 
 # --- Output widths (2x the largest place each is displayed) -----------------
 MARK_W = 192
-FULL_W = 640
+# The lockup is shown at most 206px wide (header, h-16) and 208px (footer
+# column), so 448 is a true 2x. It was 640 — a third more pixels than any
+# screen can use, on an image that loads on every page.
+FULL_W = 448
 ICON_W = 256
 PALETTE_COLORS = 200
 
 PORTRAIT_MAX_W = 720
-PORTRAIT_QUALITY = 84
+# WebP rather than JPEG: at matching quality it is roughly 40% smaller, and the
+# portrait is the largest element on the homepage — it decides the LCP. The
+# logos stay PNG; they are palette-quantised artwork, which PNG already encodes
+# more compactly than WebP manages.
+PORTRAIT_QUALITY = 82
 
 
 def strip_background(im: Image.Image) -> Image.Image:
@@ -148,9 +155,9 @@ def build_portrait() -> None:
     # Never upscale — enlarging a small original just makes a soft, heavier file.
     width = min(PORTRAIT_MAX_W, im.size[0])
     height = round(width * im.size[1] / im.size[0])
-    out = PUBLIC / 'dr-deshpande.jpg'
+    out = PUBLIC / 'dr-deshpande.webp'
     im.resize((width, height), Image.LANCZOS).save(
-        out, 'JPEG', quality=PORTRAIT_QUALITY, optimize=True, progressive=True
+        out, 'WEBP', quality=PORTRAIT_QUALITY, method=6
     )
     print(f'  {out.relative_to(ROOT)}  {width}x{height}  {out.stat().st_size // 1024} KB')
     if im.size[0] < 900:

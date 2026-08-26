@@ -123,7 +123,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         <SectionHead eyebrow="Questions" title="Frequently asked" />
         <div className="mt-8 grid max-w-[52rem] gap-4">
           {page.faqs.map((faq) => (
-            <details key={faq.q} className="card group overflow-hidden">
+            <details key={faq.q} className="disclose card group overflow-hidden">
               <summary className="flex cursor-pointer list-none items-start justify-between gap-5 p-6 [&::-webkit-details-marker]:hidden">
                 <h3 className="display-s max-w-[46ch] transition-colors group-hover:text-brand">
                   {faq.q}

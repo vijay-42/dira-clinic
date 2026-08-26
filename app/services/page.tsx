@@ -73,7 +73,7 @@ export default function ServicesPage() {
               <Link
                 key={sp.slug}
                 href={serviceHref(sp.slug)}
-                className={`card ${sp.cat} cat-top group flex flex-col p-6 transition-shadow hover:shadow-[0_10px_34px_-14px_hsl(var(--c-shadow)/0.28)]`}
+                className={`card lift ${sp.cat} cat-top group flex flex-col p-6`}
               >
                 <span className="cat-bg inline-flex h-11 w-11 items-center justify-center rounded-[11px]">
                   <DIcon className="cat-text h-[1.35rem] w-[1.35rem]" />
@@ -81,7 +81,7 @@ export default function ServicesPage() {
                 <h3 className="display-s mt-4 cat-text">{sp.title}</h3>
                 <p className="mt-2 flex-1 text-[0.92rem] leading-relaxed text-muted">{sp.lede}</p>
                 <span className="mt-4 inline-flex items-center gap-1.5 text-[0.88rem] font-medium cat-text">
-                  Read more <IconArrow className="h-4 w-4" />
+                  Read more <IconArrow className="nudge h-4 w-4" />
                 </span>
               </Link>
             )

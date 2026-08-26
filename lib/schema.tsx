@@ -9,11 +9,57 @@ function present<T>(value: T): T | undefined {
   return value
 }
 
-/** Maps the hours table to schema.org openingHoursSpecification. */
+/** Maps the hours table to schema.org openingHoursSpecification.
+ * Keys must match the `days` labels used in content/clinic.ts exactly,
+ * en-dash included. */
 const DAY_MAP: Record<string, string[]> = {
   'Monday – Friday': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+  'Monday – Saturday': [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ],
+  'Monday – Sunday': [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ],
   Saturday: ['Saturday'],
   Sunday: ['Sunday'],
+}
+
+/**
+ * "10:00 am – 9:00 pm" -> { opens: '10:00', closes: '21:00' }.
+ * Google wants 24-hour times, not the prose the site displays. Returns
+ * undefined for anything it cannot parse confidently, so a hand-written
+ * range like "by appointment" degrades to a description instead of a wrong
+ * machine-readable time.
+ */
+function parseRange(time: string): { opens: string; closes: string } | undefined {
+  const parts = time.split(/[–—-]/)
+  if (parts.length !== 2) return undefined
+
+  const to24 = (raw: string): string | undefined => {
+    const m = raw.trim().match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)$/i)
+    if (!m) return undefined
+    let hour = Number(m[1])
+    if (hour < 1 || hour > 12) return undefined
+    const meridiem = m[3].toLowerCase()
+    if (meridiem === 'pm' && hour !== 12) hour += 12
+    if (meridiem === 'am' && hour === 12) hour = 0
+    return `${String(hour).padStart(2, '0')}:${m[2] ?? '00'}`
+  }
+
+  const opens = to24(parts[0])
+  const closes = to24(parts[1])
+  return opens && closes ? { opens, closes } : undefined
 }
 
 /** Undefined rather than an empty array — an empty property is worse than none. */
@@ -23,6 +69,7 @@ function openingHours() {
     .map((h) => ({
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: DAY_MAP[h.days] ?? [h.days],
+      ...parseRange(h.time),
       description: h.time,
     }))
   return rows.length > 0 ? rows : undefined

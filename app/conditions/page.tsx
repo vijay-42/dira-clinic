@@ -69,7 +69,7 @@ export default function ConditionsPage() {
           />
           <div className="mt-8 flex flex-wrap gap-4">
             <Link href="/contact/" className="btn btn-warm">
-              Book an appointment <IconArrow className="h-4 w-4" />
+              Book an appointment <IconArrow className="nudge h-4 w-4" />
             </Link>
             <Link href="/services/" className="btn btn-ghost">
               How an evaluation works

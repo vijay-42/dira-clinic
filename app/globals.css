@@ -39,9 +39,14 @@
   --c-warm-tint:   #FAEADC;
   --c-fresh:       #166E1E;
   --c-fresh-tint:  #DEEFE0;
-  /* Band fill, separate from the text accent — same reason as brand-surface. */
-  --c-fresh-surface:    #166E1E;
-  --c-on-fresh-surface: #FFFFFF;
+  /* The split CTA band: one hue at two depths rather than two competing
+     colours. Both sit deeper than --c-brand-surface so the band stays distinct
+     from the footer it runs into; the deeper half carries the primary action. */
+  --c-band-mid:    #0D2C66;
+  --c-band-deep:   #071B41;
+  --c-on-band:     #FFFFFF;
+  /* The seam where the two panels meet. */
+  --c-band-seam:   rgb(255 255 255 / 0.14);
   --c-teal:        #0A626D;
   --c-teal-tint:   #D9ECEF;
   --c-plum:        #65457F;
@@ -74,8 +79,9 @@
   --color-warm-tint:  var(--c-warm-tint);
   --color-fresh:      var(--c-fresh);
   --color-fresh-tint: var(--c-fresh-tint);
-  --color-fresh-surface:    var(--c-fresh-surface);
-  --color-on-fresh-surface: var(--c-on-fresh-surface);
+  --color-band-mid:   var(--c-band-mid);
+  --color-band-deep:  var(--c-band-deep);
+  --color-on-band:    var(--c-on-band);
   --color-teal:       var(--c-teal);
   --color-teal-tint:  var(--c-teal-tint);
   --color-plum:       var(--c-plum);
@@ -122,9 +128,14 @@
 
   h1, h2, h3, h4 { text-wrap: balance; }
 
+  /* Anything that can be jumped to — /services/#consultation and friends —
+     stops below the sticky header rather than underneath it. */
+  [id] { scroll-margin-top: 6.5rem; }
+
   /* IBM Plex Sans ships no italic here, so a bare <em> would be synthesised as
-     a fake oblique. Use the real Spectral italic already loaded. */
-  em, i { font-family: var(--font-display); font-style: italic; }
+     a fake oblique. Use the real Spectral italic already loaded. (This pointed
+     at --font-display, which has no italic face either — same fake slant.) */
+  em, i { font-family: var(--font-quote); font-style: italic; }
 
   /* Patients with inflammatory arthritis may struggle with fine pointer
      control, so tap targets stay generous throughout. */
@@ -256,7 +267,9 @@
   letter-spacing: 0.005em;
   border: 2px solid transparent;
   transition: background-color 150ms ease, color 150ms ease,
-              border-color 150ms ease, transform 150ms ease;
+              border-color 150ms ease, transform 150ms ease,
+              box-shadow 150ms ease;
+  &:active { transform: translateY(1px); }
 }
 @utility btn-solid {
   background: var(--c-brand);
@@ -323,6 +336,104 @@
   border-radius: 6px;
   border: 1px dashed color-mix(in oklab, var(--c-warm) 45%, transparent);
   overflow-wrap: anywhere;
+}
+
+/* ===========================================================================
+   MOTION
+
+   All of it is scroll-driven CSS — there is no JavaScript behind any of this,
+   so it costs nothing to download and cannot delay interaction. Browsers
+   without `animation-timeline` (Safari and Firefox today) simply show the
+   content in its final state: every rule below is written so the *absence* of
+   animation is the correct rendering, never a blank element.
+
+   Nothing here animates for a visitor who has asked for reduced motion. Note
+   that the blanket duration override in BASE cannot switch a scroll-driven
+   animation off — progress comes from the scroll position, not from time — so
+   these are disabled explicitly.
+   ========================================================================= */
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* `.reveal` animates the element itself; `.reveal-each` animates its
+       children, which staggers naturally — each child has its own timeline
+       and crosses the trigger line a moment after the one above it. */
+    .reveal,
+    .reveal-each > * {
+      animation: rise-in linear both;
+      animation-timeline: view();
+      /* The whole reveal happens while the element is still entering, and is
+         over by the time it is half in. This matters more than it looks: the
+         range has to close before "fully on screen", or an element the reader
+         has stopped scrolling at can sit there half-faded — and one at the
+         very end of a short page, where there is no scroll left to give,
+         would never finish at all. */
+      animation-range: entry 0% entry 50%;
+    }
+
+    /* Cards in one row share a top edge, so they would otherwise arrive in
+       unison. Ending each column's range a little later walks them in from
+       left to right — still finished well before the row is fully on screen. */
+    .reveal-each > :nth-child(2n) { animation-range: entry 0% entry 64%; }
+    .reveal-each > :nth-child(3n) { animation-range: entry 0% entry 78%; }
+
+    /* The sticky header sits flat on the page until the page scrolls under
+       it, then lifts. Driven by the document scroll, not a scroll listener. */
+    @keyframes header-lift {
+      to {
+        box-shadow: 0 1px 2px hsl(var(--c-shadow) / 0.06),
+                    0 10px 30px -18px hsl(var(--c-shadow) / 0.35);
+        border-bottom-color: var(--c-rule);
+      }
+    }
+    .header-sticky {
+      animation: header-lift linear both;
+      animation-timeline: scroll();
+      animation-range: 0 90px;
+    }
+  }
+}
+
+/* The FAQ and service-page disclosures. `interpolate-size` is what makes a
+   height of `auto` animatable at all; without it — and without
+   ::details-content — the panel simply snaps open, exactly as it does today. */
+@supports selector(::details-content) {
+  @media (prefers-reduced-motion: no-preference) {
+    :root { interpolate-size: allow-keywords; }
+
+    .disclose::details-content {
+      block-size: 0;
+      overflow: clip;
+      transition: block-size 260ms ease, content-visibility 260ms ease;
+      transition-behavior: allow-discrete;
+    }
+    .disclose[open]::details-content { block-size: auto; }
+  }
+}
+
+/* Interaction feedback. Cheap properties only — transform and opacity are
+   composited, so none of this touches layout. */
+
+/* A card that is itself a link or contains one. */
+@utility lift {
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  &:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in oklab, var(--cat, var(--c-brand)) 35%, var(--c-rule-soft));
+    box-shadow: 0 2px 4px hsl(var(--c-shadow) / 0.06),
+                0 18px 40px -20px hsl(var(--c-shadow) / 0.28);
+  }
+}
+
+/* The arrow on a "read more" row slides forward with the pointer. */
+@utility nudge {
+  transition: transform 200ms ease;
+  a:hover &, button:hover & { transform: translateX(4px); }
 }
 
 .skip-link { position: absolute; left: -9999px; top: 0; z-index: 100; }

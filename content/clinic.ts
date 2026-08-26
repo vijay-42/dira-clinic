@@ -74,16 +74,16 @@ export const clinic = {
   ],
 
   /**
-   * PENDING Clinic hours. Left empty for now, so the hours block is hidden in
-   * the footer and on the contact page rather than showing a placeholder.
-   * Restore the rows below to bring it back — `closed: true` renders as
-   * "Closed", and the table also generates opening-hours data for Google.
+   * Clinic hours. Provisional — change the times here and they update the
+   * footer, the contact page and the opening-hours data given to Google.
+   * `closed: true` renders as "Closed"; an empty list hides the block.
    *
-   *   { days: 'Monday – Friday', time: '9:00 am – 6:00 pm', closed: false },
-   *   { days: 'Saturday', time: '9:00 am – 1:00 pm', closed: false },
-   *   { days: 'Sunday', time: '', closed: true },
+   * NOTE: the day label must also exist in DAY_MAP in lib/schema.tsx, which
+   * is what turns it into structured data.
    */
-  hours: [] as ReadonlyArray<{ days: string; time: string; closed: boolean }>,
+  hours: [
+    { days: 'Monday – Sunday', time: '10:00 am – 9:00 pm', closed: false },
+  ] as ReadonlyArray<{ days: string; time: string; closed: boolean }>,
   /** Shown beneath the hours table. Set to '' to hide. */
   hoursNote: 'Consultations are by prior appointment.',
 

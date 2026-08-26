@@ -24,6 +24,11 @@ export function SiteFooter() {
   return (
     <footer className="bg-brand-surface pb-24 pt-14 text-[color:var(--c-on-brand-surface)] lg:pb-14">
       <Container>
+        {/* The two link lists below opt out of prefetching. Fourteen links sit
+            in the viewport together the moment a visitor reaches the bottom of
+            any page, and prefetching them all pulled ~85 KB of route payloads
+            over the wire for navigation that usually never happens. The header
+            nav — where visitors actually navigate from — still prefetches. */}
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr] lg:gap-12">
           <div>
             <LogoLockup className="w-[13rem] max-w-full rounded-[14px] p-4" />
@@ -99,6 +104,7 @@ export function SiteFooter() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  prefetch={false}
                   className="text-[0.94rem] leading-snug opacity-90 transition-opacity hover:opacity-100 hover:underline"
                 >
                   {item.label}
@@ -114,6 +120,7 @@ export function SiteFooter() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  prefetch={false}
                   className="text-[0.94rem] opacity-90 transition-opacity hover:opacity-100 hover:underline"
                 >
                   {item.label}

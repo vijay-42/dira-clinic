@@ -96,7 +96,7 @@ export default function DoctorPage() {
           <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 bg-[color:var(--cat)]" />
           <p className="pill">A note from {doctor.shortName}</p>
           <blockquote className="mt-5">
-            <p className="display-m max-w-[30ch] font-normal italic">
+            <p className="quote max-w-[30ch] text-[clamp(1.35rem,2.4vw,1.85rem)] leading-[1.4]">
               “{doctor.note.pullquote}”
             </p>
           </blockquote>

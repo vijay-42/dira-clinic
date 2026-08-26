@@ -64,7 +64,7 @@ export default function PatientEducationPage() {
           consultation.
         </p>
         <Link href="/faq/" className="link mt-4 inline-flex items-center gap-1.5">
-          Read the frequently asked questions <IconArrow className="h-4 w-4" />
+          Read the frequently asked questions <IconArrow className="nudge h-4 w-4" />
         </Link>
       </Section>
     </>

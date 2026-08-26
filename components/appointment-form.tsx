@@ -16,18 +16,9 @@ import { clinic, isTodo } from '@/content/clinic'
  * are no API routes — you would use a form service or a separate function.
  */
 
-const REASONS = [
-  'New consultation',
-  'Second opinion',
-  'Follow-up appointment',
-  'Referral from another doctor',
-  'Not sure — I have a question first',
-] as const
-
 export function AppointmentForm() {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
-  const [reason, setReason] = useState<string>(REASONS[0])
   const [details, setDetails] = useState('')
   const [touched, setTouched] = useState(false)
 
@@ -41,8 +32,7 @@ export function AppointmentForm() {
       '',
       `Name: ${name.trim()}`,
       `Phone: ${phone.trim()}`,
-      `Reason: ${reason}`,
-      details.trim() ? `Details: ${details.trim()}` : null,
+      details.trim() ? `Reason: ${details.trim()}` : null,
     ]
       .filter((line) => line !== null)
       .join('\n')
@@ -128,27 +118,9 @@ export function AppointmentForm() {
       </div>
 
       <div className="mt-5">
-        <label className={label} htmlFor="af-reason">
-          Reason for the appointment
-        </label>
-        <select
-          id="af-reason"
-          name="reason"
-          className={field}
-          value={reason}
-          onChange={(e) => setReason(e.target.value)}
-        >
-          {REASONS.map((r) => (
-            <option key={r} value={r}>
-              {r}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="mt-5">
         <label className={label} htmlFor="af-details">
-          Anything the clinic should know <span className="text-faint">(optional)</span>
+          Reason for the appointment{' '}
+          <span className="text-faint">(optional)</span>
         </label>
         <textarea
           id="af-details"

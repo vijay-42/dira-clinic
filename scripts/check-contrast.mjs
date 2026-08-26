@@ -12,7 +12,7 @@ const LIGHT = {
   plum: '#65457F', plumTint: '#ECE5F2',
   onBrand: '#FFFFFF',
   onWarm: '#FFFFFF', white: '#FFFFFF', onWhite: '#0D2C66',
-  freshSurface: '#166E1E', onFreshSurface: '#FFFFFF',
+  bandMid: '#0D2C66', bandDeep: '#071B41', onBand: '#FFFFFF',
 }
 
 const lin = (c) => (c /= 255) <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
@@ -41,7 +41,8 @@ const pairs = (t) => [
   ['brand', 'brandTint', 4.5, 'brand text on brand tint'],
   ['onBrand', 'brand', 4.5, 'button label on brand fill'],
   ['onBrandSurface', 'brandSurface', 4.5, 'text on hero/footer band'],
-  ['onFreshSurface', 'freshSurface', 4.5, 'text on the green CTA panel'],
+  ['onBand', 'bandMid', 4.5, 'text on the lighter CTA panel'],
+  ['onBand', 'bandDeep', 4.5, 'text on the deeper CTA panel'],
   ['onWarm', 'warm', 4.5, 'label on the amber action button'],
   ['onWhite', 'white', 4.5, 'label on the fixed-white button over a dark band'],
   ['warm', 'paper', 4.5, 'warm category text'],

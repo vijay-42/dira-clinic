@@ -21,7 +21,7 @@ export function DoctorPortrait({
 }) {
   return (
     <img
-      src="/dr-deshpande.jpg"
+      src="/dr-deshpande.webp"
       alt={`${doctor.name}, ${doctor.title}`}
       width={510}
       height={630}

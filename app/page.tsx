@@ -56,27 +56,38 @@ export default function HomePage() {
           soft halo, which is what gives the section its shape. */}
       <section className="ring-field relative overflow-hidden bg-paper">
         <Container className="relative">
-          <div className="grid items-center gap-10 pb-24 pt-10 sm:pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-28 lg:pt-16">
+          <div className="grid items-center gap-9 pb-20 pt-8 sm:pt-11 lg:grid-cols-[1.32fr_0.68fr] lg:gap-12 lg:pb-24 lg:pt-12">
             <div className="min-w-0">
               <p className="eyebrow text-brand">{clinic.tagline}</p>
 
-              <h1 className="display-xl mt-4 max-w-[16ch]">
+              <h1 className="display-xl mt-4 max-w-[26ch] text-[clamp(1.95rem,3.4vw,2.85rem)]">
                 Expert care in rheumatology &amp; immunology in {cityName()}
               </h1>
 
-              <p className="lede measure mt-5">
+              <p className="lede measure mt-4">
                 Led by {doctor.name}, {doctor.title}, DIRA Clinic provides comprehensive,
                 compassionate care for arthritis, autoimmune diseases, joint pain, and other
                 rheumatic conditions in {locality()}.
               </p>
 
-              <AppointmentActions className="mt-8" />
+              <ul className="mt-6 flex flex-wrap items-center gap-2">
+                {doctor.degrees.map((d) => (
+                  <li
+                    key={d}
+                    className="rounded-full bg-brand-tint px-3.5 py-1.5 text-[0.82rem] font-medium text-brand"
+                  >
+                    {d}
+                  </li>
+                ))}
+              </ul>
+
+              <AppointmentActions className="mt-7" />
             </div>
 
             {/* Portrait in a halo. The circles are decorative and sit behind
                 the photo; the photo itself is circular so the composition
                 reads as one shape. */}
-            <div className="relative mx-auto w-full max-w-[26rem] lg:mx-0 lg:ml-auto">
+            <div className="relative mx-auto w-full max-w-[21rem] lg:mx-0 lg:ml-auto">
               <span
                 aria-hidden="true"
                 className="absolute left-1/2 top-1/2 -z-10 aspect-square w-[116%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-tint"
@@ -91,6 +102,17 @@ export default function HomePage() {
               />
               <div className="relative aspect-square overflow-hidden rounded-full border-8 border-[color:var(--c-surface)] bg-raised shadow-[0_24px_60px_-28px_hsl(var(--c-shadow)/0.5)]">
                 <DoctorPortrait priority fill />
+              </div>
+
+              <div className="absolute -bottom-2 left-0 rounded-[14px] bg-[color:var(--c-surface)] px-4 py-3 shadow-[0_14px_38px_-18px_hsl(var(--c-shadow)/0.45)]">
+                <p className="display-s leading-none text-brand">
+                  {doctor.yearsOfExperience}+
+                </p>
+                <p className="mt-1 text-[0.72rem] font-medium leading-tight text-muted">
+                  years of
+                  <br />
+                  experience
+                </p>
               </div>
             </div>
           </div>
@@ -109,7 +131,7 @@ export default function HomePage() {
 
       {/* ========================================================== TRUST */}
       <Section tone="paper">
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="reveal-each grid gap-6 md:grid-cols-3">
           {trust.map((t) => (
             <div key={t.title} className={`${t.cat} cat-bg rounded-[var(--radius)] p-7`}>
               <span className="blob inline-flex h-14 w-14 items-center justify-center bg-[color:var(--c-surface)]">
@@ -130,7 +152,7 @@ export default function HomePage() {
             <span className="mt-1 block text-brand">Expertise when it is clear.</span>
           </p>
           <Link href="/conditions/" className="btn btn-solid shrink-0">
-            Conditions we treat <IconArrow className="h-4 w-4" />
+            Conditions we treat <IconArrow className="nudge h-4 w-4" />
           </Link>
         </div>
       </Section>
@@ -142,7 +164,7 @@ export default function HomePage() {
           title="You do not need a confirmed diagnosis to seek an opinion"
           lede="DIRA is for patients with a diagnosis — and also for patients who are still looking for one. Not everyone who consults here has an autoimmune disease. That is precisely why careful clinical assessment comes first."
         />
-        <div className="mt-11 grid gap-6 sm:grid-cols-2">
+        <div className="reveal-each mt-11 grid gap-6 sm:grid-cols-2">
           {triage.map((group, i) => (
             <div key={group.heading} className={`${catFor[i]} cat-bg rounded-[var(--radius)] p-7`}>
               <h3 className="display-s cat-text">{group.heading}</h3>
@@ -168,7 +190,7 @@ export default function HomePage() {
           title="More than a consultation"
           lede="Patients with rheumatological and immune-related problems often need evaluation, laboratory support, medicines, physiotherapy, pain management and follow-up. DIRA brings these together."
         />
-        <div className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="reveal-each mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {serviceCards.map((s) => (
             <Link
               key={s.title}
@@ -186,7 +208,7 @@ export default function HomePage() {
           ))}
         </div>
         <Link href="/services/" className="link mt-9 inline-flex items-center gap-1.5">
-          All services in detail <IconArrow className="h-4 w-4" />
+          All services in detail <IconArrow className="nudge h-4 w-4" />
         </Link>
       </Section>
 
@@ -197,7 +219,7 @@ export default function HomePage() {
           title="What we commonly see"
           lede="Four families of condition, colour-coded throughout the site so you can find your way around quickly."
         />
-        <div className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="reveal-each mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {conditionGroups.map((group, i) => {
             const Icon = iconFor[i]
             return (
@@ -214,7 +236,7 @@ export default function HomePage() {
                   {group.intro}
                 </p>
                 <span className="mt-4 inline-flex items-center gap-1.5 text-[0.88rem] font-medium cat-text">
-                  {group.items.length} conditions <IconArrow className="h-4 w-4" />
+                  {group.items.length} conditions <IconArrow className="nudge h-4 w-4" />
                 </span>
               </Link>
             )
@@ -229,7 +251,7 @@ export default function HomePage() {
           title="How an evaluation proceeds"
           lede="Six steps, in order — because the sequence is the point. The diagnosis is established before treatment is chosen."
         />
-        <ol className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ol className="reveal-each mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {approach.map((step, i) => (
             <li key={step.title} className="card p-6">
               <span className="eyebrow tnum text-brand">
@@ -259,7 +281,7 @@ export default function HomePage() {
             href="/dr-gaurang-deshpande/"
             className="link mt-6 inline-flex items-center gap-1.5"
           >
-            Read the full profile <IconArrow className="h-4 w-4" />
+            Read the full profile <IconArrow className="nudge h-4 w-4" />
           </Link>
         </figure>
       </Section>
@@ -274,7 +296,7 @@ export default function HomePage() {
               lede="You don’t need to be certain that it is autoimmune before referring. A specialist opinion can also establish when it is not an autoimmune disease, and guide the patient to the appropriate next step."
             />
             <Link href="/for-doctors/" className="btn btn-ghost mt-8">
-              When to refer <IconArrow className="h-4 w-4" />
+              When to refer <IconArrow className="nudge h-4 w-4" />
             </Link>
           </div>
           <div className="card cat-plum p-7">
@@ -298,7 +320,7 @@ export default function HomePage() {
           Two panels rather than one: the questions "is this even autoimmune?"
           and "I want to book" are different visitors, and each gets its own. */}
       <section className="grid lg:grid-cols-2">
-        <div className="ring-field bg-fresh-surface px-6 py-14 text-[color:var(--c-on-fresh-surface)] sm:px-10 sm:py-16 lg:px-14">
+        <div className="ring-field bg-band-mid px-6 py-14 text-[color:var(--c-on-band)] sm:px-10 sm:py-16 lg:px-14">
           <div className="ml-auto max-w-[34rem] lg:mr-8">
             <p className="eyebrow opacity-85">Not sure if it is autoimmune?</p>
             <h2 className="display-m mt-4 max-w-[20ch]">
@@ -313,12 +335,14 @@ export default function HomePage() {
               href="/conditions/"
               className="btn btn-on-dark mt-7"
             >
-              Conditions we see <IconArrow className="h-4 w-4" />
+              Conditions we see <IconArrow className="nudge h-4 w-4" />
             </Link>
           </div>
         </div>
 
-        <div className="ring-field bg-brand-surface px-6 py-14 text-[color:var(--c-on-brand-surface)] sm:px-10 sm:py-16 lg:px-14">
+        {/* A hairline keeps the two depths of navy reading as two panels: below
+            lg they stack, so the seam moves from the left edge to the top. */}
+        <div className="ring-field border-t border-[color:var(--c-band-seam)] bg-band-deep px-6 py-14 text-[color:var(--c-on-band)] sm:px-10 sm:py-16 lg:border-l lg:border-t-0 lg:px-14">
           <div className="max-w-[34rem] lg:ml-8">
             <p className="eyebrow opacity-85">Appointments</p>
             <h2 className="display-m mt-4 max-w-[20ch]">

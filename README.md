@@ -79,7 +79,7 @@ colours or font sizes in components.
   | from `design/`            | to                                                   |
   | ------------------------- | ---------------------------------------------------- |
   | `logo-source.png`         | `logo-mark.png`, `logo-wordmark.png`, `logo-full.png`, `app/icon.png` |
-  | `dr-deshpande-source.png` | `dr-deshpande.jpg`                                   |
+  | `dr-deshpande-source.png` | `dr-deshpande.webp`                                   |
 
   **To change either:** replace the file in `design/` and re-run. If the logo
   composition changes, re-measure the crop boxes at the top of
