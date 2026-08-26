@@ -22,7 +22,8 @@ fi
 
 # Light-theme copies: our CSS honours data-theme over the OS setting, and
 # headless Chrome reports prefers-color-scheme: dark.
-for page in index about conditions services contact faq for-doctors patient-education dr-gaurang-deshpande; do
+SERVICE_PAGES="arthritis-treatment-in-bangalore immunology-and-rheumatology-treatment-in-bangalore physiotherapy-clinic-in-bangalore pharmacy-service-in-bangalore day-care-infusion-diagnostics-in-indiranagar"
+for page in index about conditions services contact faq for-doctors patient-education dr-gaurang-deshpande $SERVICE_PAGES; do
   src="$OUT/$page/index.html"; [ "$page" = index ] && src="$OUT/index.html"
   [ -f "$src" ] && sed 's|<html lang="en-IN"|<html data-theme="light" lang="en-IN"|' "$src" > "$OUT/_light-$page.html"
 done
@@ -31,7 +32,7 @@ cat > "$OUT/_probe.html" <<'EOF'
 <!doctype html><meta charset="utf-8"><body style="margin:0">
 <pre id="out">running</pre>
 <script>
-const PAGES = ['index','about','conditions','services','contact','faq','for-doctors','patient-education','dr-gaurang-deshpande']
+const PAGES = ['index','about','conditions','services','contact','faq','for-doctors','patient-education','dr-gaurang-deshpande','arthritis-treatment-in-bangalore','immunology-and-rheumatology-treatment-in-bangalore','physiotherapy-clinic-in-bangalore','pharmacy-service-in-bangalore','day-care-infusion-diagnostics-in-indiranagar']
 const WIDTHS = [360, 390, 768]
 const lines = []
 window.onerror = (e) => { document.getElementById('out').textContent = 'JS ERROR: ' + e }

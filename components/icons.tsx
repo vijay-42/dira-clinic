@@ -129,6 +129,12 @@ export const IconClock = ({ className }: P) => (
   </svg>
 )
 
+export const IconChevron = ({ className }: P) => (
+  <svg {...base} className={className}>
+    <path d="m6 9 6 6 6-6" />
+  </svg>
+)
+
 export const IconArrow = ({ className }: P) => (
   <svg {...base} className={className}>
     <path d="M4 12h15M13 6l6 6-6 6" />

@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { Container, PageHeader, Section, SectionHead, TickList } from '@/components/ui'
 import { AppointmentActions } from '@/components/contact-bar'
 import {
   IconConsult, IconOpinion, IconImmune, IconJoint, IconPain,
-  IconRehab, IconLab, IconPharmacy, IconTeam,
+  IconRehab, IconLab, IconPharmacy, IconTeam, IconArrow,
 } from '@/components/icons'
 import { services } from '@/content/site'
+import { servicePages } from '@/content/service-pages'
 import { clinic } from '@/content/clinic'
 
 export const metadata: Metadata = {
@@ -26,6 +28,8 @@ const meta: Record<string, { Icon: typeof IconConsult; cat: string }> = {
   pharmacy: { Icon: IconPharmacy, cat: 'cat-plum' },
   multidisciplinary: { Icon: IconTeam, cat: 'cat-brand' },
 }
+
+const detailIcons = { joint: IconJoint, immune: IconImmune, rehab: IconRehab, pharmacy: IconPharmacy, lab: IconLab }
 
 const facilityLabel: Record<string, string> = {
   'on-site': 'Available on site',
@@ -54,11 +58,42 @@ export default function ServicesPage() {
         </nav>
       </PageHeader>
 
+      {/* The five service pages. These are the local-search landing pages, so
+          they sit above the general service descriptions below. */}
+      <Section tone="paper">
+        <SectionHead
+          eyebrow="Service pages"
+          title="Explore each service in detail"
+          lede="Each of these has its own page covering what it involves, who it helps and the questions patients ask most."
+        />
+        <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {servicePages.map((sp) => {
+            const DIcon = detailIcons[sp.icon]
+            return (
+              <Link
+                key={sp.slug}
+                href={`/${sp.slug}/`}
+                className={`card ${sp.cat} cat-top group flex flex-col p-6 transition-shadow hover:shadow-[0_10px_34px_-14px_hsl(var(--c-shadow)/0.28)]`}
+              >
+                <span className="cat-bg inline-flex h-11 w-11 items-center justify-center rounded-[11px]">
+                  <DIcon className="cat-text h-[1.35rem] w-[1.35rem]" />
+                </span>
+                <h3 className="display-s mt-4 cat-text">{sp.title}</h3>
+                <p className="mt-2 flex-1 text-[0.92rem] leading-relaxed text-muted">{sp.lede}</p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-[0.88rem] font-medium cat-text">
+                  Read more <IconArrow className="h-4 w-4" />
+                </span>
+              </Link>
+            )
+          })}
+        </div>
+      </Section>
+
       {services.map((service, i) => {
         const m = meta[service.slug]
         const isFacility = ['physiotherapy', 'laboratory', 'pharmacy'].includes(service.slug)
         return (
-          <Section key={service.slug} id={service.slug} tone={i % 2 === 0 ? 'paper' : 'raised'}>
+          <Section key={service.slug} id={service.slug} tone={i % 2 === 0 ? 'raised' : 'paper'}>
             <div className={m.cat}>
               <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
                 <div>

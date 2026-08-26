@@ -12,6 +12,7 @@ import {
   isTodo,
 } from '@/content/clinic'
 import { nav } from '@/content/site'
+import { serviceMenu } from '@/content/service-pages'
 import { doctor } from '@/content/doctor'
 
 export function SiteFooter() {
@@ -22,7 +23,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-brand-surface pb-24 pt-14 text-[color:var(--c-on-brand-surface)] lg:pb-14">
       <Container>
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-14">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr] lg:gap-12">
           <div>
             <LogoLockup className="w-[13rem] max-w-full rounded-[14px] p-4" />
             <p className="mt-5 max-w-[34ch] text-[0.94rem] leading-relaxed opacity-85">
@@ -86,6 +87,21 @@ export function SiteFooter() {
                 </span>
               </p>
             </address>
+          </div>
+
+          <div>
+            <p className="eyebrow opacity-70">Services</p>
+            <nav aria-label="Services" className="mt-3 grid gap-1.5">
+              {serviceMenu.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-[0.94rem] leading-snug opacity-90 transition-opacity hover:opacity-100 hover:underline"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
           </div>
 
           <div>
