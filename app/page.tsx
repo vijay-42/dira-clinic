@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Container, Section, SectionHead, TickList } from '@/components/ui'
 import { AppointmentActions } from '@/components/contact-bar'
+import { QuickBookBar, ContactStrip } from '@/components/quick-book'
 import { DoctorPortrait } from '@/components/portrait'
 import {
   IconConsult, IconOpinion, IconImmune, IconJoint, IconPain,
@@ -50,45 +51,45 @@ const iconFor = [IconJoint, IconImmune, IconPain, IconRehab] as const
 export default function HomePage() {
   return (
     <>
-      {/* ============================================================ HERO */}
-      <section className="relative overflow-hidden bg-brand-surface text-[color:var(--c-on-brand-surface)]">
-        {/* Soft depth, drawn with the brand colour rather than a stock gradient */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-32 -top-40 h-[38rem] w-[38rem] rounded-full opacity-[0.14]"
-          style={{ background: 'radial-gradient(circle, #FFFFFF 0%, transparent 62%)' }}
-        />
+      {/* ============================================================ HERO
+          Light panel rather than a solid colour block: the portrait sits in a
+          soft halo, which is what gives the section its shape. */}
+      <section className="ring-field relative overflow-hidden bg-paper">
         <Container className="relative">
-          <div className="grid items-center items-stretch gap-8 py-7 sm:py-8 lg:grid-cols-[1.4fr_0.6fr] lg:gap-12 lg:py-9">
+          <div className="grid items-center gap-10 pb-24 pt-10 sm:pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-28 lg:pt-16">
             <div className="min-w-0">
-              {/* Not the strapline — that is already inside the logo directly
-                  above. This says something the logo doesn't. */}
-              <p className="pill bg-white/15 text-[color:var(--c-on-brand-surface)]">
-                {clinic.tagline}
-              </p>
+              <p className="eyebrow text-brand">{clinic.tagline}</p>
 
-              <h1 className="display-l mt-3 max-w-[30ch] text-[clamp(1.7rem,2.6vw,2.25rem)]">
-                Expert Care in Rheumatology &amp; Immunology Treatment in {cityName()}
+              <h1 className="display-xl mt-4 max-w-[16ch]">
+                Expert care in rheumatology &amp; immunology in {cityName()}
               </h1>
 
-              <p className="mt-3 max-w-[60ch] text-[0.98rem] leading-relaxed opacity-90">
+              <p className="lede measure mt-5">
                 Led by {doctor.name}, {doctor.title}, DIRA Clinic provides comprehensive,
                 compassionate care for arthritis, autoimmune diseases, joint pain, and other
                 rheumatic conditions in {locality()}.
               </p>
 
-
-              <AppointmentActions className="mt-5" onDark />
+              <AppointmentActions className="mt-8" />
             </div>
 
-            {/* Portrait only — the consultant's name, qualifications and profile
-                link live in the section below and on the profile page, so
-                repeating them here just made the banner taller. */}
-            <div className="min-w-0">
-              {/* No fixed aspect ratio here on purpose. An aspect box would make
-                  the portrait dictate the banner height; instead it stretches to
-                  whatever the text column needs and crops with object-cover. */}
-              <div className="card relative mx-auto h-full min-h-[15rem] w-full max-w-[20rem] overflow-hidden bg-raised p-0 lg:max-w-none">
+            {/* Portrait in a halo. The circles are decorative and sit behind
+                the photo; the photo itself is circular so the composition
+                reads as one shape. */}
+            <div className="relative mx-auto w-full max-w-[26rem] lg:mx-0 lg:ml-auto">
+              <span
+                aria-hidden="true"
+                className="absolute left-1/2 top-1/2 -z-10 aspect-square w-[116%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-tint"
+              />
+              <span
+                aria-hidden="true"
+                className="absolute left-1/2 top-1/2 -z-10 aspect-square w-[95%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[color:var(--c-surface)] opacity-70"
+              />
+              <span
+                aria-hidden="true"
+                className="cat-fresh cat-bg blob absolute -left-2 bottom-6 -z-10 h-24 w-24 sm:h-28 sm:w-28"
+              />
+              <div className="relative aspect-square overflow-hidden rounded-full border-8 border-[color:var(--c-surface)] bg-raised shadow-[0_24px_60px_-28px_hsl(var(--c-shadow)/0.5)]">
                 <DoctorPortrait priority fill />
               </div>
             </div>
@@ -96,12 +97,22 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* Appointment bar, straddling the hero and the section below it */}
+      <Container className="relative z-10 -mt-16">
+        <QuickBookBar />
+      </Container>
+
+      {/* Practical facts strip */}
+      <Section tone="paper" className="!py-12 sm:!py-14">
+        <ContactStrip />
+      </Section>
+
       {/* ========================================================== TRUST */}
       <Section tone="paper">
         <div className="grid gap-6 md:grid-cols-3">
           {trust.map((t) => (
-            <div key={t.title} className={`card cat-top ${t.cat} p-7`}>
-              <span className="cat-bg inline-flex h-12 w-12 items-center justify-center rounded-[12px]">
+            <div key={t.title} className={`${t.cat} cat-bg rounded-[var(--radius)] p-7`}>
+              <span className="blob inline-flex h-14 w-14 items-center justify-center bg-[color:var(--c-surface)]">
                 <t.Icon className="cat-text h-6 w-6" />
               </span>
               <h3 className="display-s mt-5">{t.title}</h3>
@@ -133,7 +144,7 @@ export default function HomePage() {
         />
         <div className="mt-11 grid gap-6 sm:grid-cols-2">
           {triage.map((group, i) => (
-            <div key={group.heading} className={`card ${catFor[i]} p-7`}>
+            <div key={group.heading} className={`${catFor[i]} cat-bg rounded-[var(--radius)] p-7`}>
               <h3 className="display-s cat-text">{group.heading}</h3>
               <TickList items={group.items} columns={1} className="mt-4" />
             </div>
@@ -162,9 +173,9 @@ export default function HomePage() {
             <Link
               key={s.title}
               href={s.href}
-              className={`card ${s.cat} group p-6 transition-shadow hover:shadow-[0_10px_34px_-14px_hsl(var(--c-shadow)/0.28)]`}
+              className={`${s.cat} cat-bg group rounded-[var(--radius)] p-6 transition-transform duration-200 hover:-translate-y-1`}
             >
-              <span className="cat-bg inline-flex h-11 w-11 items-center justify-center rounded-[11px]">
+              <span className="blob-alt inline-flex h-12 w-12 items-center justify-center bg-[color:var(--c-surface)]">
                 <s.Icon className="cat-text h-[1.35rem] w-[1.35rem]" />
               </span>
               <h3 className="mt-4 text-[1.02rem] font-semibold leading-snug group-hover:text-brand">
@@ -193,9 +204,9 @@ export default function HomePage() {
               <Link
                 key={group.id}
                 href={`/conditions/#${group.id}`}
-                className={`card cat-top ${catFor[i]} group flex flex-col p-6`}
+                className={`${catFor[i]} cat-bg group flex flex-col rounded-[var(--radius)] p-6 transition-transform duration-200 hover:-translate-y-1`}
               >
-                <span className="cat-bg inline-flex h-11 w-11 items-center justify-center rounded-[11px]">
+                <span className="blob-alt inline-flex h-12 w-12 items-center justify-center bg-[color:var(--c-surface)]">
                   <Icon className="cat-text h-[1.35rem] w-[1.35rem]" />
                 </span>
                 <h3 className="display-s mt-4 cat-text">{group.title}</h3>
@@ -236,7 +247,7 @@ export default function HomePage() {
         <figure className="card cat-warm relative overflow-hidden p-8 sm:p-12">
           <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 bg-[color:var(--cat)]" />
           <blockquote>
-            <p className="display-m max-w-[30ch] font-normal italic">
+            <p className="quote max-w-[30ch] text-[clamp(1.35rem,2.4vw,1.85rem)] leading-[1.4]">
               “{doctor.note.pullquote}”
             </p>
           </blockquote>
@@ -283,22 +294,43 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* ======================================================= CTA BAND */}
-      <section className="bg-brand-surface py-16 text-[color:var(--c-on-brand-surface)] sm:py-20">
-        <Container>
-          <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
-            <div>
-              <h2 className="display-l max-w-[20ch]">
-                Take the first step towards understanding what is happening
-              </h2>
-              <p className="mt-4 max-w-[52ch] text-[1.02rem] opacity-85">
-                Consultations at {cityName()} are by prior appointment. WhatsApp is usually the
-                quickest way to reach the clinic.
-              </p>
-            </div>
-            <AppointmentActions onDark className="shrink-0" />
+      {/* ======================================================= CTA BAND
+          Two panels rather than one: the questions "is this even autoimmune?"
+          and "I want to book" are different visitors, and each gets its own. */}
+      <section className="grid lg:grid-cols-2">
+        <div className="ring-field bg-fresh-surface px-6 py-14 text-[color:var(--c-on-fresh-surface)] sm:px-10 sm:py-16 lg:px-14">
+          <div className="ml-auto max-w-[34rem] lg:mr-8">
+            <p className="eyebrow opacity-85">Not sure if it is autoimmune?</p>
+            <h2 className="display-m mt-4 max-w-[20ch]">
+              Being told it is not an autoimmune disease is a useful answer too
+            </h2>
+            <p className="mt-4 max-w-[46ch] text-[1rem] leading-relaxed opacity-90">
+              Many patients arrive with a positive ANA, a raised inflammatory marker, or symptoms
+              across several organs and no diagnosis at all. Establishing what is not happening
+              is part of the work.
+            </p>
+            <Link
+              href="/conditions/"
+              className="btn btn-on-dark mt-7"
+            >
+              Conditions we see <IconArrow className="h-4 w-4" />
+            </Link>
           </div>
-        </Container>
+        </div>
+
+        <div className="ring-field bg-brand-surface px-6 py-14 text-[color:var(--c-on-brand-surface)] sm:px-10 sm:py-16 lg:px-14">
+          <div className="max-w-[34rem] lg:ml-8">
+            <p className="eyebrow opacity-85">Appointments</p>
+            <h2 className="display-m mt-4 max-w-[20ch]">
+              Take the first step towards understanding what is happening
+            </h2>
+            <p className="mt-4 max-w-[46ch] text-[1rem] leading-relaxed opacity-90">
+              Consultations at {locality()} are by prior appointment. WhatsApp is usually the
+              quickest way to reach the clinic.
+            </p>
+            <AppointmentActions onDark className="mt-7" />
+          </div>
+        </div>
       </section>
     </>
   )

@@ -1,4 +1,5 @@
 /* Verifies every foreground/background pair the design actually uses.
+ * The site is light only — see the note at the top of app/globals.css.
  * Run with: npm run check:contrast */
 const LIGHT = {
   paper: '#F4F7FA', surface: '#FFFFFF', raised: '#E7EFF7',
@@ -11,18 +12,7 @@ const LIGHT = {
   plum: '#65457F', plumTint: '#ECE5F2',
   onBrand: '#FFFFFF',
   onWarm: '#FFFFFF', white: '#FFFFFF', onWhite: '#0D2C66',
-}
-const DARK = {
-  paper: '#0A121E', surface: '#101B2B', raised: '#142235',
-  ink: '#E4EAF2', muted: '#9AABC0', faint: '#8395AB',
-  brand: '#77A9EA', brandInk: '#95BEF2', brandTint: '#14243F',
-  brandSurface: '#0C1B36', onBrandSurface: '#E4EAF2',
-  warm: '#F0A05A', warmTint: '#33220F',
-  fresh: '#68C173', freshTint: '#142D18',
-  teal: '#63B7C2', tealTint: '#0F2C31',
-  plum: '#B99AD2', plumTint: '#241D33',
-  onBrand: '#08111E',
-  onWarm: '#2B1808', white: '#FFFFFF', onWhite: '#0D2C66',
+  freshSurface: '#166E1E', onFreshSurface: '#FFFFFF',
 }
 
 const lin = (c) => (c /= 255) <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
@@ -51,6 +41,7 @@ const pairs = (t) => [
   ['brand', 'brandTint', 4.5, 'brand text on brand tint'],
   ['onBrand', 'brand', 4.5, 'button label on brand fill'],
   ['onBrandSurface', 'brandSurface', 4.5, 'text on hero/footer band'],
+  ['onFreshSurface', 'freshSurface', 4.5, 'text on the green CTA panel'],
   ['onWarm', 'warm', 4.5, 'label on the amber action button'],
   ['onWhite', 'white', 4.5, 'label on the fixed-white button over a dark band'],
   ['warm', 'paper', 4.5, 'warm category text'],
@@ -68,7 +59,7 @@ const pairs = (t) => [
 ]
 
 let failures = 0
-for (const [name, t] of [['LIGHT', LIGHT], ['DARK', DARK]]) {
+for (const [name, t] of [['LIGHT', LIGHT]]) {
   console.log(`\n  ${name}`)
   for (const [fg, bg, min, desc] of pairs(t)) {
     const r = ratio(t[fg], t[bg])

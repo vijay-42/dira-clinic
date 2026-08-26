@@ -1,7 +1,13 @@
 @import "tailwindcss";
 
 /* ===========================================================================
-   PALETTE — a four-colour clinical system.
+   PALETTE — a four-colour clinical system. Light only.
+
+   There is deliberately no dark theme. The design is a light, airy clinic
+   layout, and a dark variant kept producing the same bug: a token used as a
+   *text accent* has to go light on a dark ground, but the same token used as a
+   *surface fill* has to stay deep. Every colour here is checked by
+   `npm run check:contrast` against a single set of grounds.
    Deep teal carries the brand; coral, green and plum colour-code the four
    condition families so category is readable at a glance, not decorative.
    Every pair below is verified by `npm run check:contrast`. Change a value
@@ -33,79 +39,21 @@
   --c-warm-tint:   #FAEADC;
   --c-fresh:       #166E1E;
   --c-fresh-tint:  #DEEFE0;
+  /* Band fill, separate from the text accent — same reason as brand-surface. */
+  --c-fresh-surface:    #166E1E;
+  --c-on-fresh-surface: #FFFFFF;
   --c-teal:        #0A626D;
   --c-teal-tint:   #D9ECEF;
   --c-plum:        #65457F;
   --c-plum-tint:   #ECE5F2;
+
+  color-scheme: light;
 
   --c-shadow:      215 40% 18%;
   --radius:        14px;
   --radius-sm:     10px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --c-paper:       #0A121E;
-    --c-surface:     #101B2B;
-    --c-raised:      #142235;
-    --c-ink:         #E4EAF2;
-    --c-muted:       #9AABC0;
-    --c-faint:       #8395AB;
-    --c-rule:        #23324A;
-    --c-rule-soft:   #1A2739;
-
-    --c-brand:       #77A9EA;
-    --c-brand-ink:   #95BEF2;
-    --c-brand-tint:  #14243F;
-    --c-on-brand:    #08111E;
-    --c-brand-surface:    #0C1B36;
-    --c-on-brand-surface: #E4EAF2;
-  --c-on-warm:     #2B1808;
-  --c-on-white:    #0D2C66;
-    --c-on-warm:     #2B1808;
-    --c-on-white:    #0D2C66;
-
-    --c-warm:        #F0A05A;
-    --c-warm-tint:   #33220F;
-    --c-fresh:       #68C173;
-    --c-fresh-tint:  #142D18;
-    --c-teal:        #63B7C2;
-    --c-teal-tint:   #0F2C31;
-    --c-plum:        #B99AD2;
-    --c-plum-tint:   #241D33;
-
-    --c-shadow:      215 60% 2%;
-  }
-}
-
-:root[data-theme="dark"] {
-  --c-paper:       #0A121E;
-  --c-surface:     #101B2B;
-  --c-raised:      #142235;
-  --c-ink:         #E4EAF2;
-  --c-muted:       #9AABC0;
-  --c-faint:       #8395AB;
-  --c-rule:        #23324A;
-  --c-rule-soft:   #1A2739;
-
-  --c-brand:       #77A9EA;
-  --c-brand-ink:   #95BEF2;
-  --c-brand-tint:  #14243F;
-  --c-on-brand:    #08111E;
-  --c-brand-surface:    #0C1B36;
-  --c-on-brand-surface: #E4EAF2;
-
-  --c-warm:        #F0A05A;
-  --c-warm-tint:   #33220F;
-  --c-fresh:       #68C173;
-  --c-fresh-tint:  #142D18;
-  --c-teal:        #63B7C2;
-  --c-teal-tint:   #0F2C31;
-  --c-plum:        #B99AD2;
-  --c-plum-tint:   #241D33;
-
-  --c-shadow:      215 60% 2%;
-}
 
 @theme inline {
   --color-paper:      var(--c-paper);
@@ -126,12 +74,15 @@
   --color-warm-tint:  var(--c-warm-tint);
   --color-fresh:      var(--c-fresh);
   --color-fresh-tint: var(--c-fresh-tint);
+  --color-fresh-surface:    var(--c-fresh-surface);
+  --color-on-fresh-surface: var(--c-on-fresh-surface);
   --color-teal:       var(--c-teal);
   --color-teal-tint:  var(--c-teal-tint);
   --color-plum:       var(--c-plum);
   --color-plum-tint:  var(--c-plum-tint);
 
-  --font-display: var(--font-spectral), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-quote:   var(--font-spectral), Georgia, "Times New Roman", serif;
   --font-sans:    var(--font-plex-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono:    var(--font-plex-mono), ui-monospace, "SF Mono", Menlo, monospace;
 
@@ -185,30 +136,38 @@
    ========================================================================= */
 @utility display-xl {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(2.35rem, 5.4vw, 3.7rem);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  font-weight: 800;
+  font-size: clamp(2.3rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.032em;
 }
 @utility display-l {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(1.95rem, 4vw, 2.75rem);
-  line-height: 1.14;
-  letter-spacing: -0.015em;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 3.6vw, 2.65rem);
+  line-height: 1.16;
+  letter-spacing: -0.028em;
 }
 @utility display-m {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(1.5rem, 2.7vw, 2rem);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  line-height: 1.22;
+  letter-spacing: -0.022em;
 }
 @utility display-s {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.2rem;
-  line-height: 1.32;
+  font-weight: 700;
+  font-size: 1.18rem;
+  line-height: 1.34;
+  letter-spacing: -0.014em;
+}
+
+/* Pull quotes keep the serif. */
+@utility quote {
+  font-family: var(--font-quote);
+  font-style: italic;
+  font-weight: 400;
 }
 
 @utility eyebrow {
@@ -237,6 +196,31 @@
 /* ===========================================================================
    COMPONENTS
    ========================================================================= */
+
+/* An organic rounded shape, used behind icons instead of a plain square.
+   Cheaper and sharper than shipping a blob SVG per icon. */
+@utility blob {
+  border-radius: 62% 38% 46% 54% / 54% 46% 58% 42%;
+}
+@utility blob-alt {
+  border-radius: 44% 56% 63% 37% / 47% 39% 61% 53%;
+}
+
+/* Soft concentric rings — a calm, subject-appropriate texture for large light
+   panels. Kept very low contrast so it reads as paper, not pattern. */
+@utility ring-field {
+  background-image: repeating-radial-gradient(
+    circle at 72% 42%,
+    color-mix(in oklab, var(--c-brand) 5.5%, transparent) 0 1px,
+    transparent 1px 34px
+  );
+}
+
+/* A tinted panel that carries a category colour across a whole block. */
+@utility tint-panel {
+  background: var(--cat-tint);
+  border-radius: var(--radius);
+}
 
 @utility card {
   background: var(--c-surface);

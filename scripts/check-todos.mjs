@@ -4,6 +4,9 @@ import { readFileSync } from 'node:fs'
 
 const FILES = ['content/clinic.ts', 'content/doctor.ts']
 const outstanding = []
+/* Details deliberately left blank for now. They are hidden on the site rather
+ * than shown as a marker, so this list is the only thing that remembers them. */
+const pending = []
 
 /** Pulls the nearest preceding /** ... *\/ comment as context. */
 function hintAbove(lines, index) {
@@ -45,6 +48,17 @@ for (const file of FILES) {
       outstanding.push({ file, line: i + 1, field: m[1], hint: context })
     }
   })
+
+  // A second pass for fields parked with a PENDING note in the comment above.
+  lines.forEach((line, i) => {
+    const m = line.match(/^\s*([A-Za-z0-9_]+):\s*(''|\[\])/)
+    if (!m) return
+    const hint = hintAbove(lines, i)
+    if (!/^PENDING\b/i.test(hint)) return
+    // First sentence only — the rest of the comment is instructions for the edit.
+    const short = hint.replace(/^PENDING[:\s]*/i, '').split(/(?<=\.)\s/)[0]
+    pending.push({ file, line: i + 1, field: m[1], hint: short })
+  })
 }
 
 const BOLD = '\x1b[1m'
@@ -53,15 +67,24 @@ const YEL = '\x1b[33m'
 const GRN = '\x1b[32m'
 const OFF = '\x1b[0m'
 
-if (outstanding.length === 0) {
-  console.log(`\n  ${GRN}All clinic details are filled in.${OFF} Ready to launch.\n`)
-  process.exit(0)
+function list(rows) {
+  for (const o of rows) {
+    console.log(`  ${YEL}${o.field.padEnd(20)}${OFF}${DIM}${o.file}:${o.line}${OFF}`)
+    if (o.hint) console.log(`  ${DIM}${' '.repeat(20)}${o.hint}${OFF}`)
+  }
 }
 
-console.log(`\n  ${BOLD}${outstanding.length} detail(s) still needed before launch${OFF}\n`)
-for (const o of outstanding) {
-  console.log(`  ${YEL}${o.field.padEnd(20)}${OFF}${DIM}${o.file}:${o.line}${OFF}`)
-  if (o.hint) console.log(`  ${DIM}${' '.repeat(20)}${o.hint}${OFF}`)
+if (outstanding.length === 0) {
+  console.log(`\n  ${GRN}All clinic details are filled in.${OFF} Ready to launch.`)
+} else {
+  console.log(`\n  ${BOLD}${outstanding.length} detail(s) still needed before launch${OFF}\n`)
+  list(outstanding)
+  console.log(`\n  Edit ${BOLD}content/clinic.ts${OFF} (and content/doctor.ts) to fill these in.`)
+  console.log(`  Anything left unfilled renders on the site as a visible [MARKER].`)
 }
-console.log(`\n  Edit ${BOLD}content/clinic.ts${OFF} (and content/doctor.ts) to fill these in.`)
-console.log(`  Anything left unfilled renders on the site as a visible [MARKER].\n`)
+
+if (pending.length > 0) {
+  console.log(`\n  ${BOLD}${pending.length} detail(s) parked for later${OFF} ${DIM}— hidden on the site until supplied${OFF}\n`)
+  list(pending)
+}
+console.log('')

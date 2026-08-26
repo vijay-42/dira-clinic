@@ -20,13 +20,13 @@ if ! curl -sf -o /dev/null "http://localhost:$PORT/" 2>/dev/null; then
   done
 fi
 
-# Light-theme copies: our CSS honours data-theme over the OS setting, and
-# headless Chrome reports prefers-color-scheme: dark.
+# Plain copies at predictable filenames. The site is light only, so no theme
+# stamping is needed any more.
 SERVICE_PAGES="services/arthritis-treatment-in-bangalore services/immunology-and-rheumatology-treatment-in-bangalore services/physiotherapy-clinic-in-bangalore services/pharmacy-service-in-bangalore services/day-care-infusion-diagnostics-in-indiranagar"
 for page in index about conditions services contact faq for-doctors patient-education dr-gaurang-deshpande $SERVICE_PAGES; do
   src="$OUT/$page/index.html"; [ "$page" = index ] && src="$OUT/index.html"
   flat=$(echo "$page" | tr '/' '-')
-  [ -f "$src" ] && sed 's|<html lang="en-IN"|<html data-theme="light" lang="en-IN"|' "$src" > "$OUT/_light-$flat.html"
+  [ -f "$src" ] && cp "$src" "$OUT/_light-$flat.html"
 done
 
 cat > "$OUT/_probe.html" <<'EOF'

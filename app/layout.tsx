@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Spectral, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
+import { Plus_Jakarta_Sans, Spectral, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
@@ -9,9 +9,20 @@ import { clinicSchema, JsonLd } from '@/lib/schema'
 
 /* Fonts are downloaded at build time and served from our own origin — no
    request ever leaves for a third-party font server. */
+/* Headings: a geometric sans with a friendly bold, in the register of a modern
+   clinic site. Not Poppins, which is the default everyone reaches for. */
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['500', '600', '700', '800'],
+  display: 'swap',
+  variable: '--font-jakarta',
+})
+
+/* Spectral is kept for pull quotes only — an editorial serif still adds warmth
+   where a person is being quoted. */
 const spectral = Spectral({
   subsets: ['latin'],
-  weight: ['300', '600'],
+  weight: ['400'],
   style: ['normal', 'italic'],
   display: 'swap',
   variable: '--font-spectral',
@@ -56,17 +67,16 @@ export const metadata: Metadata = {
 }
 
 export const viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#0D5661' },
-    { media: '(prefers-color-scheme: dark)', color: '#0C1518' },
-  ],
+  // Light only — see the note at the top of globals.css.
+  themeColor: '#123A83',
+  colorScheme: 'light',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en-IN"
-      className={`${spectral.variable} ${plexSans.variable} ${plexMono.variable}`}
+      className={`${jakarta.variable} ${spectral.variable} ${plexSans.variable} ${plexMono.variable}`}
     >
       <body className="flex min-h-screen flex-col">
         <a href="#main" className="skip-link">
