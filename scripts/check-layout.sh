@@ -34,7 +34,7 @@ cat > "$OUT/_probe.html" <<'EOF'
 <pre id="out">running</pre>
 <script>
 const PAGES = ['index','about','conditions','services','contact','faq','for-doctors','patient-education','dr-gaurang-deshpande','services-arthritis-treatment-in-bangalore','services-immunology-and-rheumatology-treatment-in-bangalore','services-physiotherapy-clinic-in-bangalore','services-pharmacy-service-in-bangalore','services-day-care-infusion-diagnostics-in-indiranagar']
-const WIDTHS = [360, 390, 768]
+const WIDTHS = [320, 360, 390, 768]
 const lines = []
 window.onerror = (e) => { document.getElementById('out').textContent = 'JS ERROR: ' + e }
 function measure(name, w) {
@@ -44,6 +44,12 @@ function measure(name, w) {
     f.src = '/_light-' + name + '.html'
     f.onload = () => {
       const d = f.contentDocument
+      // A late onload on a torn-down frame yields a null document. Report which
+      // page it was rather than throwing and losing the whole run.
+      if (!d || !d.documentElement) {
+        lines.push('NODOC     ' + name + ' @' + w)
+        f.remove(); res(); return
+      }
       const vw = d.documentElement.clientWidth
       const sw = d.documentElement.scrollWidth
       let detail = ''
@@ -68,12 +74,12 @@ function measure(name, w) {
 ;(async () => {
   for (const p of PAGES) for (const w of WIDTHS) await measure(p, w)
   document.getElementById('out').textContent =
-    lines.length ? lines.join('\n') : 'PASS — no horizontal overflow at 360/390/768 on any page.'
+    lines.length ? lines.join('\n') : 'PASS — no horizontal overflow at 320/360/390/768 on any page.'
 })()
 </script>
 EOF
 
-"$CHROME" --headless --disable-gpu --window-size=1200,1000 --virtual-time-budget=30000 \
+"$CHROME" --headless --disable-gpu --window-size=1200,1000 --virtual-time-budget=90000 \
   --dump-dom "http://localhost:$PORT/_probe.html" 2>/dev/null > /tmp/dira-probe.html
 
 cleanup() {
