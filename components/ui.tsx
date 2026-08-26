@@ -106,7 +106,7 @@ export function PageHeader({
     <header className="border-b border-rule-soft bg-raised py-8 sm:py-10 lg:py-12">
       <Container>
         <p className="pill">{eyebrow}</p>
-        <h1 className="display-l mt-3 max-w-[24ch] text-[clamp(1.75rem,2.7vw,2.35rem)]">
+        <h1 className="display-l mt-3 max-w-[24ch] text-[clamp(1.55rem,2.7vw,2.35rem)]">
           {title}
         </h1>
         {lede ? <p className="lede measure mt-3">{lede}</p> : null}

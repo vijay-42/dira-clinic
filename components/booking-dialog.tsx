@@ -222,7 +222,7 @@ export function BookingDialog() {
 
           <button
             type="submit"
-            className="btn btn-warm mt-6 w-full"
+            className="btn btn-solid mt-6 w-full"
             disabled={isTodo(clinic.whatsapp)}
           >
             <IconWhatsApp className="h-[1.15rem] w-[1.15rem]" />

@@ -49,7 +49,7 @@ export function SiteHeader() {
       {/* Utility bar — contact details above the fold on every page */}
       <div className="bg-brand-surface text-[color:var(--c-on-brand-surface)]">
         <HeaderRow>
-          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 py-2 text-[0.84rem]">
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 py-2 text-[0.8rem] sm:text-[0.84rem]">
             <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
               <a
                 href={tel ?? '/contact/'}
@@ -66,7 +66,7 @@ export function SiteHeader() {
                 {isTodo(clinic.email) ? '[ADD EMAIL ADDRESS]' : clinic.email}
               </a>
             </div>
-            <p className="hidden items-center gap-1.5 opacity-90 md:flex">
+            <p className="flex items-center gap-1.5 opacity-90">
               <IconPin className="h-4 w-4" />
               {cityName()}
             </p>
@@ -76,7 +76,7 @@ export function SiteHeader() {
 
       <header className="header-sticky sticky top-0 z-30 border-b border-rule-soft bg-surface/95 backdrop-blur">
         <HeaderRow>
-          <div className="flex items-center justify-between gap-8 py-4">
+          <div className="flex items-center justify-between gap-3 py-3 sm:gap-6 sm:py-4 lg:gap-8">
             <Link href="/" aria-label="DIRA — home" className="flex shrink-0 items-center text-ink">
               <Logo />
             </Link>
@@ -134,7 +134,7 @@ export function SiteHeader() {
               <button
                 type="button"
                 onClick={() => openBooking()}
-                className="btn btn-warm min-h-0 px-6 py-3 text-[0.95rem]"
+                className="btn btn-solid min-h-0 px-6 py-3 text-[0.95rem]"
               >
                 <IconWhatsApp className="h-4 w-4" />
                 Book appointment
@@ -196,7 +196,7 @@ export function SiteHeader() {
                       e.currentTarget.closest('details')?.removeAttribute('open')
                       openBooking()
                     }}
-                    className="btn btn-warm min-h-0 w-full py-2.5 text-[0.9rem]"
+                    className="btn btn-solid min-h-0 w-full py-2.5 text-[0.9rem]"
                   >
                     <IconWhatsApp className="h-4 w-4" />
                     Book appointment

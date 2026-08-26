@@ -52,7 +52,7 @@ export function AppointmentActions({
     <div className={`flex flex-col gap-3 sm:flex-row sm:items-center ${className}`}>
       <BookAppointmentButton
         topic={message}
-        className={`btn ${onDark ? 'btn-on-dark' : 'btn-warm'}`}
+        className={`btn ${onDark ? 'btn-on-dark' : 'btn-solid'}`}
       >
         <IconWhatsApp className="h-[1.15rem] w-[1.15rem]" />
         Book appointment

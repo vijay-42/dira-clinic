@@ -217,14 +217,32 @@
   border-radius: 44% 56% 63% 37% / 47% 39% 61% 53%;
 }
 
-/* Soft concentric rings — a calm, subject-appropriate texture for large light
-   panels. Kept very low contrast so it reads as paper, not pattern. */
-@utility ring-field {
-  background-image: repeating-radial-gradient(
-    circle at 72% 42%,
-    color-mix(in oklab, var(--c-brand) 5.5%, transparent) 0 1px,
-    transparent 1px 34px
-  );
+/* The hero ground. Three layers over paper, all in the brand navy taken from
+   the logo, so the banner carries the brand colour without becoming a solid
+   block — the headline stays dark ink on a light surface:
+     1. soft concentric rings, a calm texture that reads as paper, not pattern
+     2. a wash behind the portrait, deepest where the halo already is
+     3. a faint top-down tint that ties the banner to the header above it
+   Keep every mix low: `npm run check:contrast` assumes body text sits on a
+   light ground. */
+@utility hero-field {
+  background-color: var(--c-paper);
+  background-image:
+    repeating-radial-gradient(
+      circle at 72% 42%,
+      color-mix(in oklab, var(--c-brand) 7%, transparent) 0 1px,
+      transparent 1px 34px
+    ),
+    radial-gradient(
+      116% 88% at 78% 34%,
+      color-mix(in oklab, var(--c-brand) 22%, transparent) 0%,
+      transparent 66%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--c-brand) 11%, transparent) 0%,
+      transparent 58%
+    );
 }
 
 /* A tinted panel that carries a category colour across a whole block. */

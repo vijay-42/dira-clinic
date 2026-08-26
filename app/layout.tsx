@@ -90,7 +90,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en-IN"
       className={`${jakarta.variable} ${spectral.variable} ${plexSans.variable} ${plexMono.variable}`}
     >
-      <body className="flex min-h-screen flex-col">
+      <body
+        /* pb clears the fixed mobile contact bar (59px tall), which otherwise
+           sits permanently on top of the last line of the footer. */
+        className="flex min-h-screen flex-col pb-[3.7rem] lg:pb-0"
+      >
         <a href="#main" className="skip-link">
           Skip to content
         </a>

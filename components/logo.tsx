@@ -61,7 +61,7 @@ export function Logo({ className = '' }: { className?: string }) {
         alt={`${clinic.name} — ${clinic.legalName}. ${clinic.strapline}`}
         width={448}
         height={140}
-        className="block h-14 w-auto sm:h-16"
+        className="block h-11 w-auto sm:h-14 lg:h-16"
       />
     </span>
   )

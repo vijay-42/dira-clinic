@@ -212,8 +212,8 @@ export default function HomePage() {
       <Section tone="paper">
         <SectionHead
           eyebrow="Conditions"
-          title="What we commonly see"
-          lede="Four families of condition, colour-coded throughout the site so you can find your way around quickly."
+          title="Conditions & Services at DIRA Clinic"
+          lede="Explore our key areas of care, from arthritis and joint pain to autoimmune and immune-related conditions, with specialized care at DIRA Clinic."
         />
         <div className="reveal-each mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {conditionGroups.map((group, i) => {
@@ -238,28 +238,6 @@ export default function HomePage() {
             )
           })}
         </div>
-      </Section>
-
-      {/* ============================================== DOCTOR PULL QUOTE */}
-      <Section tone="raised">
-        <figure className="card cat-warm relative overflow-hidden p-8 sm:p-12">
-          <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 bg-[color:var(--cat)]" />
-          <blockquote>
-            <p className="quote max-w-[30ch] text-[clamp(1.35rem,2.4vw,1.85rem)] leading-[1.4]">
-              “{doctor.note.pullquote}”
-            </p>
-          </blockquote>
-          <figcaption className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1">
-            <span className="font-semibold">{doctor.name}</span>
-            <span className="text-[0.9rem] text-muted">{doctor.title}</span>
-          </figcaption>
-          <Link
-            href="/dr-gaurang-deshpande/"
-            className="link mt-6 inline-flex items-center gap-1.5"
-          >
-            Read the full profile <IconArrow className="nudge h-4 w-4" />
-          </Link>
-        </figure>
       </Section>
 
     </>

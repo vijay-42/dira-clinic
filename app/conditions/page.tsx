@@ -68,7 +68,7 @@ export default function ConditionsPage() {
             lede="Many patients arrive with a positive ANA, a raised inflammatory marker, or symptoms across several organs, and no diagnosis at all. Determining that a disease is not present is a legitimate and useful outcome of a specialist consultation."
           />
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link href="/contact/" className="btn btn-warm">
+            <Link href="/contact/" className="btn btn-solid">
               Book an appointment <IconArrow className="nudge h-4 w-4" />
             </Link>
             <Link href="/services/" className="btn btn-ghost">
