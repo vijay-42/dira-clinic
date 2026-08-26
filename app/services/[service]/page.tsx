@@ -54,46 +54,79 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   return (
     <>
-      <header className={`${page.cat} border-b border-rule-soft bg-raised py-8 sm:py-10 lg:py-12`}>
-        <Container>
-          <nav aria-label="Breadcrumb" className="mb-4">
-            <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.82rem] text-muted">
-              <li>
-                <Link href="/" className="hover:text-brand hover:underline">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/services/" className="hover:text-brand hover:underline">
-                  Services
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="text-ink">
-                {page.navLabel}
-              </li>
-            </ol>
-          </nav>
+      <header className={`${page.cat} w-full border-b border-rule-soft bg-raised pt-0 pb-0`}>
+        <div className="relative w-full overflow-hidden bg-white">
+          <div className="relative min-h-[300px] w-full sm:min-h-[340px] lg:min-h-[390px]">
+            {page.image ? (
+              <img
+                src={page.image}
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover object-center"
+              />
+            ) : null}
+            <div className="absolute inset-0 bg-white/8" />
 
-          <div className="flex flex-wrap items-center gap-4">
-            <span className="cat-bg inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-[12px]">
-              <Icon className="cat-text h-6 w-6" />
-            </span>
-            <p className="pill">{page.eyebrow}</p>
+            <div className="relative z-10 mx-auto w-full max-w-[78rem] px-5 py-0 sm:px-8 lg:px-10">
+              <nav aria-label="Breadcrumb" className="mb-2 sm:mb-3">
+                <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.82rem] text-muted">
+                  <li>
+                    <Link href="/" className="hover:text-brand hover:underline">
+                      Home
+                    </Link>
+                  </li>
+                  <li aria-hidden="true">/</li>
+                  <li>
+                    <Link href="/services/" className="hover:text-brand hover:underline">
+                      Services
+                    </Link>
+                  </li>
+                  <li aria-hidden="true">/</li>
+                  <li aria-current="page" className="text-ink">
+                    {page.navLabel}
+                  </li>
+                </ol>
+              </nav>
+
+              <div className="flex items-center justify-between gap-8 py-0 sm:py-0 lg:py-0">
+                <div className="max-w-[640px] rounded-[18px] bg-white/10 p-4 shadow-[0_12px_30px_-18px_rgba(15,23,42,0.35)] backdrop-blur-[1px] sm:p-5 lg:p-6">
+                  <div className="flex flex-wrap items-center gap-4">
+                    <span className="cat-bg inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px]">
+                      <Icon className="cat-text h-5 w-5" />
+                    </span>
+                    <p className="pill text-slate-900/80 backdrop-blur-sm">{page.eyebrow}</p>
+                  </div>
+
+                  <h1 className="mt-5 max-w-[16ch] text-[clamp(1.8rem,2.5vw,2.8rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-slate-900">
+                    {page.title} in {cityName()}
+                  </h1>
+
+                  <p className="mt-3 max-w-[60ch] text-[0.96rem] leading-relaxed text-slate-800 sm:text-[1.05rem]">
+                    {page.lede}
+                  </p>
+
+                  <AppointmentActions
+                    className="mt-5"
+                    message={`Hello, I would like to ask about ${page.title} at DIRA.`}
+                  />
+                </div>
+
+                <div className="hidden min-w-[200px] justify-center lg:flex">
+                  <div className="flex flex-col items-center gap-6 py-0">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/80 bg-white/40 shadow-[0_8px_20px_-12px_rgba(15,23,42,0.35)]">
+                      <Icon className="cat-text h-8 w-8" />
+                    </div>
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/80 bg-white/40 shadow-[0_8px_20px_-12px_rgba(15,23,42,0.35)]">
+                      <Icon className="cat-text h-8 w-8" />
+                    </div>
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/80 bg-white/40 shadow-[0_8px_20px_-12px_rgba(15,23,42,0.35)]">
+                      <Icon className="cat-text h-8 w-8" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
-          {/* No width cap: every service title fits on one line at desktop
-              widths, and short screens still wrap naturally. */}
-          <h1 className="display-l mt-4 text-[clamp(1.6rem,2.7vw,2.35rem)]">
-            {page.title} in {cityName()}
-          </h1>
-          <p className="lede measure mt-3">{page.lede}</p>
-          <AppointmentActions
-            className="mt-7"
-            message={`Hello, I would like to ask about ${page.title} at DIRA.`}
-          />
-        </Container>
+        </div>
       </header>
 
       {page.sections.map((section, i) => (

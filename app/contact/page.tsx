@@ -150,16 +150,6 @@ export default function ContactPage() {
           </div>
         </div>
       </Section>
-
-      <Section tone="raised">
-        <div className="card cat-warm p-8 sm:p-10">
-          <SectionHead
-            eyebrow="Urgent?"
-            title={<span className="cat-text">If this is an emergency</span>}
-            lede="This clinic does not provide emergency care. If you have severe chest pain, difficulty breathing, a high fever with confusion, sudden weakness, or any other symptom that worries you acutely, please go to your nearest hospital emergency department rather than waiting for an appointment."
-          />
-        </div>
-      </Section>
     </>
   )
 }

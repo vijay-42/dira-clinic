@@ -75,6 +75,13 @@ export default function ServicesPage() {
                 href={serviceHref(sp.slug)}
                 className={`card lift ${sp.cat} cat-top group flex flex-col p-6`}
               >
+                {sp.image ? (
+                  <img
+                    src={sp.image}
+                    alt={sp.title}
+                    className="mb-4 h-40 w-full rounded-[12px] object-cover"
+                  />
+                ) : null}
                 <span className="cat-bg inline-flex h-11 w-11 items-center justify-center rounded-[11px]">
                   <DIcon className="cat-text h-[1.35rem] w-[1.35rem]" />
                 </span>

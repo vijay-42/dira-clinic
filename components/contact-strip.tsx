@@ -21,12 +21,6 @@ export function ContactStrip() {
     { Icon: IconPin, label: 'Location', value: locality(), href: has(clinic.mapsUrl) ? clinic.mapsUrl : undefined, cat: 'cat-plum' },
   ]
 
-  const facilities = [
-    { Icon: IconRehab, label: 'Physiotherapy', state: clinic.facilities.physiotherapy, cat: 'cat-fresh' },
-    { Icon: IconLab, label: 'Laboratory', state: clinic.facilities.laboratory, cat: 'cat-teal' },
-    { Icon: IconPharmacy, label: 'Pharmacy', state: clinic.facilities.pharmacy, cat: 'cat-plum' },
-  ].filter((f) => f.state !== 'none')
-
   return (
     <div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -56,24 +50,6 @@ export function ContactStrip() {
           )
         })}
       </div>
-
-      {facilities.length > 0 ? (
-        <div className="mt-8 grid gap-5 border-t border-rule-soft pt-8 sm:grid-cols-3">
-          {facilities.map((f) => (
-            <div key={f.label} className={`${f.cat} flex items-center gap-3.5`}>
-              <span className="cat-bg blob inline-flex h-11 w-11 shrink-0 items-center justify-center">
-                <f.Icon className="cat-text h-5 w-5" />
-              </span>
-              <span className="min-w-0">
-                <span className="block text-[0.95rem] font-semibold leading-snug">{f.label}</span>
-                <span className="mt-0.5 block truncate text-[0.85rem] text-muted">
-                  {facilityLabel[f.state]}
-                </span>
-              </span>
-            </div>
-          ))}
-        </div>
-      ) : null}
     </div>
   )
 }

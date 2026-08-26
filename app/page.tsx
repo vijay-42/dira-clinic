@@ -10,6 +10,7 @@ import {
 import { clinic, isTodo, cityName, locality } from '@/content/clinic'
 import { doctor } from '@/content/doctor'
 import { triage, conditionGroups } from '@/content/site'
+import { SocialLinks } from '@/components/social'
 
 /* Why a patient can trust this clinic — stated as facts, not slogans.
    No invented statistics: the only number here is real. */
@@ -64,6 +65,10 @@ export default function HomePage() {
               <h1 className="display-xl mt-4 max-w-[26ch] text-[clamp(1.7rem,3.4vw,2.85rem)]">
                 Expert care in Rheumatology &amp; Immunology in {cityName()}
               </h1>
+
+              <p className="lede measure mt-4">
+                Convenient consultation hours with personalised rheumatology &amp; immunology care.
+              </p>
 
               <p className="lede measure mt-4">
                 Led by {doctor.name}, {doctor.title}, DIRA Clinic provides comprehensive,
@@ -121,7 +126,13 @@ export default function HomePage() {
       </section>
 
       {/* Practical facts strip */}
-      <Section tone="paper" className="!py-12 sm:!py-14">
+      <Section tone="paper" className="!py-6 sm:!py-8">
+        <div className="mb-6 flex items-center justify-between gap-4 border-b border-rule-soft pb-4">
+          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-muted">
+            Follow us
+          </p>
+          <SocialLinks />
+        </div>
         <ContactStrip />
       </Section>
 

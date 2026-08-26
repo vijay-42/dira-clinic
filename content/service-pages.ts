@@ -33,6 +33,7 @@ export type ServicePage = {
   /** Which of the four condition families colours this page. */
   cat: 'cat-brand' | 'cat-teal' | 'cat-fresh' | 'cat-plum'
   icon: 'joint' | 'immune' | 'rehab' | 'pharmacy' | 'lab'
+  image?: string
   sections: {
     heading: string
     body?: string[]
@@ -55,6 +56,7 @@ export const servicePages: ServicePage[] = [
     eyebrow: 'Arthritis',
     cat: 'cat-brand',
     icon: 'joint',
+    image: '/Arthritis%20%26%20Allergy%20Treatment%20in%20Bangalore.webp',
     lede: 'Living with arthritis can make simple everyday activities such as walking, climbing stairs, working, or even getting out of bed uncomfortable. At DIRA, we focus on helping patients understand their joint problems and receive personalised care based on their symptoms, condition, and overall health.',
     sections: [
       {
@@ -135,6 +137,7 @@ export const servicePages: ServicePage[] = [
     eyebrow: 'Immunology & rheumatology',
     cat: 'cat-teal',
     icon: 'immune',
+    image: '/Immunology%20%26%20Rheumatology%20Treatment%20in%20Bangalore.webp',
     lede: 'Autoimmune and rheumatic conditions can affect more than just your joints. Persistent joint pain, stiffness, swelling, fatigue, muscle discomfort, skin changes or unexplained inflammation may sometimes be linked to an underlying immune-system disorder.',
     sections: [
       {
@@ -218,6 +221,7 @@ export const servicePages: ServicePage[] = [
     eyebrow: 'Physiotherapy',
     cat: 'cat-fresh',
     icon: 'rehab',
+    image: '/Physiotherapy%20%26%20Rehabilitation%20in%20Bangalore.webp',
     lede: 'Pain, stiffness, muscle weakness or difficulty moving can affect your work, your exercise, your sleep and your everyday activities. Whether you are recovering from an injury, managing joint pain or living with a long-term musculoskeletal condition, the right physiotherapy can improve movement and function.',
     sections: [
       {
@@ -302,6 +306,7 @@ export const servicePages: ServicePage[] = [
     eyebrow: 'Pharmacy',
     cat: 'cat-plum',
     icon: 'pharmacy',
+    image: '/Pharmacy%20Service%20in%20Bangalore.webp',
     lede: 'Getting the right medicines at the right time is an important part of your healthcare journey. Our pharmacy service is designed to make accessing prescribed medicines more convenient, while keeping patient safety and medication awareness at the centre of care.',
     sections: [
       {
@@ -385,6 +390,7 @@ export const servicePages: ServicePage[] = [
     eyebrow: 'Day care & diagnostics',
     cat: 'cat-teal',
     icon: 'lab',
+    image: '/Day%20Care%20Infusion%20%26%20Diagnostics%20in%20Bangalore.webp',
     lede: 'Managing a chronic condition or undergoing regular treatment can mean several hours in a hospital, or repeated visits for investigations and therapy. Our day care service is designed to make planned treatment and essential investigations more convenient and comfortable, without the need for an overnight stay.',
     sections: [
       {
