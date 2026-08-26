@@ -11,9 +11,9 @@
  *   "day care infusion diagnostics in indiranagar"
  *       -> day-care-infusion-diagnostics-in-indiranagar
  *
- * These sit at the top level (/arthritis-treatment-in-bangalore/) rather than
- * under /services/, matching the sheet and targeting the search phrase directly.
- * Changing that later means adding redirects, so it is worth confirming.
+ * These live under /services/ — e.g. /services/arthritis-treatment-in-bangalore/.
+ * Build every link with serviceHref() rather than writing the path by hand, so
+ * the prefix lives in exactly one place.
  *
  * Compliance note: no superlatives, no success rates, no testimonials, no cure
  * claims anywhere in this file. See docs/dira-plan.html, Section 08.
@@ -337,8 +337,16 @@ export const servicePages: ServicePage[] = [
   },
 ]
 
+/** The one place the /services/ prefix is defined. */
+export const SERVICES_BASE = '/services'
+
+/** Canonical path for a service page. Always use this rather than a literal. */
+export function serviceHref(slug: string): string {
+  return `${SERVICES_BASE}/${slug}/`
+}
+
 /** Menu entries for the Services dropdown. */
 export const serviceMenu = servicePages.map((p) => ({
-  href: `/${p.slug}/`,
+  href: serviceHref(p.slug),
   label: p.navLabel,
 }))

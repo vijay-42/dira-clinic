@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { siteUrl } from '@/content/clinic'
 import { nav } from '@/content/site'
-import { servicePages } from '@/content/service-pages'
+import { servicePages, serviceHref } from '@/content/service-pages'
 
 export const dynamic = 'force-static'
 
@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Service detail pages are the local-search landing pages, so they rank
   // above the general informational pages in priority.
   const services: MetadataRoute.Sitemap = servicePages.map((p) => ({
-    url: `${base}/${p.slug}/`,
+    url: `${base}${serviceHref(p.slug)}`,
     changeFrequency: 'yearly',
     priority: 0.8,
   }))

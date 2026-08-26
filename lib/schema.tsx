@@ -87,6 +87,23 @@ export function clinicSchema() {
   }
 }
 
+/** BreadcrumbList for a page nested under a section. */
+export function breadcrumbSchema(
+  trail: readonly { name: string; path: string }[],
+) {
+  const base = siteUrl()
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: trail.map((step, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: step.name,
+      item: `${base}${step.path}`,
+    })),
+  }
+}
+
 export function faqSchema(faqs: readonly { q: string; a: string }[]) {
   return {
     '@context': 'https://schema.org',

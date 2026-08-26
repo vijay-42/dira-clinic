@@ -6,14 +6,14 @@ import { AppointmentActions } from '@/components/contact-bar'
 import {
   IconJoint, IconImmune, IconRehab, IconPharmacy, IconLab, IconArrow,
 } from '@/components/icons'
-import { servicePages } from '@/content/service-pages'
+import { servicePages, serviceHref } from '@/content/service-pages'
 import { clinic, cityName, locality } from '@/content/clinic'
-import { faqSchema, JsonLd } from '@/lib/schema'
+import { faqSchema, breadcrumbSchema, JsonLd } from '@/lib/schema'
 
-/* One dynamic route renders all five service pages. Only the slugs returned by
-   generateStaticParams are emitted, so this cannot swallow unknown top-level
-   paths — they still 404 at the host. Static routes like /about/ take
-   precedence over this in Next's router. */
+/* One dynamic route renders all five service pages, nested under /services/.
+   Only the slugs returned by generateStaticParams are emitted, so unknown
+   paths still 404 at the host rather than being swallowed. The sibling
+   app/services/page.tsx keeps serving /services/ itself. */
 export function generateStaticParams() {
   return servicePages.map((p) => ({ service: p.slug }))
 }
@@ -35,11 +35,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: { absolute: `${page.metaTitle} | DIRA` },
     description: page.metaDescription,
-    alternates: { canonical: `/${page.slug}/` },
+    alternates: { canonical: serviceHref(page.slug) },
     openGraph: {
       title: page.metaTitle,
       description: page.metaDescription,
-      url: `/${page.slug}/`,
+      url: serviceHref(page.slug),
     },
   }
 }
@@ -152,7 +152,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             return (
               <Link
                 key={o.slug}
-                href={`/${o.slug}/`}
+                href={serviceHref(o.slug)}
                 className={`card ${o.cat} cat-top group flex flex-col p-5`}
               >
                 <span className="cat-bg inline-flex h-10 w-10 items-center justify-center rounded-[10px]">
@@ -184,6 +184,13 @@ export default async function ServiceDetailPage({ params }: Props) {
       </section>
 
       <JsonLd data={faqSchema(page.faqs)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services/' },
+          { name: page.navLabel, path: serviceHref(page.slug) },
+        ])}
+      />
     </>
   )
 }

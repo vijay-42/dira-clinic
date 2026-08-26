@@ -7,7 +7,7 @@ import {
   IconRehab, IconLab, IconPharmacy, IconTeam, IconArrow,
 } from '@/components/icons'
 import { services } from '@/content/site'
-import { servicePages } from '@/content/service-pages'
+import { servicePages, serviceHref } from '@/content/service-pages'
 import { clinic } from '@/content/clinic'
 
 export const metadata: Metadata = {
@@ -72,7 +72,7 @@ export default function ServicesPage() {
             return (
               <Link
                 key={sp.slug}
-                href={`/${sp.slug}/`}
+                href={serviceHref(sp.slug)}
                 className={`card ${sp.cat} cat-top group flex flex-col p-6 transition-shadow hover:shadow-[0_10px_34px_-14px_hsl(var(--c-shadow)/0.28)]`}
               >
                 <span className="cat-bg inline-flex h-11 w-11 items-center justify-center rounded-[11px]">
