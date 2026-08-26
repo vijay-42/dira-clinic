@@ -1,9 +1,12 @@
 import { clinic, isTodo, siteUrl } from '@/content/clinic'
 import { doctor } from '@/content/doctor'
 
-/** Only include a field when it has actually been supplied. */
+/** Only include a field when it has actually been supplied. An empty string
+ * is a deliberate "not yet"; it must not surface as an empty property. */
 function present<T>(value: T): T | undefined {
-  return isTodo(value) ? undefined : value
+  if (isTodo(value)) return undefined
+  if (typeof value === 'string' && value.trim() === '') return undefined
+  return value
 }
 
 /** Maps the hours table to schema.org openingHoursSpecification. */
@@ -13,14 +16,16 @@ const DAY_MAP: Record<string, string[]> = {
   Sunday: ['Sunday'],
 }
 
+/** Undefined rather than an empty array — an empty property is worse than none. */
 function openingHours() {
-  return clinic.hours
-    .filter((h) => !h.closed && !isTodo(h.time))
+  const rows = clinic.hours
+    .filter((h) => !h.closed && present(h.time) !== undefined)
     .map((h) => ({
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: DAY_MAP[h.days] ?? [h.days],
       description: h.time,
     }))
+  return rows.length > 0 ? rows : undefined
 }
 
 /**
@@ -55,6 +60,7 @@ export function clinicSchema() {
         telephone: present(clinic.phone),
         email: present(clinic.email),
         hasMap: present(clinic.mapsUrl),
+        sameAs: clinic.social.map((s) => s.url),
         openingHoursSpecification: openingHours(),
         availableService: [
           'Rheumatology consultation',
@@ -76,7 +82,7 @@ export function clinicSchema() {
         address,
         telephone: present(clinic.phone),
         alumniOf: doctor.training
-          .filter((t) => !isTodo(t.institution))
+          .filter((t) => present(t.institution) !== undefined)
           .map((t) => ({ '@type': 'EducationalOrganization', name: t.institution })),
         hasCredential: doctor.degrees.map((d) => ({
           '@type': 'EducationalOccupationalCredential',

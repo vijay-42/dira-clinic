@@ -3,9 +3,10 @@ import { PageHeader, Section, SectionHead } from '@/components/ui'
 import { AppointmentActions } from '@/components/contact-bar'
 import { AppointmentForm } from '@/components/appointment-form'
 import { Value } from '@/components/value'
+import { SocialLinks } from '@/components/social'
 import { IconPhone, IconWhatsApp, IconMail, IconPin, IconClock } from '@/components/icons'
 import {
-  clinic, addressLine, telHref, mailHref, whatsappHref, isTodo,
+  clinic, addressLine, telHref, mailHref, whatsappHref, has,
 } from '@/content/clinic'
 
 export const metadata: Metadata = {
@@ -24,13 +25,11 @@ export default function ContactPage() {
     {
       Icon: IconPin, cat: 'cat-brand', label: 'Address',
       main: <address className="not-italic leading-relaxed">{addressLine()}</address>,
-      extra: isTodo(clinic.mapsUrl) ? (
-        <span className="todo-marker">[ADD GOOGLE MAPS LINK]</span>
-      ) : (
+      extra: has(clinic.mapsUrl) ? (
         <a href={clinic.mapsUrl} target="_blank" rel="noopener noreferrer" className="link text-[0.92rem]">
           Open in Google Maps
         </a>
-      ),
+      ) : null,
     },
     {
       Icon: IconPhone, cat: 'cat-fresh', label: 'Telephone',
@@ -82,6 +81,14 @@ export default function ContactPage() {
             </div>
           ))}
         </div>
+        {clinic.social.length > 0 ? (
+          <div className="mt-8 flex flex-col gap-3 border-t border-rule-soft pt-7 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-[0.98rem] text-muted">
+              DIRA also posts patient education and clinic updates on social media.
+            </p>
+            <SocialLinks />
+          </div>
+        ) : null}
       </Section>
 
       <Section tone="raised">
@@ -91,11 +98,18 @@ export default function ContactPage() {
               <IconClock className="h-7 w-7 text-brand" />
             </span>
             <SectionHead className="mt-5" eyebrow="Timings" title="Clinic hours" />
-            {clinic.hoursNote ? (
+            {clinic.hours.length > 0 && clinic.hoursNote ? (
               <p className="mt-4 text-[0.98rem] text-muted">{clinic.hoursNote}</p>
             ) : null}
           </div>
           <div className="card p-7 sm:p-8">
+            {/* Until the timings are supplied, the card carries the note on its
+                own rather than an empty table. */}
+            {clinic.hours.length === 0 ? (
+              <p className="text-[1rem] leading-relaxed text-muted">
+                {clinic.hoursNote} Please WhatsApp or call the clinic to arrange a time.
+              </p>
+            ) : null}
             <dl>
               {clinic.hours.map((slot, i) => (
                 <div

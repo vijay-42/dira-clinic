@@ -29,12 +29,12 @@ export const clinic = {
   /** State. */
   state: 'Karnataka',
   address: {
-    /** TODO e.g. 'Suite 4, Sunrise Medical Centre, 12 FC Road' */
-    line1: TODO,
+    /** Street address. */
+    line1: 'No. 579, 9th Main Road, 1st Stage',
     /** Locality / area. */
     line2: 'Indiranagar',
-    /** TODO e.g. '411005' */
-    postalCode: TODO,
+    /** PIN code. */
+    postalCode: '560038',
   },
   /** Display form. */
   phone: '+91 90363 69016',
@@ -50,37 +50,64 @@ export const clinic = {
   email: 'diraclinicllp2026@gmail.com',
 
   /**
-   * TODO Clinic hours. `closed: true` renders as "Closed".
-   * Also used to generate opening-hours structured data for Google.
+   * Public profiles. Rendered as an icon row in the footer and on the contact
+   * page, and emitted as schema.org `sameAs` so Google ties the accounts to
+   * this site. Delete a row to drop that icon; this is the order shown.
    */
-  hours: [
-    { days: 'Monday – Friday', time: TODO, closed: false },
-    { days: 'Saturday', time: TODO, closed: false },
-    { days: 'Sunday', time: '', closed: true },
+  social: [
+    {
+      network: 'facebook',
+      label: 'Facebook',
+      url: 'https://www.facebook.com/profile.php?id=61593718982403',
+    },
+    {
+      network: 'instagram',
+      label: 'Instagram',
+      url: 'https://www.instagram.com/dira_clinic_bangalore/',
+    },
+    {
+      network: 'youtube',
+      label: 'YouTube',
+      url: 'https://www.youtube.com/channel/UCk7U2Tsag7_AfIa3u9u8pyg',
+    },
+    { network: 'x', label: 'X', url: 'https://x.com/Dira_Clinic' },
   ],
+
+  /**
+   * PENDING Clinic hours. Left empty for now, so the hours block is hidden in
+   * the footer and on the contact page rather than showing a placeholder.
+   * Restore the rows below to bring it back — `closed: true` renders as
+   * "Closed", and the table also generates opening-hours data for Google.
+   *
+   *   { days: 'Monday – Friday', time: '9:00 am – 6:00 pm', closed: false },
+   *   { days: 'Saturday', time: '9:00 am – 1:00 pm', closed: false },
+   *   { days: 'Sunday', time: '', closed: true },
+   */
+  hours: [] as ReadonlyArray<{ days: string; time: string; closed: boolean }>,
   /** Shown beneath the hours table. Set to '' to hide. */
   hoursNote: 'Consultations are by prior appointment.',
 
-  /** TODO Google Maps place URL, or '' to hide the directions link. */
-  mapsUrl: TODO,
+  /** PENDING Google Maps place URL. Empty hides the directions link. */
+  mapsUrl: '',
 
   // ---- BLOCKS LAUNCH -----------------------------------------------------
   /**
-   * TODO NMC / State Medical Council registration number.
-   * Displayed alongside qualifications — expected practice, and it signals
-   * legitimacy to patients who know to check. Set to '' to omit entirely.
+   * PENDING NMC / State Medical Council registration number. Empty omits it
+   * entirely. Worth adding when available: it is expected practice, and it
+   * signals legitimacy to patients who know to check.
    */
-  registrationNumber: TODO,
-  /** TODO Council that issued it, e.g. 'Maharashtra Medical Council'. */
-  registrationCouncil: TODO,
+  registrationNumber: '',
+  /** PENDING Council that issued it, e.g. 'Karnataka Medical Council'. */
+  registrationCouncil: '',
 
   /**
-   * TODO Production domain, no trailing slash, e.g. 'https://diraclinic.in'.
-   * Used for canonical URLs, sitemap.xml and structured data.
+   * PENDING Production domain, no trailing slash, e.g. 'https://diraclinic.in'.
+   * Used for canonical URLs, sitemap.xml and structured data; until it is set,
+   * those fall back to a placeholder host and nothing is shown to visitors.
    * NOTE: prefer a domain containing "deshpande" + the speciality over "dira"
    * alone — see the name-collision note in docs/dira-plan.html, Section 09.
    */
-  siteUrl: TODO,
+  siteUrl: '',
 
   /**
    * Consultation fee. Stated factually or not at all — never as an offer,
@@ -113,6 +140,15 @@ export const clinic = {
 /** True when a field has not been filled in yet. */
 export function isTodo(value: unknown): boolean {
   return value === TODO
+}
+
+/**
+ * True when a field holds something displayable. An empty string is a
+ * deliberate "hide this for now"; a TODO is an unfilled placeholder. Neither
+ * should reach the page.
+ */
+export function has(value: string): boolean {
+  return !isTodo(value) && value.trim() !== ''
 }
 
 /**
@@ -170,5 +206,5 @@ export function cityName(): string {
 
 /** Base URL for canonicals and sitemap. Falls back to a placeholder host. */
 export function siteUrl(): string {
-  return isTodo(clinic.siteUrl) ? 'https://example.invalid' : clinic.siteUrl
+  return has(clinic.siteUrl) ? clinic.siteUrl : 'https://example.invalid'
 }

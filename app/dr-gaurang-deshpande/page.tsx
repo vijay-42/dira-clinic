@@ -3,7 +3,7 @@ import { Container, Section, SectionHead } from '@/components/ui'
 import { AppointmentActions } from '@/components/contact-bar'
 import { DoctorPortrait } from '@/components/portrait'
 import { doctor } from '@/content/doctor'
-import { clinic, isTodo } from '@/content/clinic'
+import { clinic, isTodo, has } from '@/content/clinic'
 
 export const metadata: Metadata = {
   title: {
@@ -50,16 +50,12 @@ export default function DoctorPage() {
                 ))}
               </ul>
 
-              {isTodo(clinic.registrationNumber) ? (
-                <p className="mt-4">
-                  <span className="todo-marker">[ADD MEDICAL COUNCIL REGISTRATION NO.]</span>
-                </p>
-              ) : (
+              {has(clinic.registrationNumber) ? (
                 <p className="mt-4 text-[0.88rem] opacity-80">
                   Reg. No. {clinic.registrationNumber}
-                  {!isTodo(clinic.registrationCouncil) ? `, ${clinic.registrationCouncil}` : null}
+                  {has(clinic.registrationCouncil) ? `, ${clinic.registrationCouncil}` : null}
                 </p>
-              )}
+              ) : null}
             </div>
           </div>
         </Container>
@@ -69,19 +65,15 @@ export default function DoctorPage() {
         <SectionHead
           eyebrow="Training"
           title="Qualifications"
-          lede={`Approximately ${doctor.yearsAsConsultant} years of experience as a Consultant Rheumatologist, caring for patients with inflammatory, autoimmune, rheumatological and immune-related disorders.`}
+          lede={`${doctor.yearsOfExperience}+ years of experience in clinical immunology and rheumatology, caring for patients with inflammatory, autoimmune, rheumatological and immune-related disorders.`}
         />
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {doctor.training.map((t, i) => (
             <div key={t.qualification} className={`card cat-top ${catFor[i]} p-6`}>
               <p className="eyebrow cat-text">{t.qualification}</p>
-              <p className="mt-3 text-[1rem] leading-snug">
-                {isTodo(t.institution) ? (
-                  <span className="todo-marker">[{t.marker}]</span>
-                ) : (
-                  t.institution
-                )}
-              </p>
+              {has(t.institution) ? (
+                <p className="mt-3 text-[1rem] leading-snug">{t.institution}</p>
+              ) : null}
             </div>
           ))}
         </div>

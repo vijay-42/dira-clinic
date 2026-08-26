@@ -1,11 +1,10 @@
-import { TODO } from './clinic'
-
 export const doctor = {
   name: 'Dr Gaurang Deshpande',
   shortName: 'Dr Deshpande',
   title: 'Consultant Rheumatologist & Clinical Immunologist',
   degrees: ['MBBS', 'MD Internal Medicine', 'DM Clinical Immunology & Rheumatology'],
-  yearsAsConsultant: 5,
+  /** Displayed as “8+ years”. Experience in clinical immunology and rheumatology. */
+  yearsOfExperience: 8,
 
   intro:
     'Dr Gaurang Deshpande is a Consultant Rheumatologist and Clinical Immunologist with specialised training in the evaluation and management of rheumatological, autoimmune and immune-mediated diseases.',
@@ -13,19 +12,16 @@ export const doctor = {
   training: [
     {
       qualification: 'MBBS',
-      /** TODO Exact official name of the medical college, as it should be displayed. */
-      institution: TODO,
-      marker: 'ADD MBBS COLLEGE NAME',
+      /** PENDING Medical college. Empty shows the qualification on its own. */
+      institution: '',
     },
     {
       qualification: 'MD Internal Medicine',
       institution: 'Kasturba Medical College, Mangalore',
-      marker: '',
     },
     {
       qualification: 'DM Clinical Immunology & Rheumatology',
       institution: "Nizam's Institute of Medical Sciences (NIMS), Hyderabad",
-      marker: '',
     },
   ],
 

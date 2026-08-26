@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Container } from './ui'
 import { LogoLockup } from './logo'
 import { Value } from './value'
+import { SocialLinks } from './social'
 import { IconPhone, IconWhatsApp, IconMail, IconPin, IconClock } from './icons'
 import {
   clinic,
@@ -9,7 +10,7 @@ import {
   telHref,
   mailHref,
   whatsappHref,
-  isTodo,
+  has,
 } from '@/content/clinic'
 import { nav } from '@/content/site'
 import { serviceMenu } from '@/content/service-pages'
@@ -32,6 +33,8 @@ export function SiteFooter() {
             <p className="mt-3 max-w-[34ch] text-[0.94rem] leading-relaxed opacity-85">
               {clinic.tagline}
             </p>
+            <p className="eyebrow mt-7 opacity-70">Follow DIRA</p>
+            <SocialLinks tone="brand" className="mt-3" />
           </div>
 
           <div>
@@ -71,7 +74,7 @@ export function SiteFooter() {
                   <Value value={clinic.email} marker="ADD EMAIL ADDRESS" />
                 )}
               </p>
-              <p className="flex items-start gap-2.5">
+              <p className={`flex items-start gap-2.5 ${clinic.hours.length ? '' : 'hidden'}`}>
                 <IconClock className="mt-1 h-4 w-4 shrink-0 opacity-80" />
                 <span className="opacity-90">
                   {clinic.hours.map((h) => (
@@ -124,18 +127,13 @@ export function SiteFooter() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <p className="text-[0.82rem] leading-relaxed opacity-80">
               {doctor.name} · {doctor.degrees.join(' · ')}
-              {isTodo(clinic.registrationNumber) ? (
-                <>
-                  {' '}
-                  · <span className="todo-marker">[ADD MEDICAL COUNCIL REGISTRATION NO.]</span>
-                </>
-              ) : (
+              {has(clinic.registrationNumber) ? (
                 <>
                   {' '}
                   · Reg. No. {clinic.registrationNumber}
-                  {!isTodo(clinic.registrationCouncil) ? `, ${clinic.registrationCouncil}` : null}
+                  {has(clinic.registrationCouncil) ? `, ${clinic.registrationCouncil}` : null}
                 </>
-              )}
+              ) : null}
             </p>
             <p className="shrink-0 text-[0.82rem] opacity-80">© 2026 {clinic.name}</p>
           </div>
