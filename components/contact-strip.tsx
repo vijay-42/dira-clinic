@@ -37,8 +37,8 @@ export function ContactStrip() {
                 i > 0 ? 'lg:border-l lg:border-rule lg:pl-6' : ''
               }`}
             >
-              <span className="cat-bg blob inline-flex h-14 w-14 shrink-0 items-center justify-center">
-                <it.Icon className="cat-text h-6 w-6" />
+              <span className="icon-tile inline-flex h-14 w-14 shrink-0 items-center justify-center transition-transform duration-200 group-hover:-translate-y-0.5">
+                <it.Icon className="h-7 w-7" />
               </span>
               <span className="min-w-0">
                 <span className="block text-[1rem] font-semibold leading-snug group-hover:text-brand">

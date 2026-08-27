@@ -217,6 +217,22 @@
   border-radius: 44% 56% 63% 37% / 47% 39% 61% 53%;
 }
 
+/* A solid icon tile — the category colour carrying a white glyph, rather than
+   a pale tint carrying a coloured one. Reads as a chip beside a label, which
+   is what the contact strip needs; the blob shapes stay for decorative use.
+   The gradient is the same hue darkened, so no new colour enters the palette,
+   and white on every --cat clears WCAG AA (see npm run check:contrast). */
+@utility icon-tile {
+  border-radius: 15px;
+  background: linear-gradient(
+    145deg,
+    var(--cat, var(--c-brand)),
+    color-mix(in oklab, var(--cat, var(--c-brand)) 74%, #000)
+  );
+  color: #FFFFFF;
+  box-shadow: 0 8px 18px -10px color-mix(in oklab, var(--cat, var(--c-brand)) 70%, transparent);
+}
+
 /* The hero ground. Three layers over paper, all in the brand navy taken from
    the logo, so the banner carries the brand colour without becoming a solid
    block — the headline stays dark ink on a light surface:
