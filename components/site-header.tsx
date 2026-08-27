@@ -136,7 +136,7 @@ export function SiteHeader() {
                 onClick={() => openBooking()}
                 className="btn btn-solid min-h-0 px-6 py-3 text-[0.95rem]"
               >
-                <IconWhatsApp className="h-4 w-4" />
+                <IconWhatsApp className="h-6 w-6" />
                 Book appointment
               </button>
             </nav>
@@ -198,7 +198,7 @@ export function SiteHeader() {
                     }}
                     className="btn btn-solid min-h-0 w-full py-2.5 text-[0.9rem]"
                   >
-                    <IconWhatsApp className="h-4 w-4" />
+                    <IconWhatsApp className="h-6 w-6" />
                     Book appointment
                   </button>
                 </div>
