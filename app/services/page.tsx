@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Container, PageHeader, Section, SectionHead, TickList } from '@/components/ui'
+import { Container, Section, SectionHead, TickList } from '@/components/ui'
 import { AppointmentActions } from '@/components/contact-bar'
 import {
   IconConsult, IconOpinion, IconImmune, IconJoint, IconPain,
@@ -40,23 +40,41 @@ const facilityLabel: Record<string, string> = {
 export default function ServicesPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="Services"
-        title="Evaluation, treatment and the support around it"
-        lede="Patients with rheumatological and immune-related problems often need more than a consultation. These are the elements DIRA brings together."
-      >
-        <nav aria-label="Services" className="mt-8 flex flex-wrap gap-2.5">
-          {services.map((s) => (
-            <a
-              key={s.slug}
-              href={`#${s.slug}`}
-              className="rounded-full border border-rule bg-surface px-4 py-2 text-[0.86rem] font-medium transition-colors hover:border-brand hover:text-brand"
-            >
-              {s.title}
-            </a>
-          ))}
-        </nav>
-      </PageHeader>
+      <header className="w-full border-b border-rule-soft bg-raised pt-0 pb-0">
+        <div className="relative w-full overflow-hidden bg-white">
+          <div className="relative min-h-[280px] w-full sm:min-h-[320px] lg:min-h-[360px]">
+            <img
+              src="/Service%20page.webp"
+              alt="DIRA services overview"
+              className="absolute inset-0 h-full w-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_85%_at_50%_50%,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.75)_45%,rgba(255,255,255,0.3)_75%,rgba(255,255,255,0)_100%)]" />
+
+            <div className="relative z-10 mx-auto flex min-h-[280px] w-full max-w-[78rem] flex-col items-center justify-center px-5 py-10 text-center sm:min-h-[320px] sm:px-8 sm:py-12 lg:min-h-[360px] lg:px-10">
+              <p className="pill">Services</p>
+              <h1 className="mt-3 max-w-[24ch] text-[clamp(1.8rem,2.7vw,2.8rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-slate-900 [text-shadow:0_1px_24px_rgba(255,255,255,0.9),0_1px_2px_rgba(255,255,255,0.9)]">
+                Evaluation, treatment and the support around it
+              </h1>
+              <p className="mt-3 max-w-[60ch] text-[0.96rem] leading-relaxed text-slate-800 sm:text-[1.05rem] [text-shadow:0_1px_16px_rgba(255,255,255,0.9),0_1px_2px_rgba(255,255,255,0.9)]">
+                Patients with rheumatological and immune-related problems often need more than a
+                consultation. These are the elements DIRA brings together.
+              </p>
+
+              <nav aria-label="Services" className="mt-8 flex flex-wrap justify-center gap-2.5">
+                {services.map((s) => (
+                  <a
+                    key={s.slug}
+                    href={`#${s.slug}`}
+                    className="rounded-full border border-rule bg-surface px-4 py-2 text-[0.86rem] font-medium transition-colors hover:border-brand hover:text-brand"
+                  >
+                    {s.title}
+                  </a>
+                ))}
+              </nav>
+            </div>
+          </div>
+        </div>
+      </header>
 
       {/* The five service pages. These are the local-search landing pages, so
           they sit above the general service descriptions below. */}

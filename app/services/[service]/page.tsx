@@ -49,7 +49,6 @@ export default async function ServiceDetailPage({ params }: Props) {
   const page = servicePages.find((p) => p.slug === service)
   if (!page) notFound()
 
-  const Icon = icons[page.icon]
   const others = servicePages.filter((p) => p.slug !== page.slug)
 
   return (
@@ -87,41 +86,15 @@ export default async function ServiceDetailPage({ params }: Props) {
                 </ol>
               </nav>
 
-              <div className="flex items-center justify-between gap-8 py-0 sm:py-0 lg:py-0">
-                <div className="max-w-[640px] rounded-[18px] bg-white/10 p-4 shadow-[0_12px_30px_-18px_rgba(15,23,42,0.35)] backdrop-blur-[1px] sm:p-5 lg:p-6">
-                  <div className="flex flex-wrap items-center gap-4">
-                    <span className="cat-bg inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px]">
-                      <Icon className="cat-text h-5 w-5" />
-                    </span>
-                    <p className="pill text-slate-900/80 backdrop-blur-sm">{page.eyebrow}</p>
-                  </div>
-
-                  <h1 className="mt-5 max-w-[16ch] text-[clamp(1.8rem,2.5vw,2.8rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-slate-900">
+              <div className="flex justify-center py-0 sm:py-0 lg:py-0">
+                <div className="mx-auto max-w-[640px] p-4 text-center sm:p-5 lg:p-6">
+                  <h1 className="mx-auto max-w-[16ch] text-[clamp(1.8rem,2.5vw,2.8rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-slate-900 [text-shadow:0_1px_24px_rgba(255,255,255,0.9),0_1px_2px_rgba(255,255,255,0.9)]">
                     {page.title} in {cityName()}
                   </h1>
 
-                  <p className="mt-3 max-w-[60ch] text-[0.96rem] leading-relaxed text-slate-800 sm:text-[1.05rem]">
+                  <p className="mx-auto mt-3 max-w-[60ch] text-[0.96rem] leading-relaxed text-slate-800 sm:text-[1.05rem] [text-shadow:0_1px_16px_rgba(255,255,255,0.9),0_1px_2px_rgba(255,255,255,0.9)]">
                     {page.lede}
                   </p>
-
-                  <AppointmentActions
-                    className="mt-5"
-                    message={`Hello, I would like to ask about ${page.title} at DIRA.`}
-                  />
-                </div>
-
-                <div className="hidden min-w-[200px] justify-center lg:flex">
-                  <div className="flex flex-col items-center gap-6 py-0">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/80 bg-white/40 shadow-[0_8px_20px_-12px_rgba(15,23,42,0.35)]">
-                      <Icon className="cat-text h-8 w-8" />
-                    </div>
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/80 bg-white/40 shadow-[0_8px_20px_-12px_rgba(15,23,42,0.35)]">
-                      <Icon className="cat-text h-8 w-8" />
-                    </div>
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/80 bg-white/40 shadow-[0_8px_20px_-12px_rgba(15,23,42,0.35)]">
-                      <Icon className="cat-text h-8 w-8" />
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
