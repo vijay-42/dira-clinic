@@ -52,7 +52,20 @@ export default function ConditionsPage() {
                   />
                 </div>
                 <div className="card p-7 sm:p-8">
-                  <TickList items={group.items} />
+                  {'subgroups' in group && group.subgroups ? (
+                    <div className="space-y-6">
+                      {group.subgroups.map((sub) => (
+                        <div key={sub.title}>
+                          <h4 className="cat-text text-[0.85rem] font-semibold uppercase tracking-wide">
+                            {sub.title}
+                          </h4>
+                          <TickList items={sub.items} className="mt-3" />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <TickList items={group.items} />
+                  )}
                 </div>
               </div>
             </div>

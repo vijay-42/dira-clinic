@@ -180,20 +180,60 @@ export const conditionGroups = [
     id: 'rheumatology',
     title: 'Rheumatology',
     intro:
-      'Inflammatory and autoimmune diseases affecting the joints, spine, muscles and connective tissue.',
+      'Systemic autoimmune disease can affect the joints, muscles, eyes, skin and lungs — either on its own or as part of a multi-organ disease such as lupus, Sjögren’s disease, systemic sclerosis or vasculitis.',
     items: [
       'Rheumatoid arthritis',
       'Osteoarthritis',
       'Spondyloarthritis',
       'Psoriatic arthritis',
       'Gout and other crystal arthritis',
-      'Connective tissue diseases',
+      'Inflammatory myositis',
+      'Uveitis and other inflammatory eye disease',
+      'Psoriasis and other autoimmune skin disease',
+      'Interstitial lung disease',
       'Lupus',
       'Sjögren’s disease',
       'Systemic sclerosis',
-      'Inflammatory myositis',
       'Vasculitis',
-      'Other inflammatory and autoimmune rheumatic diseases',
+      'Other connective tissue disease',
+    ],
+    subgroups: [
+      {
+        title: 'Joint — various types of arthritis',
+        items: [
+          'Rheumatoid arthritis',
+          'Osteoarthritis',
+          'Spondyloarthritis',
+          'Psoriatic arthritis',
+          'Gout and other crystal arthritis',
+        ],
+      },
+      {
+        title: 'Muscle',
+        items: ['Inflammatory myositis (polymyositis, dermatomyositis and related muscle disease)'],
+      },
+      {
+        title: 'Eye',
+        items: ['Uveitis and other inflammatory eye disease'],
+      },
+      {
+        title: 'Skin',
+        items: ['Psoriasis and other autoimmune skin disease'],
+      },
+      {
+        title: 'Lung',
+        items: ['Interstitial lung disease'],
+      },
+      {
+        title: 'Multi-organ & connective tissue disease',
+        items: [
+          'Lupus',
+          'Sjögren’s disease',
+          'Systemic sclerosis',
+          'Vasculitis',
+          'Other connective tissue disease',
+        ],
+      },
     ],
   },
   {
