@@ -175,7 +175,10 @@ export default function HomePage() {
         />
         <div className="reveal-each mt-11 grid gap-6 sm:grid-cols-2">
           {triage.map((group, i) => (
-            <div key={group.heading} className={`${catFor[i]} cat-bg rounded-[var(--radius)] p-7`}>
+            <div
+              key={group.heading}
+              className={`${catFor[i % catFor.length]} cat-bg rounded-[var(--radius)] p-7`}
+            >
               <h3 className="display-s cat-text">{group.heading}</h3>
               <TickList items={group.items} columns={1} className="mt-4" />
             </div>
