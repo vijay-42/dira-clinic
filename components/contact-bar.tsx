@@ -12,7 +12,7 @@ export function MobileContactBar() {
       <a
         href={wa ?? '/contact/'}
         {...(wa ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-        className="flex min-h-[3.6rem] items-center justify-center gap-2 border-r border-rule text-[0.92rem] font-semibold text-brand"
+        className="flex min-h-[3.6rem] items-center justify-center gap-2 border-r border-rule bg-[#25D366] text-[0.92rem] font-semibold text-white"
       >
         <IconWhatsApp className="h-[1.15rem] w-[1.15rem]" />
         WhatsApp
