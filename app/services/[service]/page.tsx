@@ -65,48 +65,59 @@ export default async function ServiceDetailPage({ params }: Props) {
             ) : null}
             <div className="absolute inset-0 bg-white/8" />
 
-            <div className="relative z-10 mx-auto w-full max-w-[78rem] px-5 py-0 sm:px-8 lg:px-10">
-              <nav aria-label="Breadcrumb" className="mb-2 sm:mb-3">
-                <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.82rem] text-muted">
-                  <li>
-                    <Link href="/" className="hover:text-brand hover:underline">
-                      Home
-                    </Link>
-                  </li>
-                  <li aria-hidden="true">/</li>
-                  <li>
-                    <Link href="/services/" className="hover:text-brand hover:underline">
-                      Services
-                    </Link>
-                  </li>
-                  <li aria-hidden="true">/</li>
-                  <li aria-current="page" className="text-ink">
-                    {page.navLabel}
-                  </li>
-                </ol>
-              </nav>
+            <div className="absolute inset-0 z-10 mx-auto flex w-full max-w-[78rem] items-center justify-center px-5 sm:px-8 lg:px-10">
+              <div className="mx-auto max-w-[900px] p-4 text-center sm:p-5 lg:p-6">
+                <h1 className="mx-auto whitespace-normal text-[clamp(1.5rem,2.6vw,2.6rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-slate-900 [text-shadow:0_1px_24px_rgba(255,255,255,0.9),0_1px_2px_rgba(255,255,255,0.9)] lg:whitespace-nowrap">
+                  {page.title} in {cityName()}
+                </h1>
 
-              <div className="flex justify-center py-0 sm:py-0 lg:py-0">
-                <div className="mx-auto max-w-[640px] p-4 text-center sm:p-5 lg:p-6">
-                  <h1 className="mx-auto max-w-[16ch] text-[clamp(1.8rem,2.5vw,2.8rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-slate-900 [text-shadow:0_1px_24px_rgba(255,255,255,0.9),0_1px_2px_rgba(255,255,255,0.9)]">
-                    {page.title} in {cityName()}
-                  </h1>
-
-                  <p className="mx-auto mt-3 max-w-[60ch] text-[0.96rem] leading-relaxed text-slate-800 sm:text-[1.05rem] [text-shadow:0_1px_16px_rgba(255,255,255,0.9),0_1px_2px_rgba(255,255,255,0.9)]">
-                    {page.lede}
-                  </p>
-                </div>
+                <p className="mx-auto mt-3 max-w-[60ch] text-[0.96rem] leading-relaxed text-slate-800 sm:text-[1.05rem] [text-shadow:0_1px_16px_rgba(255,255,255,0.9),0_1px_2px_rgba(255,255,255,0.9)]">
+                  {page.lede}
+                </p>
               </div>
             </div>
           </div>
         </div>
       </header>
 
+      <div className="w-full border-b border-rule-soft bg-paper">
+        <Container className="py-3">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.82rem] text-muted">
+              <li>
+                <Link href="/" className="hover:text-brand hover:underline">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li>
+                <Link href="/services/" className="hover:text-brand hover:underline">
+                  Services
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="text-ink">
+                {page.navLabel}
+              </li>
+            </ol>
+          </nav>
+        </Container>
+      </div>
+
       {page.sections.map((section, i) => (
-        <Section key={section.heading} tone={i % 2 === 0 ? 'paper' : 'raised'}>
+        <Section
+          key={section.heading}
+          tone={i % 2 === 0 ? 'paper' : 'raised'}
+          className="!py-10 sm:!py-14 lg:!py-16"
+        >
           <div className={page.cat}>
             <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
-              <SectionHead title={<span className="cat-text">{section.heading}</span>} />
+              <div>
+                <SectionHead
+                  className="lg:sticky lg:top-28"
+                  title={<span className="cat-text">{section.heading}</span>}
+                />
+              </div>
               <div>
                 {section.body ? (
                   <div className="prose measure text-[1.02rem]">
