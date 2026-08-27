@@ -58,8 +58,8 @@ export default function HomePage() {
           what gives the section its shape. */}
       <section className="hero-field relative overflow-hidden">
         <Container className="relative">
-          <div className="grid items-center gap-9 pb-12 pt-8 sm:pt-11 lg:grid-cols-[1.32fr_0.68fr] lg:gap-12 lg:pb-16 lg:pt-12">
-            <div className="min-w-0">
+          <div className="grid items-start gap-9 pb-12 pt-8 sm:pt-11 lg:grid-cols-[1.32fr_0.68fr] lg:gap-x-12 lg:gap-y-7 lg:pb-16 lg:pt-12">
+            <div className="min-w-0 lg:col-start-1 lg:row-start-1">
               <p className="eyebrow text-brand">{clinic.tagline}</p>
 
               <h1 className="display-xl mt-4 max-w-[26ch] text-[clamp(1.7rem,3.4vw,2.85rem)]">
@@ -86,14 +86,14 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-
-              <AppointmentActions className="mt-7" />
             </div>
 
             {/* Portrait in a halo. The circles are decorative and sit behind
                 the photo; the photo itself is circular so the composition
-                reads as one shape. */}
-            <div className="relative mx-auto w-full max-w-[21rem] lg:mx-0 lg:ml-auto">
+                reads as one shape. On mobile the photo sits between the intro
+                text and the appointment actions; on desktop it spans both
+                rows on the right so it stays vertically centred beside them. */}
+            <div className="relative mx-auto w-full max-w-[21rem] lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:mx-0 lg:ml-auto lg:self-center">
               <span
                 aria-hidden="true"
                 className="absolute left-1/2 top-1/2 -z-10 aspect-square w-[116%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-tint"
@@ -121,6 +121,8 @@ export default function HomePage() {
                 </p>
               </div>
             </div>
+
+            <AppointmentActions className="lg:col-start-1 lg:row-start-2 lg:self-start" />
           </div>
         </Container>
       </section>
