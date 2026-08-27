@@ -141,26 +141,45 @@ export function SiteHeader() {
               </button>
             </nav>
 
-            {/* Mobile menu — a <details> disclosure, so it needs no JavaScript */}
-            <details className="group relative lg:hidden">
-              <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-[10px] border border-rule px-3 py-2 text-[0.85rem] font-medium text-ink [&::-webkit-details-marker]:hidden">
+            {/* Mobile menu — a <details> disclosure, so it needs no JavaScript
+                for its open/close state. The backdrop's click-to-close and the
+                panel's Escape-to-close are the only imperative bits, added the
+                same way the booking button below already closes the menu. */}
+            <details
+              className="menu-disclose group relative lg:hidden"
+              onKeyDown={(e) => {
+                if (e.key !== 'Escape') return
+                const details = e.currentTarget
+                details.removeAttribute('open')
+                details.querySelector('summary')?.focus()
+              }}
+            >
+              <summary className="relative z-40 flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-[10px] border border-rule px-3 py-2 text-[0.85rem] font-medium text-ink [&::-webkit-details-marker]:hidden">
                 Menu
-                <span aria-hidden="true" className="flex flex-col gap-[3.5px]">
-                  <span className="block h-0.5 w-4 rounded bg-brand" />
-                  <span className="block h-0.5 w-4 rounded bg-brand" />
-                  <span className="block h-0.5 w-4 rounded bg-brand" />
+                <span aria-hidden="true" className="relative h-4 w-4">
+                  <span className="absolute left-1/2 top-1/2 h-0.5 w-4 -translate-x-1/2 -translate-y-[5px] rounded bg-brand transition-transform duration-200 group-open:translate-y-0 group-open:rotate-45" />
+                  <span className="absolute left-1/2 top-1/2 h-0.5 w-4 -translate-x-1/2 -translate-y-1/2 rounded bg-brand transition-opacity duration-150 group-open:opacity-0" />
+                  <span className="absolute left-1/2 top-1/2 h-0.5 w-4 -translate-x-1/2 translate-y-[5px] rounded bg-brand transition-transform duration-200 group-open:translate-y-0 group-open:-rotate-45" />
                 </span>
               </summary>
+
+              {/* Backdrop: dims the page and closes the menu on tap. */}
+              <div
+                aria-hidden="true"
+                onClick={(e) => e.currentTarget.closest('details')?.removeAttribute('open')}
+                className="fixed left-0 top-0 z-30 h-dvh w-screen bg-ink/40 backdrop-blur-[1px]"
+              />
+
               <nav
                 aria-label="Primary"
-                className="card absolute right-0 top-full z-40 mt-3 w-[17rem] overflow-hidden p-0"
+                className="card absolute right-0 top-full z-40 mt-3 w-[min(20rem,calc(100vw-2.25rem))] max-h-[calc(100dvh-6rem)] overflow-y-auto overflow-x-hidden p-0"
               >
                 {primaryNav.map((item) => (
                   <div key={item.href} className="border-b border-rule-soft last:border-b-0">
                     <Link
                       href={item.href}
                       aria-current={isActive(item.href) ? 'page' : undefined}
-                      className={`block px-4 py-3 text-[0.95rem] ${
+                      className={`block px-4 py-3 text-[0.95rem] transition-colors hover:bg-brand-tint hover:text-brand ${
                         isActive(item.href)
                           ? 'bg-brand-tint font-medium text-brand'
                           : 'text-ink'
@@ -175,7 +194,7 @@ export function SiteHeader() {
                             <Link
                               href={sub.href}
                               aria-current={isActive(sub.href) ? 'page' : undefined}
-                              className={`block py-2 pl-7 pr-4 text-[0.88rem] leading-snug ${
+                              className={`block py-2 pl-7 pr-4 text-[0.88rem] leading-snug transition-colors hover:bg-brand-tint hover:text-brand ${
                                 isActive(sub.href) ? 'font-medium text-brand' : 'text-muted'
                               }`}
                             >

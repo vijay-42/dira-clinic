@@ -450,6 +450,42 @@
   }
 }
 
+/* The mobile header menu — also a <details>, but its content is a backdrop
+   plus an absolutely-positioned panel rather than flow content, so it
+   animates opacity only on ::details-content (no transform — a transform
+   here would make this pseudo-element a containing block for the backdrop's
+   `fixed` positioning, collapsing it to the panel's own zero-height box).
+   The panel's own slide/scale lives on the <nav> element instead. */
+@supports selector(::details-content) {
+  @media (prefers-reduced-motion: no-preference) {
+    .menu-disclose::details-content {
+      overflow: visible;
+      opacity: 1;
+      transition: opacity 180ms ease, content-visibility 180ms allow-discrete;
+    }
+    .menu-disclose:not([open])::details-content { opacity: 0; }
+    @starting-style {
+      .menu-disclose[open]::details-content { opacity: 0; }
+    }
+
+    .menu-disclose nav {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+    .menu-disclose:not([open]) nav {
+      opacity: 0;
+      transform: translateY(-6px) scale(0.98);
+    }
+    @starting-style {
+      .menu-disclose[open] nav {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.98);
+      }
+    }
+  }
+}
+
 /* Interaction feedback. Cheap properties only — transform and opacity are
    composited, so none of this touches layout. */
 
