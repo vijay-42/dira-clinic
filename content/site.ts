@@ -5,7 +5,7 @@
 export const nav = [
   { href: '/', label: 'Home' },
   { href: '/about/', label: 'About DIRA' },
-  { href: '/dr-gaurang-deshpande/', label: 'Dr Deshpande' },
+  { href: '/dr-gaurang-deshpande/', label: 'Dr. Gaurang Deshpande' },
   { href: '/conditions/', label: 'Conditions' },
   { href: '/services/', label: 'Services' },
   { href: '/for-doctors/', label: 'For Doctors' },
