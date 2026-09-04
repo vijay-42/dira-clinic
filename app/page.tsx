@@ -67,13 +67,9 @@ export default function HomePage() {
               </h1>
 
               <p className="lede measure mt-4">
-                Convenient consultation hours with personalised rheumatology &amp; immunology care.
-              </p>
-
-              <p className="lede measure mt-4">
-                Led by {doctor.name}, {doctor.title}, DIRA Clinic provides comprehensive,
-                compassionate care for arthritis, autoimmune diseases, joint pain, and other
-                rheumatic conditions in {locality()}.
+                DIRA Clinic, led by {doctor.name}, {doctor.title}, provides comprehensive care
+                for arthritis, autoimmune diseases, joint pain and other rheumatic conditions
+                in {locality()}.
               </p>
 
               <ul className="mt-6 flex flex-wrap items-center gap-2">
