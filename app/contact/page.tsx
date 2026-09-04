@@ -12,7 +12,7 @@ import {
 export const metadata: Metadata = {
   title: 'Contact & appointments',
   description:
-    'Clinic address, timings and appointment requests for DIRA — Deshpande Immunology & Rheumatology Association.',
+    'Clinic address, timings and appointment requests for DIRA — Deshpande Immunology & Rheumatology Advanced Clinic.',
   alternates: { canonical: '/contact/' },
 }
 

@@ -16,7 +16,7 @@ export const TODO = '__TODO__' as const
 
 export const clinic = {
   name: 'DIRA',
-  legalName: 'Deshpande Immunology & Rheumatology Association',
+  legalName: 'Deshpande Immunology & Rheumatology Advanced Clinic',
   tagline: 'Your Health, Our Priority',
   /** The brand line from the supplied logo artwork. */
   strapline: 'Immunity Aligned. Movement Redefined.',

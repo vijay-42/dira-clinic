@@ -27,7 +27,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About DIRA"
         title="Understand the problem. Find the cause. Treat what matters."
-        lede="DIRA stands for Deshpande Immunology & Rheumatology Association — a specialist centre providing evaluation and care both for established diseases and for conditions where an immune or inflammatory disorder is only suspected."
+        lede="DIRA stands for Deshpande Immunology & Rheumatology Advanced Clinic — a specialist centre providing evaluation and care both for established diseases and for conditions where an immune or inflammatory disorder is only suspected."
       />
 
       <Section tone="paper">

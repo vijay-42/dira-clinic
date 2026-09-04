@@ -1,4 +1,4 @@
-# DIRA — Deshpande Immunology & Rheumatology Association
+# DIRA — Deshpande Immunology & Rheumatology Advanced Clinic
 
 Marketing and patient-information site for a rheumatology and clinical
 immunology practice. Nine static pages, no server, no database.

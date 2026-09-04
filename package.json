@@ -2,7 +2,7 @@
   "name": "dira-clinic",
   "version": "0.1.0",
   "private": true,
-  "description": "DIRA — Deshpande Immunology & Rheumatology Association",
+  "description": "DIRA — Deshpande Immunology & Rheumatology Advanced Clinic",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
