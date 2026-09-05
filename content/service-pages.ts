@@ -84,9 +84,9 @@ export const servicePages: ServicePage[] = [
       {
         heading: 'Personalised arthritis treatment',
         body: [
-          'The right treatment depends on the type and severity of arthritis, the joints involved, and individual patient needs. No single treatment works for everyone with arthritis, so the aim is a care plan suited to your specific condition and daily needs.',
-          'Treatment may include appropriate medicines, lifestyle guidance, physical activity or rehabilitation recommendations, and other clinically suitable approaches. Your doctor will explain the available options and help you understand the benefits, precautions, and expected outcomes of your treatment.',
-          'The goal is not only to address joint discomfort but also to help you maintain mobility and manage your condition over the long term.',
+          'Arthritis can affect people differently, and treatment depends on the type of arthritis, disease severity, joints involved, and your individual needs. There is no single treatment that works for everyone.',
+          'At DIRA Clinic, treatment is tailored to your condition, symptoms, lifestyle, and goals. Depending on your needs, this may include appropriate medications, lifestyle and activity guidance, physiotherapy or rehabilitation, and other clinically appropriate treatments.',
+          'We discuss the available options with you, including their expected benefits, possible precautions, and what you can expect during treatment — so that you can make informed decisions about your care.',
         ],
       },
       {
