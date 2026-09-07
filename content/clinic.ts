@@ -82,7 +82,7 @@ export const clinic = {
    * is what turns it into structured data.
    */
   hours: [
-    { days: 'Monday – Sunday', time: '10:00 am – 9:00 pm', closed: false },
+    { days: 'Monday – Sunday', time: '10:00 am to 9:00 pm', closed: false },
   ] as ReadonlyArray<{ days: string; time: string; closed: boolean }>,
   /** Shown beneath the hours table. Set to '' to hide. */
   hoursNote: 'Consultations are by prior appointment.',

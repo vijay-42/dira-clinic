@@ -36,14 +36,17 @@ const DAY_MAP: Record<string, string[]> = {
 }
 
 /**
- * "10:00 am – 9:00 pm" -> { opens: '10:00', closes: '21:00' }.
+ * "10:00 am to 9:00 pm" -> { opens: '10:00', closes: '21:00' }.
  * Google wants 24-hour times, not the prose the site displays. Returns
  * undefined for anything it cannot parse confidently, so a hand-written
  * range like "by appointment" degrades to a description instead of a wrong
  * machine-readable time.
+ *
+ * Both the word "to" and a dash are accepted as the separator, so changing
+ * how the hours read on the page cannot silently drop the structured data.
  */
 function parseRange(time: string): { opens: string; closes: string } | undefined {
-  const parts = time.split(/[–—-]/)
+  const parts = time.split(/\s+to\s+|[–—-]/i)
   if (parts.length !== 2) return undefined
 
   const to24 = (raw: string): string | undefined => {
