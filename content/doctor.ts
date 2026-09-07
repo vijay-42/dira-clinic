@@ -25,10 +25,63 @@ export const doctor = {
     },
   ],
 
+  /**
+   * Consultation languages. Bangalore is multilingual and patients routinely
+   * ask before booking, so this is worth stating plainly.
+   */
+  languages: ['English', 'Hindi', 'Kannada', 'Marathi', 'Telugu'],
+
+  /** Professional bodies. Only stated where the membership is specific. */
+  memberships: ['Indian Rheumatology Association'],
+
+  /**
+   * Presentations, papers and academic contributions. Listed newest first.
+   * `note` marks a distinction where one was awarded.
+   */
+  academic: [
+    {
+      title:
+        'Factors predicting flares in lupus after attainment of low lupus disease activity state (LLDAS)',
+      venue: 'IRACON 2023, Hyderabad',
+      note: 'First place, e-poster abstract session',
+    },
+    {
+      title: 'Management of septic arthritis',
+      venue: 'Academic CME, NIMS Hyderabad, 2023',
+      note: 'Panellist',
+    },
+    {
+      title: 'Atypical presentation of necrotising vasculitis in lupus',
+      venue: 'South Zone IRACON 2022, Trivandrum',
+      note: 'Oral presentation',
+    },
+    {
+      title:
+        'COVID-19 infection in patients with autoimmune rheumatic disease: report from the outpatient setting of a tertiary care hospital',
+      venue: '',
+      note: '',
+    },
+    {
+      title: 'MRI reveals cascade sign in parenchymal neuro-Behçet’s syndrome',
+      venue: '',
+      note: '',
+    },
+    {
+      title: 'Hyper-IgE syndrome: case series with review of literature',
+      venue: 'PID CME 2019, Hyderabad',
+      note: 'Oral paper presentation',
+    },
+    {
+      title: 'Unique presentation of Takayasu’s arteritis',
+      venue: 'KAPICON 2016, Mysore',
+      note: 'Poster presentation',
+    },
+  ] as ReadonlyArray<{ title: string; venue: string; note: string }>,
+
   interests: [
     {
       title: 'Rheumatoid Arthritis',
-      body: 'Diagnosis, disease activity assessment, treat-to-target management and long-term prevention of disability.',
+      body: 'Diagnosis, disease activity assessment, treat-to-target management and long-term prevention of disability, including juvenile arthritis.',
     },
     {
       title: 'Osteoarthritis',
@@ -57,6 +110,14 @@ export const doctor = {
     {
       title: 'Autoimmune Haematological & Neurological Disorders',
       body: 'Assessment of suspected immune-mediated blood and neurological disorders, in collaboration with relevant specialists where required.',
+    },
+    {
+      title: 'Osteoporosis & Bone Health',
+      body: 'Assessment and management of osteoporosis, fragility fractures and other metabolic bone disease.',
+    },
+    {
+      title: 'Rheumatology in Transplant & Cancer Care',
+      body: 'Management of rheumatological and immune-related problems in renal transplant recipients and in patients undergoing cancer treatment.',
     },
   ],
 

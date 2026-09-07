@@ -77,6 +77,24 @@ export default function DoctorPage() {
             </div>
           ))}
         </div>
+
+        {/* Languages and membership sit with the credentials rather than in a
+            band of their own — both are things patients check before booking,
+            and neither is long enough to carry a section. */}
+        <div className="mt-8 grid gap-5 sm:grid-cols-2">
+          <div className="card p-6">
+            <p className="eyebrow text-muted">Consultations in</p>
+            <p className="mt-3 text-[1rem] leading-snug">{doctor.languages.join(' · ')}</p>
+          </div>
+          <div className="card p-6">
+            <p className="eyebrow text-muted">Professional membership</p>
+            <ul className="mt-3 text-[1rem] leading-snug">
+              {doctor.memberships.map((m) => (
+                <li key={m}>{m}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </Section>
 
       <Section tone="raised">
@@ -91,7 +109,30 @@ export default function DoctorPage() {
         </div>
       </Section>
 
+      {/* A bibliography reads better as a ruled list than as cards — the
+          entries are uneven in length and the venue is a subordinate line. */}
       <Section tone="paper">
+        <SectionHead
+          eyebrow="Academic work"
+          title="Presentations & publications"
+          lede="Selected papers, posters and panels presented at national and regional rheumatology meetings."
+        />
+        <ul className="mt-10 border-t border-rule-soft">
+          {doctor.academic.map((a) => (
+            <li key={a.title} className="border-b border-rule-soft py-5">
+              {has(a.note) ? <p className="eyebrow text-brand">{a.note}</p> : null}
+              <p className={`text-[1.02rem] leading-snug ${has(a.note) ? 'mt-2' : ''}`}>
+                {a.title}
+              </p>
+              {has(a.venue) ? (
+                <p className="mt-1.5 text-[0.9rem] text-muted">{a.venue}</p>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section tone="raised">
         <figure className="card cat-warm relative overflow-hidden p-8 sm:p-12">
           <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 bg-[color:var(--cat)]" />
           <p className="pill">A note from {doctor.shortName}</p>
