@@ -69,8 +69,12 @@ export default function HomePage() {
               <p className="lede measure mt-4">
                 DIRA Clinic, led by {doctor.name}, {doctor.title}, provides comprehensive care
                 for arthritis, autoimmune diseases, joint pain and other rheumatic conditions
-                in {locality()}. {doctor.shortName} is known for a patient-centred approach to
-                treatment.
+                in {locality()}.
+              </p>
+
+              <p className="lede measure mt-4">
+                {doctor.shortName} follows a patient-centred approach, with treatment tailored
+                to each patient’s condition, needs and goals.
               </p>
 
               <ul className="mt-6 flex flex-wrap items-center gap-2">
