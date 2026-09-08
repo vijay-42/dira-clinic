@@ -12,8 +12,7 @@ export const doctor = {
   training: [
     {
       qualification: 'MBBS',
-      /** PENDING Medical college. Empty shows the qualification on its own. */
-      institution: '',
+      institution: 'Dr. Panjabrao Alias Bhausaheb Deshmukh Memorial Medical College, Amravati',
     },
     {
       qualification: 'MD Internal Medicine',
