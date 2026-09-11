@@ -24,8 +24,8 @@ export default function DoctorsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Doctors"
-        title="Who you will be seen by"
+        eyebrow="Our team"
+        title="Meet our specialists"
         lede={`Consultations at DIRA are with a specialist trained in rheumatology and clinical immunology, in ${cityName()}.`}
       />
       <Breadcrumbs path="/doctors/" />
@@ -33,17 +33,19 @@ export default function DoctorsPage() {
       <Section tone="paper">
         <div className="grid gap-6">
           {doctors.map((d) => (
-            <article key={d.slug} className="card overflow-hidden p-0">
+            <Link
+              key={d.slug}
+              href={doctorHref(d.slug)}
+              className="card group block overflow-hidden p-0 transition-transform duration-200 hover:-translate-y-1"
+            >
               <div className="grid gap-0 sm:grid-cols-[0.34fr_0.66fr]">
                 <div className="relative min-h-[15rem] bg-raised sm:min-h-full">
                   <DoctorPortrait fill />
                 </div>
 
                 <div className="min-w-0 p-7 sm:p-9">
-                  <h2 className="display-s text-[clamp(1.3rem,2.2vw,1.7rem)]">
-                    <Link href={doctorHref(d.slug)} className="hover:text-brand">
-                      {d.name}
-                    </Link>
+                  <h2 className="display-s text-[clamp(1.3rem,2.2vw,1.7rem)] group-hover:text-brand">
+                    {d.name}
                   </h2>
                   <p className="mt-1.5 text-[1rem] text-brand">{d.title}</p>
 
@@ -64,16 +66,13 @@ export default function DoctorsPage() {
                     Consultations in {d.languages.join(' · ')}
                   </p>
 
-                  <Link
-                    href={doctorHref(d.slug)}
-                    className="group mt-6 inline-flex items-center gap-2 font-medium text-brand hover:underline"
-                  >
+                  <span className="mt-6 inline-flex items-center gap-2 font-medium text-brand">
                     Full profile, training and areas of special interest
-                    <IconArrow className="h-5 w-5 shrink-0" />
-                  </Link>
+                    <IconArrow className="nudge h-5 w-5 shrink-0" />
+                  </span>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </Section>
