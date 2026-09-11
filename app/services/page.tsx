@@ -7,6 +7,7 @@ import {
   IconRehab, IconLab, IconPharmacy, IconTeam, IconArrow,
 } from '@/components/icons'
 import { services } from '@/content/site'
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { servicePages, serviceHref } from '@/content/service-pages'
 import { clinic } from '@/content/clinic'
 
@@ -75,6 +76,8 @@ export default function ServicesPage() {
           </div>
         </div>
       </header>
+
+      <Breadcrumbs path="/services/" />
 
       {/* The five service pages. These are the local-search landing pages, so
           they sit above the general service descriptions below. */}

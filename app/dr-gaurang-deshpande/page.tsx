@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Container, Section, SectionHead } from '@/components/ui'
 import { AppointmentActions } from '@/components/contact-bar'
 import { DoctorPortrait } from '@/components/portrait'
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { doctor } from '@/content/doctor'
 import { clinic, isTodo, has } from '@/content/clinic'
 
@@ -60,6 +61,8 @@ export default function DoctorPage() {
           </div>
         </Container>
       </section>
+
+      <Breadcrumbs path="/dr-gaurang-deshpande/" />
 
       <Section tone="paper">
         <SectionHead

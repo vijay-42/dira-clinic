@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { PageHeader, Section, SectionHead } from '@/components/ui'
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { IconArrow } from '@/components/icons'
 import { faqs } from '@/content/site'
 import { faqSchema, JsonLd } from '@/lib/schema'
@@ -20,6 +21,7 @@ export default function FaqPage() {
         title="Questions patients ask most often"
         lede="If your question isn’t answered here, the clinic is happy to answer it before you book."
       />
+      <Breadcrumbs path="/faq/" />
 
       <Section tone="paper">
         <div className="mx-auto grid max-w-[52rem] gap-4">

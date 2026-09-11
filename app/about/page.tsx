@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { PageHeader, Section, SectionHead, Verses } from '@/components/ui'
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { IconArrow } from '@/components/icons'
 import { approach, difference } from '@/content/site'
 
@@ -29,6 +30,7 @@ export default function AboutPage() {
         title="Understand the problem. Find the cause. Treat what matters."
         lede="DIRA stands for Deshpande Immunology & Rheumatology Advanced Clinic — a specialist centre providing evaluation and care both for established diseases and for conditions where an immune or inflammatory disorder is only suspected."
       />
+      <Breadcrumbs path="/about/" />
 
       <Section tone="paper">
         <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">

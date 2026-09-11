@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { PageHeader, Section, SectionHead } from '@/components/ui'
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { AppointmentActions } from '@/components/contact-bar'
 import { AppointmentForm } from '@/components/appointment-form'
 import { Value } from '@/components/value'
@@ -66,6 +67,7 @@ export default function ContactPage() {
       >
         <AppointmentActions className="mt-8" />
       </PageHeader>
+      <Breadcrumbs path="/contact/" />
 
       <Section tone="paper">
         <SectionHead eyebrow="Where we are" title="Clinic details" />

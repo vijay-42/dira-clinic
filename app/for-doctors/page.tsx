@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { PageHeader, Section, SectionHead, TickList } from '@/components/ui'
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { IconPhone, IconMail, IconWhatsApp } from '@/components/icons'
 import { clinic, telHref, mailHref, whatsappHref, isTodo } from '@/content/clinic'
 import { referralReasons } from '@/content/site'
@@ -31,6 +32,7 @@ export default function ForDoctorsPage() {
         title="A specialist resource for difficult and uncertain cases"
         lede="DIRA welcomes referrals from physicians and specialists where a rheumatological or immune-mediated disorder is suspected — including cases where that suspicion is not yet firm."
       />
+      <Breadcrumbs path="/for-doctors/" />
 
       <Section tone="paper">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">

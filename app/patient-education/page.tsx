@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { PageHeader, Section, SectionHead, TickList } from '@/components/ui'
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { IconArrow } from '@/components/icons'
 import { educationPoints } from '@/content/site'
 
@@ -27,6 +28,7 @@ export default function PatientEducationPage() {
         title="Understanding your disease is part of treatment"
         lede="An informed patient is a better partner in treatment. Time is set aside in every consultation to explain what is happening and why a particular approach is being taken."
       />
+      <Breadcrumbs path="/patient-education/" />
 
       <Section tone="paper">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">

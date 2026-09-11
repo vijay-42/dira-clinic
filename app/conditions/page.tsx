@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { PageHeader, Section, SectionHead, TickList } from '@/components/ui'
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { IconJoint, IconImmune, IconPain, IconRehab, IconArrow } from '@/components/icons'
 import { conditionGroups } from '@/content/site'
 
@@ -34,6 +35,7 @@ export default function ConditionsPage() {
           ))}
         </nav>
       </PageHeader>
+      <Breadcrumbs path="/conditions/" />
 
       {conditionGroups.map((group, i) => {
         const Icon = iconFor[i]

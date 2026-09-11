@@ -6,9 +6,10 @@ import { AppointmentActions } from '@/components/contact-bar'
 import {
   IconJoint, IconImmune, IconRehab, IconPharmacy, IconLab, IconArrow,
 } from '@/components/icons'
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { servicePages, serviceHref } from '@/content/service-pages'
 import { clinic, cityName, locality } from '@/content/clinic'
-import { faqSchema, breadcrumbSchema, JsonLd } from '@/lib/schema'
+import { faqSchema, JsonLd } from '@/lib/schema'
 
 /* One dynamic route renders all five service pages, nested under /services/.
    Only the slugs returned by generateStaticParams are emitted, so unknown
@@ -80,29 +81,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         </div>
       </header>
 
-      <div className="w-full border-b border-rule-soft bg-paper">
-        <Container className="py-3">
-          <nav aria-label="Breadcrumb">
-            <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.82rem] text-muted">
-              <li>
-                <Link href="/" className="hover:text-brand hover:underline">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/services/" className="hover:text-brand hover:underline">
-                  Services
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="text-ink">
-                {page.navLabel}
-              </li>
-            </ol>
-          </nav>
-        </Container>
-      </div>
+      <Breadcrumbs path={serviceHref(page.slug)} />
 
       {page.sections.map((section, i) => (
         <Section
@@ -207,14 +186,9 @@ export default async function ServiceDetailPage({ params }: Props) {
         </Container>
       </section>
 
+      {/* The BreadcrumbList is emitted by <Breadcrumbs> above, beside the
+          trail it describes. */}
       <JsonLd data={faqSchema(page.faqs)} />
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: 'Home', path: '/' },
-          { name: 'Services', path: '/services/' },
-          { name: page.navLabel, path: serviceHref(page.slug) },
-        ])}
-      />
     </>
   )
 }

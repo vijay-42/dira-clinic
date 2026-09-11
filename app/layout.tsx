@@ -105,6 +105,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteFooter />
         <MobileContactBar />
         <BookingDialog />
+        {/* Declares the sitemap in the markup as well as in robots.txt —
+            React hoists a keyed link like this into <head>. The robots
+            directive itself is set through metadata.robots above. */}
+        <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
         <JsonLd data={clinicSchema()} />
       </body>
     </html>
