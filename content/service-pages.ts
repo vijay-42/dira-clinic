@@ -25,7 +25,7 @@ export type ServicePage = {
   navLabel: string
   /** H1 on the page. */
   title: string
-  /** <title> tag. Kept under ~60 characters where possible. */
+  /** The complete <title> tag, brand suffix included. Nothing is appended. */
   metaTitle: string
   metaDescription: string
   eyebrow: string
@@ -50,9 +50,9 @@ export const servicePages: ServicePage[] = [
     slug: 'arthritis-treatment-in-bangalore',
     navLabel: 'Arthritis',
     title: 'Arthritis Treatment',
-    metaTitle: 'Arthritis Treatment in Bangalore',
+    metaTitle: 'Arthritis Treatment in Indiranagar, Bangalore | DIRA Clinic Rheumatologist',
     metaDescription:
-      'Arthritis treatment in Indiranagar, Bangalore — assessment and personalised care for osteoarthritis, rheumatoid arthritis, inflammatory arthritis, joint pain and stiffness, from a consultant rheumatologist and clinical immunologist.',
+      'Get personalised arthritis treatment in Bangalore at DIRA Clinic, led by Dr Gaurang Deshpande, Consultant Rheumatologist & Clinical Immunologist.',
     eyebrow: 'Arthritis',
     cat: 'cat-brand',
     icon: 'joint',
@@ -131,9 +131,9 @@ export const servicePages: ServicePage[] = [
     slug: 'immunology-and-rheumatology-treatment-in-bangalore',
     navLabel: 'Immunology & Rheumatology',
     title: 'Immunology & Rheumatology Treatment',
-    metaTitle: 'Immunology & Rheumatology Treatment, Bangalore',
+    metaTitle: 'Immunology & Rheumatology Treatment in Indiranagar, Bangalore | DIRA Clinic',
     metaDescription:
-      'Personalised immunology and rheumatology care in Indiranagar, Bangalore — rheumatoid arthritis, lupus and connective tissue disorders, psoriatic arthritis, ankylosing spondylitis, Sjögren’s disease, scleroderma, vasculitis and gout, assessed by a consultant rheumatologist and clinical immunologist.',
+      'Get expert arthritis, autoimmune and rheumatology care in Indiranagar, Bangalore with Dr Gaurang Deshpande at DIRA Clinic. Book your consultation.',
     eyebrow: 'Immunology & rheumatology',
     cat: 'cat-teal',
     icon: 'immune',
@@ -215,9 +215,9 @@ export const servicePages: ServicePage[] = [
     slug: 'physiotherapy-clinic-in-bangalore',
     navLabel: 'Physiotherapy',
     title: 'Physiotherapy & Rehabilitation',
-    metaTitle: 'Physiotherapy Clinic in Bangalore',
+    metaTitle: 'Physiotherapy Clinic in Indiranagar, Bangalore | DIRA Clinic',
     metaDescription:
-      'Physiotherapy clinic in Indiranagar, Bangalore. Personalised assessment and rehabilitation for back and neck pain, knee and shoulder pain, arthritis, sports and ligament injuries, fractures and post-surgical recovery — planned alongside medical care.',
+      'Looking for physiotherapy in Indiranagar, Bangalore? DIRA Clinic offers personalised care for joint pain, arthritis, injuries, stiffness and mobility.',
     eyebrow: 'Physiotherapy',
     cat: 'cat-fresh',
     icon: 'rehab',
@@ -300,9 +300,9 @@ export const servicePages: ServicePage[] = [
     slug: 'pharmacy-service-in-bangalore',
     navLabel: 'Pharmacy',
     title: 'Pharmacy Service',
-    metaTitle: 'Pharmacy Service in Bangalore',
+    metaTitle: 'Pharmacy Service in Indiranagar, Bangalore | DIRA Clinic',
     metaDescription:
-      'Pharmacy service at DIRA Clinic, Indiranagar, Bangalore — convenient access to prescribed medicines, with careful prescription-based dispensing and clear medication guidance.',
+      'Get convenient pharmacy services in Indiranagar, Bangalore at DIRA Clinic. Access prescribed medicines with reliable dispensing and patient-focused support.',
     eyebrow: 'Pharmacy',
     cat: 'cat-plum',
     icon: 'pharmacy',
@@ -384,7 +384,7 @@ export const servicePages: ServicePage[] = [
     slug: 'day-care-infusion-diagnostics-in-indiranagar',
     navLabel: 'Day Care Infusion & Diagnostics',
     title: 'Day Care Infusion & Diagnostics',
-    metaTitle: 'Day Care Infusion & Diagnostics, Indiranagar',
+    metaTitle: 'Day Care Infusion in Indiranagar, Bangalore | DIRA Clinic',
     metaDescription:
       'Day care infusion and diagnostic services at DIRA Clinic, Indiranagar, Bangalore — planned, medically supervised infusion therapy and the investigations that support ongoing treatment, without an overnight hospital stay.',
     eyebrow: 'Day care & diagnostics',

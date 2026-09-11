@@ -11,9 +11,9 @@ import {
 } from '@/content/clinic'
 
 export const metadata: Metadata = {
-  title: 'Contact & appointments',
+  title: { absolute: 'Contact DIRA Clinic in Indiranagar, Bangalore | Rheumatologist' },
   description:
-    'Clinic address, timings and appointment requests for DIRA — Deshpande Immunology & Rheumatology Advanced Clinic.',
+    'Get in touch with DIRA Clinic in Indiranagar, Bangalore for expert rheumatology, arthritis, autoimmune disease and joint pain treatment.',
   alternates: { canonical: '/contact/' },
 }
 

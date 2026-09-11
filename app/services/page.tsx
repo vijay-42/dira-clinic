@@ -12,9 +12,9 @@ import { servicePages, serviceHref } from '@/content/service-pages'
 import { clinic } from '@/content/clinic'
 
 export const metadata: Metadata = {
-  title: 'Services',
+  title: { absolute: 'Rheumatology & Arthritis Treatment in Bangalore | DIRA Clinic' },
   description:
-    'Specialist consultation, second opinions, clinical immunology and allergy evaluation, rheumatology care, chronic pain management, physiotherapy, laboratory and pharmacy support.',
+    'Get personalised arthritis and rheumatology treatment in Indiranagar, Bangalore at DIRA Clinic for joint pain, autoimmune and rheumatic conditions.',
   alternates: { canonical: '/services/' },
 }
 

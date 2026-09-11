@@ -59,20 +59,24 @@ const city = isTodo(clinic.city) ? '' : `, ${clinic.city}`
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   title: {
-    // Never the bare acronym: "DIRA" is also a rare autoinflammatory disease,
-    // so every title pairs the name with the speciality and the city.
-    default: `DIRA${city} — Rheumatology & Clinical Immunology`,
+    // The home page title, from the SEO sheet. Never the bare acronym: "DIRA"
+    // is also a rare autoinflammatory disease, so every title pairs the name
+    // with the speciality and the city. The template covers the pages the
+    // sheet does not list; pages it does list set an absolute title.
+    default: 'DIRA Clinic | Rheumatologist & Autoimmune Care in Bangalore',
     template: `%s — DIRA${city}`,
   },
-  description: `Expert rheumatology and clinical immunology care in ${locality()}. Led by Dr Gaurang Deshpande, Consultant Rheumatologist & Clinical Immunologist — arthritis, autoimmune disease, joint pain, allergy, chronic pain and difficult-to-diagnose inflammatory conditions.`,
+  description:
+    'DIRA Clinic, led by Dr Gaurang Deshpande, offers expert rheumatology and autoimmune care for arthritis, joint pain and rheumatic conditions in Bangalore.',
   applicationName: clinic.legalName,
   authors: [{ name: clinic.legalName }],
   openGraph: {
     type: 'website',
     siteName: `DIRA — ${clinic.legalName}`,
     locale: 'en_IN',
-    title: `DIRA${city} — Rheumatology & Clinical Immunology`,
-    description: `Rheumatology, clinical immunology, allergy and chronic pain in ${locality()}. Clarity when the diagnosis is uncertain. Expertise when it is clear.`,
+    title: 'DIRA Clinic | Rheumatologist & Autoimmune Care in Bangalore',
+    description:
+      'DIRA Clinic, led by Dr Gaurang Deshpande, offers expert rheumatology and autoimmune care for arthritis, joint pain and rheumatic conditions in Bangalore.',
   },
   robots: { index: true, follow: true },
   alternates: { canonical: '/' },

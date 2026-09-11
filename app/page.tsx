@@ -176,17 +176,13 @@ export default function HomePage() {
         />
         <div className="reveal-each mt-11 grid gap-6 sm:grid-cols-2">
           {triage.map((group, i) => (
-            <Link
+            <div
               key={group.heading}
-              href="/conditions/"
-              className={`${catFor[i % catFor.length]} cat-bg group block rounded-[var(--radius)] p-7 transition-transform duration-200 hover:-translate-y-1`}
+              className={`${catFor[i % catFor.length]} cat-bg rounded-[var(--radius)] p-7`}
             >
-              <h3 className="display-s cat-text inline-flex items-center gap-1.5">
-                {group.heading}
-                <IconArrow className="nudge h-4 w-4" />
-              </h3>
+              <h3 className="display-s cat-text">{group.heading}</h3>
               <TickList items={group.items} columns={1} className="mt-4" />
-            </Link>
+            </div>
           ))}
         </div>
         <div className="mt-10 rounded-[14px] border border-rule-soft bg-brand-tint p-7">

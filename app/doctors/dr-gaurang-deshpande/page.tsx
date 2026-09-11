@@ -7,13 +7,9 @@ import { doctor, doctorHref } from '@/content/doctor'
 import { clinic, isTodo, has } from '@/content/clinic'
 
 export const metadata: Metadata = {
-  title: {
-    absolute: `Dr Gaurang Deshpande — Consultant Rheumatologist${
-      isTodo(clinic.city) ? '' : `, ${clinic.city}`
-    }`,
-  },
+  title: { absolute: 'Rheumatologist in Bangalore | Dr Gaurang Deshpande | DIRA Clinic' },
   description:
-    'Dr Gaurang Deshpande, MBBS, MD Internal Medicine, DM Clinical Immunology & Rheumatology (NIMS, Hyderabad). Consultant Rheumatologist and Clinical Immunologist.',
+    'Dr Gaurang Deshpande is a Consultant Rheumatologist & Clinical Immunologist at DIRA Clinic, Indiranagar, offering personalised care for rheumatic diseases.',
   alternates: { canonical: doctorHref('dr-gaurang-deshpande') },
 }
 

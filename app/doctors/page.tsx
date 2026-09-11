@@ -9,9 +9,9 @@ import { doctor, doctorHref } from '@/content/doctor'
 import { cityName } from '@/content/clinic'
 
 export const metadata: Metadata = {
-  title: 'Doctors',
+  title: { absolute: 'Rheumatology Specialist in Indiranagar, Bangalore | DIRA Clinic' },
   description:
-    'The consultants at DIRA. Dr Gaurang Deshpande, Consultant Rheumatologist and Clinical Immunologist, MBBS, MD Internal Medicine, DM Clinical Immunology & Rheumatology.',
+    'DIRA Clinic offers specialist rheumatology and immunology care in Indiranagar, Bangalore for arthritis, autoimmune diseases, joint pain and more.',
   alternates: { canonical: '/doctors/' },
 }
 

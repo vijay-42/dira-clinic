@@ -6,9 +6,9 @@ import { IconArrow } from '@/components/icons'
 import { approach, difference } from '@/content/site'
 
 export const metadata: Metadata = {
-  title: 'About',
+  title: { absolute: 'About Us - DIRA Clinic in Indiranagar, Bangalore' },
   description:
-    'DIRA is a specialist centre for rheumatology, clinical immunology and immune-related health concerns — for patients with an established diagnosis, and for those still looking for one.',
+    'DIRA Clinic in Indiranagar, Bangalore, led by Dr Gaurang Deshpande, offers expert rheumatology, immunology and autoimmune disease care.',
   alternates: { canonical: '/about/' },
 }
 

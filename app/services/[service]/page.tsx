@@ -34,7 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = servicePages.find((p) => p.slug === service)
   if (!page) return {}
   return {
-    title: { absolute: `${page.metaTitle} | DIRA` },
+    /* metaTitle is the finished <title> from the SEO sheet, brand suffix
+       included — nothing is appended to it here. */
+    title: { absolute: page.metaTitle },
     description: page.metaDescription,
     alternates: { canonical: serviceHref(page.slug) },
     openGraph: {
