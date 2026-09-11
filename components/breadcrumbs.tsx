@@ -4,6 +4,7 @@ import { Container } from './ui'
 import { JsonLd, breadcrumbSchema } from '@/lib/schema'
 import { nav } from '@/content/site'
 import { serviceMenu } from '@/content/service-pages'
+import { DOCTORS_BASE, doctor, doctorHref } from '@/content/doctor'
 
 /**
  * Breadcrumbs that mirror the address bar.
@@ -18,10 +19,17 @@ import { serviceMenu } from '@/content/service-pages'
  * keeping them in separate places is how that mismatch happens.
  */
 
-/** Every known path → the label already used for it in the menus. */
+/**
+ * Every known path → the label already used for it in the menus.
+ *
+ * /doctors/ is listed explicitly: the header links to it but the footer nav
+ * points straight at the profile, so it is in neither table.
+ */
 const labels = new Map<string, string>([
   ...nav.map((n) => [n.href, n.label] as [string, string]),
   ...serviceMenu.map((s) => [s.href, s.label] as [string, string]),
+  [`${DOCTORS_BASE}/`, 'Doctors'],
+  [doctorHref(doctor.slug), doctor.name],
 ])
 
 /** Last-resort label for a path no menu knows: "day-care" -> "Day care". */

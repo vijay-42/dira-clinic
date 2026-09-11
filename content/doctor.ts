@@ -1,6 +1,17 @@
+/* Doctor profiles live under /doctors/, alongside the listing page, the same
+ * way service pages sit under /services/. Build every link with doctorHref()
+ * rather than writing the path by hand. */
+export const DOCTORS_BASE = '/doctors'
+
+export function doctorHref(slug: string): string {
+  return `${DOCTORS_BASE}/${slug}/`
+}
+
 export const doctor = {
   name: 'Dr Gaurang Deshpande',
   shortName: 'Dr Deshpande',
+  /** URL segment under /doctors/. */
+  slug: 'dr-gaurang-deshpande',
   title: 'Consultant Rheumatologist & Clinical Immunologist',
   degrees: ['MBBS', 'MD Internal Medicine', 'DM Clinical Immunology & Rheumatology'],
   /** Displayed as “8+ years”. Experience in clinical immunology and rheumatology. */

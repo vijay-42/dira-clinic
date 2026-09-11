@@ -22,7 +22,7 @@ import { openBooking } from './booking-dialog'
  */
 const primaryNav = [
   { href: '/about/', label: 'About' },
-  { href: '/dr-gaurang-deshpande/', label: 'Doctors' },
+  { href: '/doctors/', label: 'Doctors' },
   { href: '/services/', label: 'Services', children: serviceMenu },
   { href: '/contact/', label: 'Contact us' },
 ]

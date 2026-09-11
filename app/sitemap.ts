@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 import { siteUrl } from '@/content/clinic'
 import { nav } from '@/content/site'
 import { servicePages, serviceHref } from '@/content/service-pages'
+import { DOCTORS_BASE } from '@/content/doctor'
 
 export const dynamic = 'force-static'
 
@@ -19,5 +20,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'yearly',
     priority: 0.8,
   }))
-  return [...pages, ...services]
+  /* The doctor profiles are reached from nav, but the /doctors/ listing they
+     sit under is linked only from the header — it would otherwise be the one
+     page missing from the sitemap. */
+  const doctors: MetadataRoute.Sitemap = [
+    { url: `${base}${DOCTORS_BASE}/`, changeFrequency: 'yearly', priority: 0.7 },
+  ]
+  return [...pages, ...doctors, ...services]
 }

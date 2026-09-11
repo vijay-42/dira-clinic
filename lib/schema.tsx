@@ -126,7 +126,7 @@ export function clinicSchema() {
         '@id': `${base}/#physician`,
         name: doctor.name,
         jobTitle: doctor.title,
-        url: `${base}/dr-gaurang-deshpande/`,
+        url: `${base}/doctors/${doctor.slug}/`,
         medicalSpecialty: ['Rheumatologic', 'Immunologic'],
         worksFor: { '@id': `${base}/#clinic` },
         address,

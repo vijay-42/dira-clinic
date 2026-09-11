@@ -101,13 +101,11 @@ export const clinic = {
   registrationCouncil: '',
 
   /**
-   * PENDING Production domain, no trailing slash, e.g. 'https://diraclinic.in'.
-   * Used for canonical URLs, sitemap.xml and structured data; until it is set,
-   * those fall back to a placeholder host and nothing is shown to visitors.
-   * NOTE: prefer a domain containing "deshpande" + the speciality over "dira"
-   * alone — see the name-collision note in docs/dira-plan.html, Section 09.
+   * Production domain, no trailing slash. Used for canonical URLs,
+   * sitemap.xml, robots.txt and structured data. Changing it moves every
+   * absolute URL the site publishes, so it belongs here and nowhere else.
    */
-  siteUrl: '',
+  siteUrl: 'https://diraclinic.com',
 
   /**
    * Consultation fee. Stated factually or not at all — never as an offer,

@@ -122,7 +122,7 @@ export default function AboutPage() {
         <SectionHead eyebrow="Next" title="Where to go from here" />
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {[
-            { href: '/dr-gaurang-deshpande/', label: 'Dr Gaurang Deshpande', sub: 'Profile, training and areas of special interest' },
+            { href: '/doctors/dr-gaurang-deshpande/', label: 'Dr Gaurang Deshpande', sub: 'Profile, training and areas of special interest' },
             { href: '/conditions/', label: 'Conditions', sub: 'What we commonly see' },
             { href: '/services/', label: 'Services', sub: 'Evaluation, treatment and support' },
             { href: '/contact/', label: 'Contact', sub: 'Address, timings and appointments' },

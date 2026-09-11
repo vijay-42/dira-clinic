@@ -3,7 +3,7 @@ import { Container, Section, SectionHead } from '@/components/ui'
 import { AppointmentActions } from '@/components/contact-bar'
 import { DoctorPortrait } from '@/components/portrait'
 import { Breadcrumbs } from '@/components/breadcrumbs'
-import { doctor } from '@/content/doctor'
+import { doctor, doctorHref } from '@/content/doctor'
 import { clinic, isTodo, has } from '@/content/clinic'
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   description:
     'Dr Gaurang Deshpande, MBBS, MD Internal Medicine, DM Clinical Immunology & Rheumatology (NIMS, Hyderabad). Consultant Rheumatologist and Clinical Immunologist.',
-  alternates: { canonical: '/dr-gaurang-deshpande/' },
+  alternates: { canonical: doctorHref('dr-gaurang-deshpande') },
 }
 
 const catFor = ['cat-brand', 'cat-teal', 'cat-fresh', 'cat-plum'] as const
@@ -62,7 +62,7 @@ export default function DoctorPage() {
         </Container>
       </section>
 
-      <Breadcrumbs path="/dr-gaurang-deshpande/" />
+      <Breadcrumbs path={doctorHref(doctor.slug)} />
 
       <Section tone="paper">
         <SectionHead
