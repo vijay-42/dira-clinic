@@ -2,50 +2,53 @@ import { Fragment } from 'react'
 import Link from 'next/link'
 import { Container } from './ui'
 import { JsonLd, breadcrumbSchema } from '@/lib/schema'
-import { nav } from '@/content/site'
-import { serviceMenu } from '@/content/service-pages'
-import { DOCTORS_BASE, doctor, doctorHref } from '@/content/doctor'
 
 /**
- * Breadcrumbs that mirror the address bar.
+ * Breadcrumbs that read the way the URL reads.
  *
- * The trail is derived from the path rather than written out page by page:
- * one crumb per URL segment, labelled from the very tables the menus read.
- * A crumb therefore cannot drift from the URL, and renaming a page in
- * content/ renames it here too.
+ * Each crumb is the URL segment itself, spaced out and capitalised — nothing
+ * else. Menu labels are deliberately NOT consulted: they abbreviate
+ * ("Pharmacy" for /services/pharmacy-service-in-bangalore/), which is what
+ * made the trail disagree with the address bar. Reading the path means a
+ * crumb cannot say anything the URL does not.
  *
  * The visible trail and its BreadcrumbList structured data are emitted
  * together, from one array — Google penalises a mismatch between the two, and
  * keeping them in separate places is how that mismatch happens.
  */
 
-/**
- * Every known path → the label already used for it in the menus.
- *
- * /doctors/ is listed explicitly: the header links to it but the footer nav
- * points straight at the profile, so it is in neither table.
- */
-const labels = new Map<string, string>([
-  ...nav.map((n) => [n.href, n.label] as [string, string]),
-  ...serviceMenu.map((s) => [s.href, s.label] as [string, string]),
-  [`${DOCTORS_BASE}/`, 'Doctors'],
-  [doctorHref(doctor.slug), doctor.name],
+/** Kept lowercase mid-title, exactly as they appear in the slug. */
+const MINOR_WORDS = new Set([
+  'a', 'an', 'and', 'at', 'for', 'in', 'of', 'on', 'or', 'the', 'to', 'with',
 ])
 
-/** Last-resort label for a path no menu knows: "day-care" -> "Day care". */
-function fromSlug(segment: string): string {
-  const words = segment.replace(/-/g, ' ')
-  return words.charAt(0).toUpperCase() + words.slice(1)
+/** Words a general capitalisation rule gets wrong. */
+const EXACT_CASE = new Map([
+  ['faq', 'FAQ'],
+  ['dira', 'DIRA'],
+  ['mri', 'MRI'],
+])
+
+/** "pharmacy-service-in-bangalore" -> "Pharmacy Service in Bangalore". */
+function labelFor(segment: string): string {
+  return segment
+    .split('-')
+    .map((word, i) => {
+      const exact = EXACT_CASE.get(word)
+      if (exact) return exact
+      if (i > 0 && MINOR_WORDS.has(word)) return word
+      return word.charAt(0).toUpperCase() + word.slice(1)
+    })
+    .join(' ')
 }
 
-/** "/services/pharmacy/" -> Home / Services / Pharmacy. */
+/** "/services/pharmacy-service-in-bangalore/" -> Home / Services / Pharmacy Service in Bangalore. */
 export function trailFor(path: string): { name: string; path: string }[] {
   const trail = [{ name: 'Home', path: '/' }]
   let sofar = ''
   for (const segment of path.split('/').filter(Boolean)) {
     sofar += `/${segment}`
-    const href = `${sofar}/`
-    trail.push({ name: labels.get(href) ?? fromSlug(segment), path: href })
+    trail.push({ name: labelFor(segment), path: `${sofar}/` })
   }
   return trail
 }
