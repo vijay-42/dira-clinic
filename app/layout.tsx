@@ -63,20 +63,20 @@ export const metadata: Metadata = {
     // is also a rare autoinflammatory disease, so every title pairs the name
     // with the speciality and the city. The template covers the pages the
     // sheet does not list; pages it does list set an absolute title.
-    default: 'DIRA Clinic | Rheumatologist & Autoimmune Care in Bangalore',
+    default: 'Rheumatology & Immunology Clinic in Indiranagar, Bangalore | DIRA Clinic',
     template: `%s — DIRA${city}`,
   },
   description:
-    'DIRA Clinic, led by Dr Gaurang Deshpande, offers expert rheumatology and autoimmune care for arthritis, joint pain and rheumatic conditions in Bangalore.',
+    'DIRA Clinic provides personalised care for arthritis, joint pain, autoimmune and rheumatic conditions in Indiranagar, Bangalore.',
   applicationName: clinic.legalName,
   authors: [{ name: clinic.legalName }],
   openGraph: {
     type: 'website',
     siteName: `DIRA — ${clinic.legalName}`,
     locale: 'en_IN',
-    title: 'DIRA Clinic | Rheumatologist & Autoimmune Care in Bangalore',
+    title: 'Rheumatology & Immunology Clinic in Indiranagar, Bangalore | DIRA Clinic',
     description:
-      'DIRA Clinic, led by Dr Gaurang Deshpande, offers expert rheumatology and autoimmune care for arthritis, joint pain and rheumatic conditions in Bangalore.',
+      'DIRA Clinic provides personalised care for arthritis, joint pain, autoimmune and rheumatic conditions in Indiranagar, Bangalore.',
   },
   robots: { index: true, follow: true },
   alternates: { canonical: '/' },
